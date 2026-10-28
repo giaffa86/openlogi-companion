@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="openlogi-companion">
+  <schema id="org.gnome.shell.extensions.openlogi-companion" path="/org/gnome/shell/extensions/openlogi-companion/">
+    <key name="show-percentage" type="b">
+      <default>false</default>
+      <summary>Allow panel percentage</summary>
+      <description>Show the percentage of a device chosen in memory for this session and refresh every 60 seconds.</description>
+    </key>
+  </schema>
+</schemalist>

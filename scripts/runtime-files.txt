@@ -1,0 +1,11 @@
+metadata.json
+extension.js
+prefs.js
+stylesheet.css
+shell/contract.js
+shell/provider.js
+shell/indicator.js
+shell/deviceRow.js
+schemas/org.gnome.shell.extensions.openlogi-companion.gschema.xml
+locale/it/LC_MESSAGES/openlogi-companion.mo
+LICENSE

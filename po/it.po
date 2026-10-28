@@ -1,0 +1,113 @@
+msgid ""
+msgstr "Project-Id-Version: OpenLogi Companion 1\nPO-Revision-Date: 2026-10-28 10:00+0100\nLast-Translator: OpenLogi Companion contributors\nLanguage-Team: Italian\nMIME-Version: 1.0\nLanguage: it\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Offline; battery reading is not current"
+msgstr "Non in linea; la batteria non è aggiornata"
+
+msgid "Battery unavailable"
+msgstr "Batteria non disponibile"
+
+msgid "Critical"
+msgstr "Critica"
+
+msgid "Low"
+msgstr "Bassa"
+
+msgid "Good"
+msgstr "Buona"
+
+msgid "Full"
+msgstr "Piena"
+
+msgid "Charging"
+msgstr "In carica"
+
+msgid "Charging slowly"
+msgstr "Ricarica lenta"
+
+msgid "Charged"
+msgstr "Carica completa"
+
+msgid "On battery"
+msgstr "A batteria"
+
+msgid "Charging error"
+msgstr "Errore di ricarica"
+
+msgid "Show this device in the panel"
+msgstr "Mostra questo dispositivo nel pannello"
+
+msgid "Unnamed device"
+msgstr "Dispositivo senza nome"
+
+msgid "Connected"
+msgstr "Connesso"
+
+msgid "Disconnected"
+msgstr "Disconnesso"
+
+msgid "Open OpenLogi and select the device in the app"
+msgstr "Apri OpenLogi e seleziona il dispositivo nell’app"
+
+msgid "Remove panel percentage"
+msgstr "Rimuovi la percentuale dal pannello"
+
+msgid "Loading…"
+msgstr "Caricamento…"
+
+msgid "Open OpenLogi"
+msgstr "Apri OpenLogi"
+
+msgid "Refresh"
+msgstr "Aggiorna"
+
+msgid "Extension preferences"
+msgstr "Preferenze dell’estensione"
+
+msgid "Scanning devices…"
+msgstr "Scansione dei dispositivi…"
+
+msgid "Inventory unavailable"
+msgstr "Inventario indisponibile"
+
+msgid "Select a device in OpenLogi. Pin a percentage for this session."
+msgstr "Seleziona il dispositivo in OpenLogi. Fissa una percentuale per questa sessione."
+
+msgid "No devices"
+msgstr "Nessun dispositivo"
+
+msgid "OpenLogi CLI is not installed"
+msgstr "La CLI di OpenLogi non è installata"
+
+msgid "Cannot reach the OpenLogi agent"
+msgstr "Agent di OpenLogi non raggiungibile"
+
+msgid "Incompatible CLI, agent or API schema"
+msgstr "CLI, agent o schema API incompatibili"
+
+msgid "Invalid inventory data"
+msgstr "Dati dell’inventario non validi"
+
+msgid "OpenLogi request timed out"
+msgstr "Tempo scaduto per la richiesta a OpenLogi"
+
+msgid "OpenLogi output exceeds the limit"
+msgstr "L’output di OpenLogi supera il limite"
+
+msgid "OpenLogi desktop application is not installed"
+msgstr "L’applicazione OpenLogi non è installata"
+
+msgid "Could not open OpenLogi"
+msgstr "Impossibile aprire OpenLogi"
+
+msgid "Panel"
+msgstr "Pannello"
+
+msgid "Pin a device from the menu. The choice lasts only for this session."
+msgstr "Fissa un dispositivo dal menu. La scelta dura solo per questa sessione."
+
+msgid "Allow panel percentage"
+msgstr "Consenti la percentuale nel pannello"
+
+msgid "Refresh every 60 seconds, with a longer delay after errors."
+msgstr "Aggiorna ogni 60 secondi, con un intervallo più lungo dopo gli errori."

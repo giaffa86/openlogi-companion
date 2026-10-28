@@ -1,0 +1,11 @@
+{
+  "uuid": "openlogi-companion@giaffa86",
+  "name": "OpenLogi Companion",
+  "description": "Independent companion showing the OpenLogi agent inventory and battery via its read-only CLI. Opens the general OpenLogi window.",
+  "shell-version": [
+    "50"
+  ],
+  "version": 1,
+  "gettext-domain": "openlogi-companion",
+  "settings-schema": "org.gnome.shell.extensions.openlogi-companion"
+}

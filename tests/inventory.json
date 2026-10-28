@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "ok": true,
+  "data": {
+    "inventory": "ready",
+    "devices": [
+      {
+        "id": "synthetic-a",
+        "name": "Synthetic keyboard",
+        "kind": "keyboard",
+        "online": true,
+        "battery": {
+          "percentage": 0,
+          "level": "critical",
+          "status": "discharging"
+        },
+        "capabilities": null
+      },
+      {
+        "id": "synthetic-b",
+        "name": "Synthetic keyboard",
+        "kind": "keyboard",
+        "online": true,
+        "battery": {
+          "percentage": 100,
+          "level": "full",
+          "status": "full"
+        },
+        "capabilities": null
+      },
+      {
+        "id": null,
+        "name": null,
+        "kind": "keyboard",
+        "online": true,
+        "battery": {
+          "percentage": null,
+          "level": "low",
+          "status": "charging_slow"
+        },
+        "capabilities": null
+      },
+      {
+        "id": "duplicate",
+        "name": "Same name",
+        "kind": "keyboard",
+        "online": true,
+        "battery": null,
+        "capabilities": null
+      },
+      {
+        "id": "duplicate",
+        "name": "Same name",
+        "kind": "keyboard",
+        "online": true,
+        "battery": null,
+        "capabilities": null
+      },
+      {
+        "id": "offline",
+        "name": "Synthetic keyboard",
+        "kind": "keyboard",
+        "online": false,
+        "battery": {
+          "percentage": 84,
+          "level": "good",
+          "status": "charging"
+        },
+        "capabilities": null
+      },
+      {
+        "id": "light",
+        "name": "Synthetic light",
+        "kind": "light",
+        "online": true,
+        "battery": null,
+        "capabilities": null
+      },
+      {
+        "id": "long",
+        "name": "Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name Long synthetic name ",
+        "kind": "keyboard",
+        "online": true,
+        "battery": {
+          "percentage": 20,
+          "level": "low",
+          "status": "charging"
+        },
+        "capabilities": null
+      }
+    ]
+  }
+}
