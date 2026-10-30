@@ -1,5 +1,31 @@
 # Verifiche locali
 
+## Script di sessione e stato dell’installazione — 30 ottobre 2026
+
+Aggiunto `scripts/session-check.sh` per le verifiche manuali, deliberatamente
+fuori da `verify.sh` e da `tests/nested.sh` perché installa file e toglie/rimette
+l’estensione nella sessione dell’autore:
+
+- senza argomenti confronta uno per uno i file elencati in
+  `scripts/runtime-files.txt` con la copia installata, poi riporta stato,
+  versione della CLI, numero di dispositivi (senza ID) e righe di log pertinenti;
+- `--install` rigenera il `.mo` e sincronizza i file runtime;
+- `--teardown` disabilita l’estensione dopo `DELAY` secondi, con il menu aperto,
+  verifica che non restino processi `openlogi api devices` e la riabilita;
+- `--all` concatena i passi; `-h` mostra l’uso.
+
+Prima esecuzione nella sessione reale: tutti i file installati risultano diversi
+dal repository, quindi la copia in uso è quella precedente alle correzioni di
+oggi. Questo spiega perché il refresh live non si osservava e perché la puntina
+seguiva ancora la vecchia regola della percentuale. Stato riportato:
+`Enabled: No`, `State: INACTIVE`, nessuna installazione di sistema: l’estensione
+non era abilitata al momento del controllo.
+
+Dato raccolto dalla stessa esecuzione: `openlogi --version` risponde
+`openlogi 0.8.19`, non 0.8.18, e l’inventario reale (2 dispositivi) è leggibile
+con schema 1. Il contratto resta verificato sul tag v0.8.18; nessuna nuova
+verifica hardware per la 0.8.19 oltre a quanto già osservato.
+
 ## Puntina e icona del tipo nel pannello — 30 ottobre 2026
 
 Difetto segnalato dall’autore: la puntina del mouse era scomparsa dalla riga.

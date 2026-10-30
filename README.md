@@ -53,7 +53,8 @@ compare anche nel nome scelto dall’autore per riconoscibilità.
 
 Fedora, GNOME Shell 50, GJS, OpenLogi RPM con CLI `openlogi api devices`,
 agent raggiungibile nello stesso profilo della CLI e launcher `openlogi.desktop`.
-Contratto verificato sul tag OpenLogi v0.8.18, schema JSON 1. Nessuna promessa
+Contratto verificato sul tag OpenLogi v0.8.18, schema JSON 1; la CLI reale
+osservata il 30 ottobre 2026 è `openlogi 0.8.19`, che ha risposto con schema 1. Nessuna promessa
 per tutti i dispositivi visibili nella GUI: l’inventario API include luci senza
 batteria, ma non webcam. Osservati due dispositivi reali (MX Master e MX Keys);
 G515 e Keys-To-Go 2 non sono stati provati.
@@ -176,6 +177,20 @@ Per una prova interattiva usare una sessione di sviluppo separata:
 Un bus isolato non vede automaticamente l’agent host: non collegare i due bus
 per aggirare l’isolamento. Consultare [VERIFICATION.md](docs/VERIFICATION.md) per
 risultati, comandi, versioni, prove non eseguite e limiti del sandbox.
+
+Nella sessione reale, con l’estensione già installata:
+
+```bash
+# Sola lettura: confronta i file installati col repository, stato, CLI, log.
+./scripts/session-check.sh
+# Aggiorna la copia installata (poi logout/login su Wayland).
+./scripts/session-check.sh --install
+# Test interattivo: disabilita col menu aperto e cerca processi orfani.
+DELAY=8 ./scripts/session-check.sh --teardown
+```
+
+Questi comandi toccano la sessione dell’utente e non sono usati da `verify.sh`
+né da `tests/nested.sh`.
 
 ## Flusso dei dati
 

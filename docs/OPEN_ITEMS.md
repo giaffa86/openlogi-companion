@@ -28,7 +28,7 @@ prove con OpenLogi chiuso e minimizzato. La pubblicazione resta quindi rimandata
    **entrambi alla finestra generale**, come previsto da OL-001. **Parziale:**
    mancano le prove con OpenLogi chiuso e minimizzato e del raggruppamento della
    finestra (OL-002).
-3. [ ] Controllare release successive alla v0.8.18, documentazione e issue upstream
+3. [ ] Controllare release successive alla v0.8.18 (in uso: 0.8.19), documentazione e issue upstream
    per eventuali interfacce pubbliche già disponibili o richieste equivalenti.
    Questo controllo può essere svolto anche senza hardware.
 4. [ ] Se il limite persiste, preparare una richiesta upstream concreta per
