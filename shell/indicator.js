@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Generated with AI for personal use.
-// Do NOT upload to extensions.gnome.org (EGO) unless you understand JavaScript
-// and can maintain this code.
 
 import Clutter from 'gi://Clutter';
+import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import Shell from 'gi://Shell';
 import Pango from 'gi://Pango';
@@ -13,8 +11,15 @@ import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 import {Provider} from './provider.js';
-import {DeviceRow} from './deviceRow.js';
+import {DeviceRow, kindIcon} from './deviceRow.js';
 import {DataError, panelDevice} from './contract.js';
+
+// Polling while the menu is open keeps battery and connection state live without
+// any preference; the panel-only poll stays slower because it runs unattended.
+const MENU_REFRESH_SECONDS = 5;
+const PANEL_REFRESH_SECONDS = 60;
+const MENU_REFRESH_MAX_SECONDS = 60;
+const PANEL_REFRESH_MAX_SECONDS = 900;
 
 export class Indicator {
     constructor(extension) {
@@ -24,14 +29,21 @@ export class Indicator {
         this._generation = 0;
         this._pending = null;
         this._timer = 0;
+        this._delay = 0;
+        this._menuOpen = false;
         this._failures = 0;
         this._selected = null;
         this._snapshot = null;
         this._rows = [];
         this._button = new PanelMenu.Button(0.0, 'OpenLogi Companion');
         const box = new St.BoxLayout({style_class: 'panel-status-menu-box'});
-        box.add_child(new St.Icon({icon_name: 'input-keyboard-symbolic', style_class: 'system-status-icon'}));
+        box.add_child(new St.Icon({
+            gicon: new Gio.FileIcon({file: extension.dir.get_child('icons').get_child('openlogi-companion-symbolic.svg')}),
+            style_class: 'system-status-icon',
+        }));
+        this._deviceIcon = new St.Icon({style_class: 'system-status-icon', visible: false});
         this._percentage = new St.Label({y_align: Clutter.ActorAlign.CENTER, visible: false});
+        box.add_child(this._deviceIcon);
         box.add_child(this._percentage);
         this._button.add_child(box);
         this._status = new PopupMenu.PopupMenuItem(_('Loading…'), {reactive: false, can_focus: false});
@@ -45,10 +57,11 @@ export class Indicator {
         this._scroll.set_child(this._section.actor);
         this._button.menu.box.add_child(this._scroll);
         this._button.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-        this._button.menu.addAction(_('Open OpenLogi'), () => this._openApp());
+        this._button.menu.addAction(_('Show OpenLogi window'), () => this._openApp());
         this._button.menu.addAction(_('Refresh'), () => this._refresh());
         this._button.menu.addAction(_('Extension preferences'), () => extension.openPreferences());
         this._menuSignal = this._button.menu.connect('open-state-changed', (_menu, open) => {
+            this._menuOpen = open;
             if (open) {
                 const monitor = Main.layoutManager.primaryMonitor;
                 const scale = St.ThemeContext.get_for_stage(global.stage).scale_factor;
@@ -56,6 +69,8 @@ export class Indicator {
                 this._button.menu.box.set_style(`max-width: ${width}px;`);
                 this._scroll.set_style(`width: ${width}px; max-height: ${Math.max(80, (monitor.height - 250) / scale)}px;`);
                 this._refresh();
+            } else {
+                this._schedule();
             }
         });
         this._settingsSignal = this._settings.connect('changed::show-percentage', () => {
@@ -72,6 +87,8 @@ export class Indicator {
             GLib.Source.remove(this._timer);
             this._timer = 0;
         }
+        this._delay = 0;
+        this._menuOpen = false;
         this._settings.disconnect(this._settingsSignal);
         this._button.menu.disconnect(this._menuSignal);
         this._provider.destroy();
@@ -85,6 +102,7 @@ export class Indicator {
         this._scroll = null;
         this._status = null;
         this._percentage = null;
+        this._deviceIcon = null;
         this._settings = null;
         this._extension = null;
         this._provider = null;
@@ -111,7 +129,9 @@ export class Indicator {
                 this._status.label.text = snapshot.inventory === 'scanning' ? _('Scanning devices…') : _('Inventory unavailable');
             } else {
                 this._render(snapshot.devices);
-                this._status.label.text = snapshot.devices.length ? _('Select a device in OpenLogi. Pin a percentage for this session.') : _('No devices');
+                this._status.label.text = snapshot.devices.length
+                    ? _('Select a device in OpenLogi. Pin a device in the panel for this session.')
+                    : _('No devices');
             }
             this._updatePanel();
         } catch (error) {
@@ -171,19 +191,28 @@ export class Indicator {
             counts.set(device.id, (counts.get(device.id) ?? 0) + 1);
         this._rows.forEach((row, i) => {
             const device = devices[i];
-            const pinnable = device.id !== null && device.online && device.battery?.percentage !== null &&
-                device.battery !== null && counts.get(device.id) === 1;
+            // The pin is a session selection: it must survive a battery reading that
+            // is temporarily missing (for example a mouse charging without a value).
+            const pinnable = device.id !== null && device.online && device.battery !== null &&
+                counts.get(device.id) === 1;
             row.update(device, pinnable, device.id !== null && device.id === this._selected);
         });
     }
 
     _updatePanel() {
         const device = this._snapshot?.inventory === 'ready' ? panelDevice(this._snapshot.devices, this._selected) : null;
-        const percentage = device?.battery?.percentage;
-        const show = this._settings.get_boolean('show-percentage') && percentage !== undefined && percentage !== null;
-        this._percentage.visible = show;
-        this._percentage.text = show ? new Intl.NumberFormat(undefined, {style: 'percent'}).format(percentage / 100) : '';
-        this._button.accessible_name = show ? `OpenLogi Companion: ${device.name} ${this._percentage.text}` : 'OpenLogi Companion';
+        const show = device !== null && this._settings.get_boolean('show-percentage');
+        const percentage = show ? device.battery?.percentage ?? null : null;
+        const text = percentage === null ? '' : new Intl.NumberFormat(undefined, {style: 'percent'}).format(percentage / 100);
+        // The kind icon identifies the pinned device even when no percentage exists,
+        // so the panel never falls back to an unexplained empty label.
+        this._deviceIcon.visible = show;
+        if (show)
+            this._deviceIcon.icon_name = kindIcon(device.kind);
+        this._percentage.visible = show && text !== '';
+        this._percentage.text = text;
+        const details = show ? ` ${device.name}${text ? ` ${text}` : ''}` : '';
+        this._button.accessible_name = `OpenLogi Companion${details}`;
     }
 
     _schedule() {
@@ -191,9 +220,15 @@ export class Indicator {
             GLib.Source.remove(this._timer);
             this._timer = 0;
         }
-        if (!this._settings.get_boolean('show-percentage'))
+        // Only a visible menu or the panel percentage needs unattended polling.
+        if (!this._menuOpen && !this._settings.get_boolean('show-percentage')) {
+            this._delay = 0;
             return;
-        const seconds = Math.min(60 * 2 ** Math.min(this._failures, 4), 900);
+        }
+        const base = this._menuOpen ? MENU_REFRESH_SECONDS : PANEL_REFRESH_SECONDS;
+        const max = this._menuOpen ? MENU_REFRESH_MAX_SECONDS : PANEL_REFRESH_MAX_SECONDS;
+        const seconds = Math.min(base * 2 ** Math.min(this._failures, 4), max);
+        this._delay = seconds;
         this._timer = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, seconds, () => {
             this._timer = 0;
             this._refresh();

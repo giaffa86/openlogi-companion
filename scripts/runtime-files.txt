@@ -2,6 +2,7 @@ metadata.json
 extension.js
 prefs.js
 stylesheet.css
+icons/openlogi-companion-symbolic.svg
 shell/contract.js
 shell/provider.js
 shell/indicator.js

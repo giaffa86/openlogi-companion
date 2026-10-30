@@ -1,4 +1,232 @@
-# Verifica del 28 ottobre 2026
+# Verifiche locali
+
+## Puntina e icona del tipo nel pannello — 30 ottobre 2026
+
+Difetto segnalato dall’autore: la puntina del mouse era scomparsa dalla riga.
+Causa: `pinnable` richiedeva `battery.percentage !== null`, quindi un dispositivo
+in carica senza lettura (`Battery unavailable · Charging`) perdeva la puntina
+anche se la selezione era ancora valida.
+
+Correzione:
+
+- la puntina ora dipende solo dalla scelta: ID univoco, dispositivo online e
+  supporto batteria (`battery !== null`); una lettura mancante non la nasconde;
+  l’icona del tipo viene mostrata sempre e la percentuale solo se esiste;
+- nel pannello, dopo l’icona dell’estensione compaiono l’icona del tipo del
+  dispositivo fissato (mouse, tastiera, …) e la percentuale quando disponibile;
+  il nome accessibile del pulsante include nome dispositivo e valore;
+- mappa delle icone di tipo centralizzata in `shell/deviceRow.js` (`kindIcon`),
+  usata sia dalle righe sia dal pannello;
+- stringhe aggiornate: «Show the pinned device in the panel» (preferenza),
+  «Remove this device from the panel» (puntina), «Select a device in OpenLogi.
+  Pin a device in the panel for this session.» (intestazione menu), più
+  descrizione della chiave GSettings; traduzione italiana a 37 messaggi;
+- fixture sintetica estesa con `charging-no-reading`, un mouse in carica senza
+  percentuale, per coprire la regressione.
+
+Verifiche:
+
+- `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh`: 64 controlli GJS
+  (erano 61), ZIP, catalogo italiano, template e Shexli tutti verdi;
+- `./tests/nested.sh`: **56 controlli** Shell (erano 48). Nuovi: puntina visibile
+  e reattiva su dispositivo senza lettura, puntina che sopravvive a un refresh,
+  nessuna puntina su un dispositivo senza batteria, icona di tipo corretta con e
+  senza percentuale, nome accessibile del pannello;
+- evidenze: `/tmp/openlogi-nested-i6QndI/pinned-kind-icon.png` (mouse senza
+  percentuale: icona del topo, nessun valore) e `pinned-percentage.png`
+  (tastiera con `0%`), ritagli del pannello ispezionati.
+
+## Icona simbolica del pannello — 30 ottobre 2026
+
+Difetto segnalato dall’autore: nel pannello compariva un pallino bianco al posto
+del marchio. Riprodotto ingrandendo lo screenshot della sessione reale.
+
+Causa: l’SVG usava due path con `stroke` e `fill="none"`. Il recolouring
+simbolico della Shell/GTK impone `fill` su tutti i path, quindi l’arco del
+cerchio veniva riempito e diventava un disco pieno che copriva il mouse.
+
+Correzione in `icons/openlogi-companion-symbolic.svg`:
+
+- cerchio come anello chiuso (due archi, `fill-rule="evenodd"`), niente `stroke`;
+- mouse come capsula con la rotella ritagliata nello stesso path tramite evenodd;
+- unico colore `#2e3436`, che il tema sostituisce; nessuna modifica al nome o al
+  percorso del file, quindi il manifest runtime resta invariato.
+
+Verifiche:
+
+- resa raster a 16, 22 e 32 px ispezionata: anello e mouse distinti, senza fusione;
+- `./tests/nested.sh`: 48 controlli superati e screenshot
+  `/tmp/openlogi-nested-LViwg2`; ritaglio del pannello ispezionato a tema chiaro e
+  scuro a scala testo 1, icona riconoscibile in entrambi (prima era un disco);
+- `tests/check-package.py` ora rifiuta un’icona `-symbolic.svg` con `stroke` o
+  `fill="none"`, così il difetto non può tornare;
+- `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh` superato.
+
+L’icona quadrata per la pagina EGO è un PNG e non è toccata da questo difetto.
+
+## Icona EGO e marchi — 30 ottobre 2026
+
+Modifica realizzata con assistenza AI per uso personale.
+
+- `scripts/make-ego-icon.py` genera `assets/ego/icon-256.png` e `icon-128.png`
+  dal logo esistente: piastra scura arrotondata (raggio 22%) con emblema chiaro
+  al 66% del lato, per leggibilità su schede chiare e scure della pagina EGO.
+  Nessuna modifica al logo o all’SVG simbolico usato dalla Shell.
+- `assets/ego/README.md` documenta rigenerazione e uso; `assets/` non è nel
+  manifest runtime, quindi l’icona non entra nello ZIP.
+- `README.md` ha ora la sezione «Marchi e indipendenza»: nessuna affiliazione,
+  marchio originale, nessun media di terzi nel repository o nel bundle, nomi
+  commerciali dei dispositivi solo a runtime.
+- Verifica visiva delle due dimensioni: emblema centrato, margini regolari,
+  nessun artefatto di ridimensionamento.
+
+`verify.sh` non è influenzato (nessun file runtime o di test modificato);
+`nested.sh` non rieseguito in questo passaggio.
+
+## Pulizia per la revisione — 30 ottobre 2026
+
+Modifica realizzata con assistenza AI per uso personale, su richiesta esplicita
+dell’autore, in deroga alla precedente regola «conservare l’avviso AI nei file
+generati».
+
+- Rimossi dagli header di tutti i file (runtime, test, script, CSS) i commenti
+  `Generated with AI for personal use` e `Do NOT upload to extensions.gnome.org`:
+  le review EGO li elencano fra gli indicatori di output AI. Resta solo
+  `SPDX-License-Identifier: GPL-3.0-or-later`.
+- Provenienza AI conservata nella documentazione: `README.md`,
+  `AI_REVIEW_GUIDELINES.md`, `AGENTS.md`, `assets/branding/README.md` e questo
+  file. Aggiornate le regole di progetto di conseguenza.
+- `metadata.json`: rimosso `version` (deprecato, impostato da EGO), aggiunto
+  `url` verso il repository previsto e descrizione estesa su requisiti, sola
+  lettura, comportamento del click e indipendenza.
+- `tests/check-package.py` ora rifiuta un bundle con `version` o senza `url`
+  `https://`.
+
+Limite noto: `url` punta a `https://github.com/giaffa86/openlogi-companion`, che
+non esiste ancora. Il link va creato prima di qualsiasi upload su EGO.
+
+Verifiche: `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh` superato
+(sintassi, 61 controlli GJS, ZIP dal manifest, catalogo italiano, template,
+Shexli senza finding). `./tests/nested.sh` non rieseguito in questo passaggio:
+non sono cambiati `shell/`, la UI o il polling.
+
+## Sessione reale e refresh del menu — 30 ottobre 2026
+
+Modifica realizzata con assistenza AI per uso personale, sulla base delle
+osservazioni dell’autore nella sessione GNOME Shell 50 con dispositivi reali
+collegati.
+
+### Riscontri della sessione reale
+
+- L’inventario reale è arrivato e il menu ha elencato due dispositivi con
+  batteria e stato di ricarica; evidenza in `assets/screenshots/menu-devices.png`.
+- Il click sulla riga e l’azione di apertura portano alla **finestra generale** di
+  OpenLogi, che richiede ancora la selezione manuale del dispositivo: è il
+  comportamento previsto da OL-001, non un difetto introdotto dal companion.
+- I nomi non coincidono con la home della GUI, che usa i nomi commerciali brevi
+  (`MX Master`, `MX Keys`) mentre la CLI riporta il nome esteso del modello.
+- La home della GUI non mostra la percentuale di carica: il confronto numerico
+  della batteria con OpenLogi resta non eseguito (evidenza
+  `assets/screenshots/openlogi-gui-home.png`).
+
+### Etichette
+
+`Open OpenLogi` ripeteva il verbo nel nome dell’applicazione. L’azione del menu
+diventa `Show OpenLogi window` / `Mostra la finestra di OpenLogi`, coerente con
+`Main.activateWindow` e con l’apertura della finestra generale. Il nome
+accessibile della riga diventa `Select the device in the OpenLogi app`. Le
+vecchie stringhe sono state rimosse da `po/it.po` e dal modello; nessun filtro
+aggiunto sul bus, nessuna intercettazione di notifiche.
+
+### Refresh live a menu aperto
+
+Difetto osservato: con il pannello aperto i dati non si aggiornavano, perché il
+timer di polling esisteva solo con la preferenza `show-percentage` attiva e con
+intervallo minimo di 60 s. Il polling ora dipende dalla visibilità del menu:
+
+- menu aperto: 5 s, con backoff `10 → 20 → 40 → 60` s in caso di errori (tetto 60 s);
+- menu chiuso: nessun timer, salvo la preferenza `show-percentage` attiva, che
+  mantiene il poll lento `60 → 900` s;
+- una sola richiesta pendente, timeout 5 s, cancellazione e reaping invariati;
+- le righe vengono riusate quando l’inventario non cambia, quindi focus e scroll
+  non vengono persi a ogni aggiornamento.
+
+### Traduzioni
+
+Lingua sorgente: inglese (i `msgid`). Italiano: `po/it.po` compilato in
+`locale/it/LC_MESSAGES/openlogi-companion.mo`, che è anche il percorso atteso da
+GNOME Shell per `gettext-domain: openlogi-companion` in `metadata.json`. Ogni
+altra lingua cade sull’inglese. Lo ZIP contiene solo il catalogo compilato: le
+regole EGO elencano `.po` e `.pot` fra i file non necessari alla submission.
+
+Controlli aggiunti a `scripts/verify.sh`:
+
+- il catalogo compilato esiste nel percorso del dominio dichiarato;
+- `msgfmt --statistics` su `po/it.po` non riporta voci non tradotte o fuzzy;
+- il catalogo si carica davvero e restituisce `Mostra la finestra di OpenLogi`
+  per `Show OpenLogi window` (verifica con il modulo `gettext` di Python, perché
+  il typelib `Gettext` non è installato su questa macchina);
+- `po/openlogi-companion.pot` è allineato ai sorgenti (37 messaggi).
+
+Stringhe aggiornate in questo passaggio: sottotitolo delle preferenze
+(`Aggiorna ogni 60 secondi mentre è mostrata nel pannello, con attesa maggiore
+dopo errori.`) e descrizione della chiave GSettings, entrambe coerenti con il
+polling 5 s a menu aperto. Restano in inglese, non tradotte, solo le stringhe di
+marca `OpenLogi Companion` del pannello.
+
+### Verifiche eseguite sui sorgenti modificati
+
+- `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh`: sintassi, limiti di
+  riga, 61 controlli GJS, ZIP dal manifest esplicito e `msgcmp` superato su 37
+  messaggi tradotti; Shexli 0.2.1 con tree-sitter 0.25.2 e tree-sitter-javascript 0.25.0
+  senza finding, errori o warning.
+- `./tests/nested.sh`: **48 controlli** Shell superati con backend sintetico (erano
+  42), incluso il refresh live a menu aperto con inventario cambiato nel finto
+  CLI, il ritorno al poll lento alla chiusura e l’apertura della finestra delle
+  preferenze con il nuovo sottotitolo. Evidenze e screenshot
+  `/tmp/openlogi-nested-swZqwi`; menu scuro a scala testo 1 ispezionato, etichetta
+  `Show OpenLogi window` visibile, avvisi ambientali AT-SPI/PipeWire invariati.
+- Nessuna installazione o ricarica nella sessione host durante queste verifiche.
+
+Restano aperti i punti di `OPEN_ITEMS.md`: confronto numerico batteria con la GUI,
+click con app chiusa e minimizzata, raggruppamento finestra, accessibilità con
+lettore di schermo e DPI/multi-monitor.
+
+## Screenshot del menu con dispositivi — 29 ottobre 2026
+
+Nota aggiunta con assistenza AI per uso personale. L'autore ha segnalato il
+funzionamento corretto dell'estensione nella sessione GNOME Shell 50 reale, con
+menu funzionante e dispositivi mostrati, e ha fornito lo screenshot acquisito.
+L'immagine è conservata come `assets/screenshots/menu-devices.png` (972×612,
+SHA-256 `db98d8d5…5e7b`), con provenienza e uso previsto nel relativo README.
+Mostra due dispositivi connessi con batteria e stato di ricarica, senza ID o
+dati sensibili. Resta un'evidenza visiva fornita dall'autore, non una
+riacquisizione automatica: non sostituisce le prove in `tests/nested.sh` né
+aggiunge verifiche hardware oltre a quanto annotato in `OPEN_ITEMS.md`. L'asset
+non è nel manifest runtime e quindi non entra nello ZIP.
+
+## Logo e icona — 29 ottobre 2026
+
+Modifica realizzata con assistenza AI per uso personale. Logo PNG generato con
+image_gen, con canale alfa verificato, in `assets/branding/`; prompt e provenienza
+nel relativo README. Adattamento SVG simbolico su griglia 16×16 in `icons/`,
+caricato da `St.Icon` tramite `Gio.FileIcon`. Il tema Shell ne determina il colore.
+Il manifest runtime include soltanto l’SVG, senza PNG, prompt o documentazione.
+
+Verifiche eseguite sui sorgenti modificati:
+
+- `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh`: 61 controlli GJS,
+  ZIP e traduzioni superati; Shexli senza finding, errori o warning.
+- `./tests/nested.sh`: 42 controlli Shell superati con backend sintetico.
+  Il bind D-Bus inizialmente negato nel sandbox è riuscito con esecuzione
+  autorizzata fuori dal sandbox. Evidenze in `/tmp/openlogi-nested-IgFqBv`.
+  Screenshot scuro a scala testo 1 ispezionato; nessun errore di caricamento
+  dell’icona nel log. Restano gli avvisi ambientali AT-SPI/PipeWire/Adw già noti.
+
+Nessuna installazione o ricarica nella sessione host. Nessuna prova hardware o
+della GUI OpenLogi reale aggiunta; restano tutti i limiti in `OPEN_ITEMS.md`.
+
+## Verifica del 28 ottobre 2026
 
 ## Preparazione dei sorgenti per GitHub
 
@@ -219,7 +447,7 @@ restano in `/tmp`; non vengono copiati nel progetto o nel pacchetto.
 
 ## Pacchetto, licenza e revisione
 
-`scripts/runtime-files.txt` contiene gli undici file runtime esatti. Lo ZIP
+`scripts/runtime-files.txt` contiene l’elenco esatto dei file runtime. Lo ZIP
 conserva `shell/`, schema XML, catalogo `.mo` e LICENSE GPLv3. Confrontati tutti
 i byte con i sorgenti e risolti gli import relativi. Esclusi `gschemas.compiled`,
 script, test, prompt, documentazione, directory agent e altri dati locali.

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Generated with AI for personal use. GPL-3.0-or-later.
+# SPDX-License-Identifier: GPL-3.0-or-later.
 set -euo pipefail
 gnome-shell --headless --virtual-monitor 1280x720 --debug-control > "$SANDBOX/shell.log" 2>&1 &
 SHELL_PID=$!

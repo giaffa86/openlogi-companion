@@ -5,11 +5,23 @@ restituiti dall’agent [OpenLogi](https://github.com/AprilNEA/OpenLogi) e la lo
 batteria. Progetto sperimentale nato per uso personale, indipendente da OpenLogi.
 Licenza [GPL-3.0-or-later](LICENSE).
 
-**Stato sperimentale:** i test automatici usano dispositivi sintetici. Non sono
-ancora state verificate periferiche reali né la GUI OpenLogi reale; in particolare
-G515 e Keys-To-Go 2 restano da provare. È supportata soltanto GNOME Shell 50.
-La condivisione dei sorgenti su GitHub non costituisce una certificazione EGO;
-non è prevista una pubblicazione su extensions.gnome.org.
+Il marchio è un mouse dentro un cerchio aperto. Il pannello usa una
+[icona SVG simbolica](icons/openlogi-companion-symbolic.svg) che segue il tema
+GNOME; [logo trasparente e provenienza AI](assets/branding/README.md) sono
+conservati separatamente dal pacchetto runtime. L’[icona quadrata per la pagina
+EGO](assets/ego/README.md) è generata dallo stesso marchio.
+
+**Stato sperimentale:** i test automatici usano dispositivi sintetici. Sono stati
+osservati due dispositivi reali (MX Master e MX Keys) con inventario, batteria e
+confronto della percentuale con la pagina dispositivo di OpenLogi. Restano da
+provare l’apertura della GUI con app chiusa/minimizzata e le verifiche di
+accessibilità. Altri modelli non sono disponibili all’autore e non sono
+dichiarati compatibili. È supportata soltanto GNOME Shell 50.
+
+La pubblicazione su extensions.gnome.org è pianificata ma **subordinata** alle
+verifiche residue elencate in [OPEN_ITEMS.md](docs/OPEN_ITEMS.md) (OL-002,
+OL-003, OL-005); i commit locali e la creazione del repository remoto la
+precedono.
 
 La pubblicazione remota è rimandata alla verifica con dispositivi reali collegati.
 Preparazione dei sorgenti e commit locali precedono questo passaggio; vedere il
@@ -21,27 +33,57 @@ Nella release verificata v0.8.18 non è stata individuata un’azione pubblica
 supportata per questa selezione. Vedi
 [limiti e proposta upstream](docs/OPEN_ITEMS.md).
 
+## Marchi e indipendenza
+
+Il progetto è indipendente: nessuna affiliazione, sponsorizzazione o approvazione
+da parte di OpenLogi, Logitech o del GNOME Project. “OpenLogi” è usato solo in
+senso descrittivo, per indicare l’app di cui l’estensione legge l’inventario, e
+compare anche nel nome scelto dall’autore per riconoscibilità.
+
+- Il marchio (mouse in un cerchio aperto) è originale, generato con assistenza
+  AI; non riproduce loghi Logitech, OpenLogi o GNOME.
+- Nel repository e nel bundle non ci sono loghi, icone, screenshot o altri
+  media di terzi. `LICENSE` è il solo testo di terzi distribuito.
+- I nomi commerciali dei dispositivi (`MX Master`, `MX Keys`, …) arrivano a
+  runtime dalla CLI di OpenLogi e non sono inclusi nel pacchetto.
+- La scheda EGO userà la stessa dichiarazione di indipendenza della
+  `description` in `metadata.json`.
+
 ## Requisiti e comportamento
 
 Fedora, GNOME Shell 50, GJS, OpenLogi RPM con CLI `openlogi api devices`,
 agent raggiungibile nello stesso profilo della CLI e launcher `openlogi.desktop`.
 Contratto verificato sul tag OpenLogi v0.8.18, schema JSON 1. Nessuna promessa
 per tutti i dispositivi visibili nella GUI: l’inventario API include luci senza
-batteria, ma non webcam. G515 e Keys-To-Go 2 non sono stati verificati.
+batteria, ma non webcam. Osservati due dispositivi reali (MX Master e MX Keys);
+G515 e Keys-To-Go 2 non sono stati provati.
 
 L’indicatore parte con la sola icona. In **Preferenze dell’estensione** si può
-consentire la percentuale; il pulsante a puntina di una riga sceglie il dispositivo
-per la sessione. Serve un ID attualmente univoco e una percentuale disponibile.
+mostrare nel pannello il dispositivo fissato: icona del tipo (mouse, tastiera,
+…​) e percentuale quando il dispositivo la fornisce. Il pulsante a puntina di una
+riga sceglie il dispositivo per la sessione e serve un ID attualmente univoco su
+un dispositivo online con supporto batteria; **non** serve una lettura valida,
+quindi un dispositivo in carica senza percentuale resta fissabile e nel pannello
+mostra almeno la sua icona.
 Non viene calcolata una media. ID null/duplicati non impediscono la visualizzazione
 delle righe, ma impediscono la scelta nel pannello. La scelta resta in memoria e
 si perde dopo scomparsa, disconnessione, errore, nuova scansione o disabilitazione.
 Non è un’identità hardware persistente: non sopravvive a cambi della route.
 
-Aggiornamento all’abilitazione, all’apertura del menu e con **Aggiorna**. Con la
-percentuale consentita, polling ogni 60 secondi anche prima della scelta;
-dopo errori il ritardo sale a 120, 240, 480 e massimo 900 secondi.
-Aprire il menu consente un tentativo immediato; richieste contemporanee vengono
-accorpate. Senza tale preferenza non ci sono timer di polling.
+Aggiornamento all’abilitazione, all’apertura del menu e con **Aggiorna**. Mentre
+il menu è aperto il polling è di 5 secondi, così batteria e connessione cambiano
+senza chiudere il pannello; dopo errori il ritardo sale a 10, 20, 40 e massimo 60
+secondi. A menu chiuso l’unico timer è quello della preferenza: con la percentuale
+consentita, polling ogni 60 secondi anche prima della scelta, con ritardo crescente
+120, 240, 480 e massimo 900 secondi dopo errori. Richieste contemporanee vengono
+accorpate. Senza menu aperto e senza la preferenza non ci sono timer di polling.
+
+Le stringhe sono in inglese nel sorgente e tradotte in italiano tramite
+`po/it.po`; il bundle include solo il catalogo compilato in
+`locale/it/LC_MESSAGES/openlogi-companion.mo`, nel percorso atteso da
+`gettext-domain`. Ogni altra lingua usa l’inglese. Il controllo in
+`scripts/verify.sh` verifica che il catalogo compilato si carichi davvero e che
+template e traduzione restino allineati.
 
 I dispositivi connessi precedono gli altri, poi segue il nome secondo la locale.
 Le righe restano distinte anche per nomi o ID uguali. Le righe immutate vengono
@@ -142,9 +184,9 @@ Agent OpenLogi (profilo corrente)
   → CLI ufficiale: openlogi api devices
   → Provider: due pipe asincrone, timeout, limite condiviso
   → validazione schema 1, ordinamento stabile
-  → menu Shell e percentuale di un solo dispositivo in memoria
+  → menu Shell, con icona del tipo e percentuale di un solo dispositivo in memoria
 
-Click riga / Apri OpenLogi → finestra del launcher openlogi.desktop
+Click riga / Show OpenLogi window → finestra del launcher openlogi.desktop
   → Main.activateWindow se esiste, Shell.App.activate per avviarla
 Preferenze GTK/Adw → GSettings: solo show-percentage
 ```
@@ -157,10 +199,12 @@ limite o teardown vengono cancellate le letture, terminato e raccolto il solo
 figlio CLI. Nessuno snapshot o ID viene salvato in GSettings, file o log.
 La GUI aperta dall’utente è indipendente dal teardown.
 
-Il codice è generato con assistenza AI e conserva l’avviso di uso personale:
-la manutenzione richiede la comprensione del JavaScript. Vedere
-[le linee guida di revisione](AI_REVIEW_GUIDELINES.md). Shexli non certifica
-l’accettazione EGO.
+Il codice è stato sviluppato con assistenza AI; la provenienza è documentata qui,
+in [AI_REVIEW_GUIDELINES.md](AI_REVIEW_GUIDELINES.md) e in `docs/`. I file
+sorgente e di runtime non contengono avvisi AI né prompt: portano solo l’SPDX
+`GPL-3.0-or-later`, perché le review EGO trattano quei commenti come indicatori
+di codice generato. La manutenzione richiede la comprensione del JavaScript;
+Shexli non certifica l’accettazione EGO.
 
 Il repository contiene sorgenti, traduzioni, test, script e documentazione.
 Il bundle installabile include soltanto i file elencati in

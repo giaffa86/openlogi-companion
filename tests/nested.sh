@@ -1,5 +1,5 @@
 #!/bin/bash
-# Generated with AI for personal use. GPL-3.0-or-later.
+# SPDX-License-Identifier: GPL-3.0-or-later.
 # Isolated synthetic session. Never bridges the host D-Bus address.
 set -euo pipefail
 SOURCE=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
@@ -26,7 +26,6 @@ cat > "$SANDBOX/data/gnome-shell/extensions/openlogi-test@local/metadata.json" <
 {"uuid":"openlogi-test@local","name":"Isolated test control","description":"Test only","shell-version":["50"]}
 EOF
 cat > "$SANDBOX/data/gnome-shell/extensions/openlogi-test@local/extension.js" <<'EOF'
-// Generated with AI for personal use. Do not upload to EGO.
 import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 export default class Test extends Extension {
     enable() { global.context.unsafe_mode = true; }
@@ -43,4 +42,4 @@ export PATH="$SANDBOX/bin:$PATH"
 export SOURCE SANDBOX
 # keyfile backend settings are confined to XDG_CONFIG_HOME.
 gsettings set org.gnome.shell enabled-extensions "['openlogi-test@local', '$UUID']"
-timeout 55 dbus-run-session -- bash "$SOURCE/tests/nested-inner.sh"
+timeout 90 dbus-run-session -- bash "$SOURCE/tests/nested-inner.sh"

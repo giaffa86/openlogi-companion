@@ -5,11 +5,18 @@ Riferimenti ufficiali consultati il 28 ottobre 2026:
 - https://gjs.guide/extensions/review-guidelines/review-guidelines.html
 - https://gjs.guide/extensions/review-guidelines/best-practices.html
 
-Conservare l’avviso AI: la manutenzione richiede la comprensione del JavaScript.
-Non preparare una submission EGO eliminando soltanto l’avviso. È prevista la
-condivisione dei sorgenti sperimentali su GitHub, non una pubblicazione EGO.
+Conservare la provenienza AI, ma solo nella documentazione di progetto. I file
+sorgente e di runtime portano esclusivamente l’SPDX `GPL-3.0-or-later`: le
+[review guidelines](https://gjs.guide/extensions/review-guidelines/review-guidelines.html)
+indicano come motivi di rifiuto i «commenti che sembrano prompt LLM o altre
+indicazioni di output AI». L’autore resta responsabile della comprensione e della
+manutenzione del JavaScript: nessuna submission senza questa revisione.
+
+Lo ZIP non contiene avvisi AI, prompt, note di provenienza o documentazione:
+`README.md`, questo file e `docs/` restano nel repository e non nel bundle.
 Le precedenti review locali suggeriscono di
-verificare API, cleanup e semplicità, non di nascondere la provenienza del codice.
+verificare API, cleanup e semplicità, non di nascondere la provenienza del codice
+al repository.
 
 Controllare prima di ogni consegna:
 

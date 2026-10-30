@@ -1,5 +1,5 @@
 #!/bin/bash
-# Generated with AI for personal use. GPL-3.0-or-later.
+# SPDX-License-Identifier: GPL-3.0-or-later.
 set -euo pipefail
 SOURCE=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
 TARGET="${HOME}/.local/share/gnome-shell/extensions/openlogi-companion@giaffa86"

@@ -8,6 +8,7 @@
 # Local agent configuration, credentials and Python environments/caches.
 /.agents/
 /.codex/
+/.serena/
 /.aws/
 /.venv/
 /venv/
@@ -23,3 +24,6 @@ __pycache__/
 *.swo
 *~
 .DS_Store
+
+# Note private e locali: mai versionate, mai incluse nel bundle.
+/private/

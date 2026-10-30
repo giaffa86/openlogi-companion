@@ -41,6 +41,17 @@
         "capabilities": null
       },
       {
+        "id": "charging-no-reading",
+        "name": "Synthetic charging mouse",
+        "kind": "mouse",
+        "online": true,
+        "battery": {
+          "percentage": null,
+          "level": null,
+          "status": "charging"
+        }
+      },
+      {
         "id": "duplicate",
         "name": "Same name",
         "kind": "keyboard",

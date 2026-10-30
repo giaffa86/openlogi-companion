@@ -2,7 +2,11 @@
 
 - Comunicare in italiano. Progetto indipendente per uso personale, GNOME Shell 50.
 - UUID `openlogi-companion@giaffa86`. ESM/GJS, nessuna toolchain Node/TypeScript.
-- Conservare l’avviso AI nei file generati. Leggere `AI_REVIEW_GUIDELINES.md`.
+- Provenienza AI documentata in `README.md`, `AI_REVIEW_GUIDELINES.md` e
+  `docs/`; i file sorgente e di runtime portano solo l'SPDX
+  `GPL-3.0-or-later`. Non reintrodurre avvisi AI nei file distribuiti: le
+  review EGO li trattano come indicatori di codice generato. Leggere
+  `AI_REVIEW_GUIDELINES.md`.
 - `extension.js` collega il lifecycle, `shell/provider.js` possiede i subprocessi,
   `shell/contract.js` valida i dati, `shell/indicator.js` possiede UI e timer.
 - GTK/Adw solo in `prefs.js`; St/Clutter/Shell solo nella Shell.

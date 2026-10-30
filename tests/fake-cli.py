@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# Generated with AI for personal use. GPL-3.0-or-later.
+# SPDX-License-Identifier: GPL-3.0-or-later.
 import json
 from pathlib import Path
 import sys

@@ -1,5 +1,33 @@
 msgid ""
-msgstr "Project-Id-Version: OpenLogi Companion 1\nPO-Revision-Date: 2026-10-28 10:00+0100\nLast-Translator: OpenLogi Companion contributors\nLanguage-Team: Italian\nMIME-Version: 1.0\nLanguage: it\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+msgstr ""
+"Project-Id-Version: OpenLogi Companion 1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-30 12:17+0100\n"
+"PO-Revision-Date: 2026-10-28 10:00+0100\n"
+"Last-Translator: OpenLogi Companion contributors\n"
+"Language-Team: Italian\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Panel"
+msgstr "Pannello"
+
+msgid "Pin a device from the menu. The choice lasts only for this session."
+msgstr ""
+"Fissa un dispositivo dal menu. La scelta dura solo per questa sessione."
+
+msgid "Show the pinned device in the panel"
+msgstr "Mostra nel pannello il dispositivo fissato"
+
+msgid ""
+"The percentage appears when the device reports one; refresh every 60 "
+"seconds, with a longer delay after errors."
+msgstr ""
+"La percentuale compare quando il dispositivo la fornisce; aggiornamento ogni "
+"60 secondi, con attesa maggiore dopo errori."
 
 msgid "Offline; battery reading is not current"
 msgstr "Non in linea; la batteria non è aggiornata"
@@ -46,17 +74,17 @@ msgstr "Connesso"
 msgid "Disconnected"
 msgstr "Disconnesso"
 
-msgid "Open OpenLogi and select the device in the app"
-msgstr "Apri OpenLogi e seleziona il dispositivo nell’app"
+msgid "Select the device in the OpenLogi app"
+msgstr "Seleziona il dispositivo nell’app OpenLogi"
 
-msgid "Remove panel percentage"
-msgstr "Rimuovi la percentuale dal pannello"
+msgid "Remove this device from the panel"
+msgstr "Rimuovi questo dispositivo dal pannello"
 
 msgid "Loading…"
 msgstr "Caricamento…"
 
-msgid "Open OpenLogi"
-msgstr "Apri OpenLogi"
+msgid "Show OpenLogi window"
+msgstr "Mostra la finestra di OpenLogi"
 
 msgid "Refresh"
 msgstr "Aggiorna"
@@ -70,8 +98,11 @@ msgstr "Scansione dei dispositivi…"
 msgid "Inventory unavailable"
 msgstr "Inventario indisponibile"
 
-msgid "Select a device in OpenLogi. Pin a percentage for this session."
-msgstr "Seleziona il dispositivo in OpenLogi. Fissa una percentuale per questa sessione."
+msgid ""
+"Select a device in OpenLogi. Pin a device in the panel for this session."
+msgstr ""
+"Seleziona il dispositivo in OpenLogi. Fissa un dispositivo nel pannello per "
+"questa sessione."
 
 msgid "No devices"
 msgstr "Nessun dispositivo"
@@ -99,15 +130,3 @@ msgstr "L’applicazione OpenLogi non è installata"
 
 msgid "Could not open OpenLogi"
 msgstr "Impossibile aprire OpenLogi"
-
-msgid "Panel"
-msgstr "Pannello"
-
-msgid "Pin a device from the menu. The choice lasts only for this session."
-msgstr "Fissa un dispositivo dal menu. La scelta dura solo per questa sessione."
-
-msgid "Allow panel percentage"
-msgstr "Consenti la percentuale nel pannello"
-
-msgid "Refresh every 60 seconds, with a longer delay after errors."
-msgstr "Aggiorna ogni 60 secondi, con un intervallo più lungo dopo gli errori."

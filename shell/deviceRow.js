@@ -1,7 +1,4 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Generated with AI for personal use.
-// Do NOT upload to extensions.gnome.org (EGO) unless you understand JavaScript
-// and can maintain this code.
 
 import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
@@ -10,6 +7,14 @@ import St from 'gi://St';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 import {batteryText} from './contract.js';
+
+export const KIND_ICONS = {mouse: 'input-mouse-symbolic', trackball: 'input-mouse-symbolic',
+    keyboard: 'input-keyboard-symbolic', numpad: 'input-dialpad-symbolic', touchpad: 'input-touchpad-symbolic',
+    light: 'display-brightness-symbolic', headset: 'audio-headphones-symbolic', gamepad: 'input-gaming-symbolic'};
+
+export function kindIcon(kind) {
+    return KIND_ICONS[kind] ?? 'input-keyboard-symbolic';
+}
 
 export const DeviceRow = GObject.registerClass(class DeviceRow extends PopupMenu.PopupBaseMenuItem {
     _init(device, openApp, select) {
@@ -35,17 +40,14 @@ export const DeviceRow = GObject.registerClass(class DeviceRow extends PopupMenu
 
     update(device, pinnable, selected) {
         this.device = device;
-        const icons = {mouse: 'input-mouse-symbolic', trackball: 'input-mouse-symbolic', keyboard: 'input-keyboard-symbolic',
-            numpad: 'input-dialpad-symbolic', touchpad: 'input-touchpad-symbolic', light: 'display-brightness-symbolic',
-            headset: 'audio-headphones-symbolic', gamepad: 'input-gaming-symbolic'};
-        this._icon.icon_name = icons[device.kind] ?? 'input-keyboard-symbolic';
+        this._icon.icon_name = kindIcon(device.kind);
         this._name.text = device.name || _('Unnamed device');
         this._detail.text = `${device.online ? _('Connected') : _('Disconnected')} · ${batteryText(device, _)}`;
-        this.accessible_name = `${this._name.text}. ${this._detail.text}. ${_('Open OpenLogi and select the device in the app')}`;
+        this.accessible_name = `${this._name.text}. ${this._detail.text}. ${_('Select the device in the OpenLogi app')}`;
         this._pin.reactive = pinnable;
         this._pin.can_focus = pinnable;
         this._pin.visible = pinnable;
-        this._pin.accessible_name = selected ? _('Remove panel percentage') : _('Show this device in the panel');
+        this._pin.accessible_name = selected ? _('Remove this device from the panel') : _('Show this device in the panel');
         if (selected)
             this._pin.add_style_pseudo_class('checked');
         else

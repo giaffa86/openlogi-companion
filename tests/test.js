@@ -1,7 +1,4 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Generated with AI for personal use.
-// Do NOT upload to extensions.gnome.org (EGO) unless you understand JavaScript
-// and can maintain this code.
 
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
@@ -30,7 +27,7 @@ function expectError(action, code) {
 }
 async function main() {
     const snapshot = parseInventory(fixture, 0);
-    assert(snapshot.devices.length === 8, 'No merging duplicate IDs/names or missing IDs');
+    assert(snapshot.devices.length === 9, 'No merging duplicate IDs/names or missing IDs');
     assert(snapshot.devices.at(-1).online === false, 'Connected first');
     const zero = snapshot.devices.find(d => d.id === 'synthetic-a');
     assert(batteryText(zero, identity).includes('0%'), 'Zero is valid');
@@ -42,6 +39,10 @@ async function main() {
     assert(panelDevice(snapshot.devices, 'offline') === null, 'Reject offline selection');
     assert(panelDevice(snapshot.devices, 'synthetic-a') === zero, 'Unique session selection');
     assert(panelDevice([], 'synthetic-a') === null, 'Disappearance clears selection');
+    const charging = snapshot.devices.find(d => d.id === 'charging-no-reading');
+    assert(charging.battery !== null && charging.battery.percentage === null, 'Battery without reading kept');
+    assert(batteryText(charging, identity).includes('Charging'), 'Charging state without percentage');
+    assert(panelDevice(snapshot.devices, 'charging-no-reading') === charging, 'Unread battery still selectable');
     const raw = JSON.parse(fixture);
     for (const state of ['scanning', 'unavailable', 'ready']) {
         raw.data.inventory = state;
@@ -89,7 +90,7 @@ async function main() {
     const a = provider.refresh();
     const b = provider.refresh();
     assert(a === b, 'Overlap coalesced into one request');
-    assert((await a).devices.length === 8, 'Concurrent stderr drain without deadlock');
+    assert((await a).devices.length === 9, 'Concurrent stderr drain without deadlock');
     provider.destroy();
     const pending = make('slow');
     const promise = pending.refresh();
@@ -104,7 +105,7 @@ async function main() {
     assert(process.get_if_signaled(), 'Owned child terminated and reaped');
     assert(pending._request === null, 'No pending ownership');
     const reconnected = make('valid');
-    assert((await reconnected.refresh()).devices.length === 8, 'Fresh provider after teardown');
+    assert((await reconnected.refresh()).devices.length === 9, 'Fresh provider after teardown');
     reconnected.destroy();
     print(`${checks} contract/provider checks passed (GJS, synthetic data)`);
 }

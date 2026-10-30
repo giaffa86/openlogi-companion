@@ -3,8 +3,8 @@
   <schema id="org.gnome.shell.extensions.openlogi-companion" path="/org/gnome/shell/extensions/openlogi-companion/">
     <key name="show-percentage" type="b">
       <default>false</default>
-      <summary>Allow panel percentage</summary>
-      <description>Show the percentage of a device chosen in memory for this session and refresh every 60 seconds.</description>
+      <summary>Show the pinned device in the panel</summary>
+      <description>Show the device pinned in memory for this session, with its kind icon and percentage when the device reports one, and refresh the panel every 60 seconds.</description>
     </key>
   </schema>
 </schemalist>
