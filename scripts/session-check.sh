@@ -64,15 +64,22 @@ check_files() {
     fi
 }
 
-check_state() {
+extension_state() {
     local info state
-    info=$(gnome-extensions info "$UUID" 2>&1) || {
-        fail "gnome-extensions info non risponde per $UUID"
-        return
-    }
+    info=$(LC_ALL=C LANGUAGE=C gnome-extensions info "$UUID") || return 1
     state=$(printf '%s\n' "$info" | sed -n 's/^ *State: *//p' | head -1)
-    if [ "$state" = "ENABLED" ]; then
-        pass "estensione ENABLED"
+    [ -n "$state" ] || return 1
+    printf '%s\n' "$state"
+}
+
+check_state() {
+    local state
+    if ! state=$(extension_state); then
+        fail "impossibile leggere lo stato di $UUID"
+        return
+    fi
+    if [ "$state" = "ACTIVE" ]; then
+        pass "estensione ACTIVE"
     else
         fail "stato estensione: ${state:-sconosciuto}"
         printf '      Abilita con: gnome-extensions enable %s\n' "$UUID"
@@ -91,7 +98,20 @@ check_cli() {
         fail "openlogi api devices non ha risposto"
         return
     fi
-    devices=$(printf '%s' "$inventory" | python3 -c 'import json,sys;d=json.load(sys.stdin);print(len(d["data"]["devices"]))' 2>/dev/null || printf '?')
+    if ! devices=$(printf '%s' "$inventory" | python3 -c '
+import json, sys
+d = json.load(sys.stdin)
+assert type(d["schema_version"]) is int and d["schema_version"] == 1
+assert d["ok"] is True
+data = d["data"]
+assert data["inventory"] in ("ready", "scanning", "unavailable")
+assert isinstance(data["devices"], list)
+assert all(isinstance(device, dict) for device in data["devices"])
+print(len(data["devices"]))
+' 2>/dev/null); then
+        fail "risposta inventario non valida o schema incompatibile"
+        return
+    fi
     pass "inventario leggibile, ${devices} dispositivi (ID non stampati)"
 }
 
@@ -110,20 +130,41 @@ install_files() {
     printf '      Riavvia la sessione (logout/login): su Wayland il codice JS resta in cache.\n'
 }
 
+restore_extension() {
+    local state
+    if ! gnome-extensions enable "$UUID"; then
+        fail "riabilitazione non riuscita: riabilitala a mano"
+        return
+    fi
+    sleep 1
+    if state=$(extension_state) && [ "$state" = "ACTIVE" ]; then
+        pass "estensione riabilitata"
+    else
+        fail "riabilitazione non riuscita: riabilitala a mano"
+    fi
+}
+
 teardown_test() {
     require_session
-    local before orphans
-    before=$(gnome-extensions info "$UUID" | sed -n 's/^ *State: *//p' | head -1)
-    if [ "$before" != "ENABLED" ]; then
-        fail "l'estensione non e' ENABLED, test --teardown saltato"
+    local before after orphans
+    if ! before=$(extension_state) || [ "$before" != "ACTIVE" ]; then
+        fail "l'estensione non e' ACTIVE, test --teardown saltato"
         return
     fi
     printf 'Apri il menu dell'"'"'estensione entro %s secondi e lascialo aperto.\n' "$DELAY"
     printf 'Allo scadere il comando disabilita l'"'"'estensione e chiude il menu.\n'
-    (sleep "$DELAY"; gnome-extensions disable "$UUID") &
-    local job=$!
-    wait "$job" || true
+    sleep "$DELAY"
+    if ! gnome-extensions disable "$UUID"; then
+        fail "disabilitazione non riuscita, test --teardown interrotto"
+        restore_extension
+        return
+    fi
     sleep 1
+    if ! after=$(extension_state) || [ "$after" != "INACTIVE" ]; then
+        fail "estensione non INACTIVE dopo la disabilitazione, test --teardown interrotto"
+        restore_extension
+        return
+    fi
     orphans=$(pgrep -af 'openlogi api devices' || true)
     if [ -n "$orphans" ]; then
         fail "processi CLI ancora vivi dopo il teardown:"
@@ -131,14 +172,13 @@ teardown_test() {
     else
         pass "nessun processo CLI orfano dopo la disabilitazione"
     fi
-    gnome-extensions enable "$UUID"
-    sleep 1
-    if gnome-extensions info "$UUID" | grep -q 'State: ENABLED'; then
-        pass "estensione riabilitata"
-    else
-        fail "riabilitazione non riuscita: riabilitala a mano"
-    fi
+    restore_extension
 }
+
+# Allow isolated tests to load the functions without running session checks.
+if [[ "${BASH_SOURCE[0]}" != "$0" ]]; then
+    return
+fi
 
 MAIN=0
 for argument in "$@"; do

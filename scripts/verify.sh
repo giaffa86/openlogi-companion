@@ -17,6 +17,7 @@ for path in [*Path('shell').glob('*.js'), *Path('tests').glob('*.js'), Path('ext
 print('Syntax, JSON and JS/CSS line limits passed')
 PY
 gjs -m tests/test.js
+bash tests/test-session-check.sh
 ./scripts/package.sh
 # The compiled catalogue must match po/, load through the packaged domain and
 # contain no untranslated or fuzzy entries; the panel falls back to English.
