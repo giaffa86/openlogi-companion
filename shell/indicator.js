@@ -12,7 +12,7 @@ import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 import {gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
 import {Provider} from './provider.js';
 import {DeviceRow, kindIcon} from './deviceRow.js';
-import {DataError, panelDevice} from './contract.js';
+import {batteryText, DataError, panelDevice} from './contract.js';
 
 // Polling while the menu is open keeps battery and connection state live without
 // any preference; the panel-only poll stays slower because it runs unattended.
@@ -32,19 +32,19 @@ export class Indicator {
         this._delay = 0;
         this._menuOpen = false;
         this._failures = 0;
-        this._selected = null;
+        this._selected = new Set();
+        this._panelDevices = new Map();
         this._snapshot = null;
         this._rows = [];
         this._button = new PanelMenu.Button(0.0, 'OpenLogi Companion');
         const box = new St.BoxLayout({style_class: 'panel-status-menu-box'});
-        box.add_child(new St.Icon({
+        this._logo = new St.Icon({
             gicon: new Gio.FileIcon({file: extension.dir.get_child('icons').get_child('openlogi-companion-symbolic.svg')}),
             style_class: 'system-status-icon',
-        }));
-        this._deviceIcon = new St.Icon({style_class: 'system-status-icon', visible: false});
-        this._percentage = new St.Label({y_align: Clutter.ActorAlign.CENTER, visible: false});
-        box.add_child(this._deviceIcon);
-        box.add_child(this._percentage);
+        });
+        box.add_child(this._logo);
+        this._panelBox = new St.BoxLayout({style_class: 'openlogi-companion-pinned'});
+        box.add_child(this._panelBox);
         this._button.add_child(box);
         this._status = new PopupMenu.PopupMenuItem(_('Loading…'), {reactive: false, can_focus: false});
         this._status.label.clutter_text.ellipsize = Pango.EllipsizeMode.END;
@@ -73,7 +73,7 @@ export class Indicator {
                 this._schedule();
             }
         });
-        this._settingsSignal = this._settings.connect('changed::show-percentage', () => {
+        this._settingsSignal = this._settings.connect('changed', () => {
             this._updatePanel();
             this._schedule();
         });
@@ -95,14 +95,15 @@ export class Indicator {
         this._pending = null;
         this._rows = [];
         this._snapshot = null;
-        this._selected = null;
+        this._selected.clear();
         this._button.destroy();
+        this._panelDevices.clear();
         this._button = null;
         this._section = null;
         this._scroll = null;
         this._status = null;
-        this._percentage = null;
-        this._deviceIcon = null;
+        this._panelBox = null;
+        this._logo = null;
         this._settings = null;
         this._extension = null;
         this._provider = null;
@@ -130,7 +131,7 @@ export class Indicator {
             } else {
                 this._render(snapshot.devices);
                 this._status.label.text = snapshot.devices.length
-                    ? _('Select a device in OpenLogi. Pin a device in the panel for this session.')
+                    ? _('Pin devices in the panel for this session.')
                     : _('No devices');
             }
             this._updatePanel();
@@ -164,7 +165,7 @@ export class Indicator {
     _clear() {
         this._section.removeAll();
         this._rows = [];
-        this._selected = null;
+        this._selected.clear();
     }
 
     _render(devices) {
@@ -175,8 +176,11 @@ export class Indicator {
         if (!same) {
             this._section.removeAll();
             this._rows = devices.map(device => {
-                const row = new DeviceRow(device, () => this._openApp(), selected => {
-                    this._selected = this._selected === selected.id ? null : selected.id;
+                const row = new DeviceRow(device, selected => {
+                    if (this._selected.has(selected.id))
+                        this._selected.delete(selected.id);
+                    else
+                        this._selected.add(selected.id);
                     this._render(this._snapshot.devices);
                     this._updatePanel();
                 });
@@ -184,8 +188,11 @@ export class Indicator {
                 return row;
             });
         }
-        if (!panelDevice(devices, this._selected))
-            this._selected = null;
+        for (const id of this._selected) {
+            const device = panelDevice(devices, id);
+            if (!device || device.battery === null)
+                this._selected.delete(id);
+        }
         const counts = new Map();
         for (const device of devices)
             counts.set(device.id, (counts.get(device.id) ?? 0) + 1);
@@ -195,24 +202,62 @@ export class Indicator {
             // is temporarily missing (for example a mouse charging without a value).
             const pinnable = device.id !== null && device.online && device.battery !== null &&
                 counts.get(device.id) === 1;
-            row.update(device, pinnable, device.id !== null && device.id === this._selected);
+            row.update(device, pinnable, this._selected.has(device.id));
         });
     }
 
     _updatePanel() {
-        const device = this._snapshot?.inventory === 'ready' ? panelDevice(this._snapshot.devices, this._selected) : null;
-        const show = device !== null && this._settings.get_boolean('show-percentage');
-        const percentage = show ? device.battery?.percentage ?? null : null;
-        const text = percentage === null ? '' : new Intl.NumberFormat(undefined, {style: 'percent'}).format(percentage / 100);
-        // The kind icon identifies the pinned device even when no percentage exists,
-        // so the panel never falls back to an unexplained empty label.
-        this._deviceIcon.visible = show;
-        if (show)
-            this._deviceIcon.icon_name = kindIcon(device.kind);
-        this._percentage.visible = show && text !== '';
-        this._percentage.text = text;
-        const details = show ? ` ${device.name}${text ? ` ${text}` : ''}` : '';
-        this._button.accessible_name = `OpenLogi Companion${details}`;
+        const devices = [];
+        if (this._snapshot?.inventory === 'ready' && this._settings.get_boolean('show-percentage')) {
+            for (const id of this._selected) {
+                const device = panelDevice(this._snapshot.devices, id);
+                if (device?.battery)
+                    devices.push(device);
+            }
+        }
+        const ids = new Set(devices.map(device => device.id));
+        for (const [id, item] of this._panelDevices) {
+            if (!ids.has(id)) {
+                item.box.destroy();
+                this._panelDevices.delete(id);
+            }
+        }
+        const bars = this._settings.get_boolean('battery-bar');
+        for (const device of devices) {
+            let item = this._panelDevices.get(device.id);
+            if (!item) {
+                const box = new St.BoxLayout({style_class: 'openlogi-companion-panel-device'});
+                const icon = new St.Icon({style_class: 'system-status-icon'});
+                const label = new St.Label({y_align: Clutter.ActorAlign.CENTER});
+                const fill = new St.Widget({style_class: 'openlogi-companion-battery-fill',
+                    x_expand: true, y_align: Clutter.ActorAlign.END});
+                const bar = new St.Bin({style_class: 'openlogi-companion-battery-bar',
+                    y_align: Clutter.ActorAlign.CENTER, child: fill});
+                box.add_child(icon);
+                box.add_child(label);
+                box.add_child(bar);
+                this._panelBox.add_child(box);
+                item = {box, icon, label, bar, fill};
+                this._panelDevices.set(device.id, item);
+            }
+            const percentage = device.battery.percentage;
+            item.icon.icon_name = kindIcon(device.kind);
+            item.label.text = percentage === null ? '' : new Intl.NumberFormat(undefined, {style: 'percent'}).format(percentage / 100);
+            item.label.visible = !bars && percentage !== null;
+            // Missing readings have no bar; zero has an empty track. Qualitative
+            // levels are never converted into a made-up percentage.
+            item.bar.visible = bars && percentage !== null;
+            item.fill.visible = percentage !== null && percentage > 0;
+            item.fill.set_style(`height: ${(percentage ?? 0) * 0.0115}em;`);
+            const severity = percentage !== null && percentage <= 10 ? ' critical' : percentage !== null && percentage <= 20 ? ' low' : '';
+            item.fill.style_class = `openlogi-companion-battery-fill${severity}`;
+            item.box.accessible_name = `${device.name || _('Unnamed device')}. ${batteryText(device, _)}`;
+        }
+        // Keep the logo whenever no pinned device is actually visible.
+        this._logo.visible = !(devices.length > 0 && this._settings.get_boolean('hide-logo'));
+        this._panelBox.visible = devices.length > 0;
+        const details = devices.map(device => `${device.name || _('Unnamed device')}. ${batteryText(device, _)}`);
+        this._button.accessible_name = ['OpenLogi Companion', ...details].join('. ');
     }
 
     _schedule() {

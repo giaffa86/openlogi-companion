@@ -3,3 +3,9 @@
 .openlogi-companion-device { spacing: 10px; }
 .openlogi-companion-detail { font-size: 0.85em; }
 .openlogi-companion-pin { padding: 6px; }
+.openlogi-companion-pinned { spacing: 10px; }
+.openlogi-companion-panel-device { spacing: 4px; }
+.openlogi-companion-battery-bar { width: 0.3em; height: 1.15em; border-radius: 1px; background-color: rgba(128, 128, 128, 0.45); }
+.openlogi-companion-battery-fill { border-radius: 1px; background-color: #73b80d; }
+.openlogi-companion-battery-fill.low { background-color: #e5a50a; }
+.openlogi-companion-battery-fill.critical { background-color: #e01b24; }

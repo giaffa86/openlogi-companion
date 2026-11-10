@@ -1,5 +1,212 @@
 # Verifiche locali
 
+## Autorizzazione alla sincronizzazione GitHub — 10 novembre 2026
+
+Nota aggiornata con assistenza AI. Dopo la creazione da parte dell’autore del
+repository pubblico `https://github.com/giaffa86/openlogi-companion.git`,
+l’autore ha chiesto esplicitamente di sincronizzarlo con il progetto locale.
+Il connettore GitHub ha confermato repository accessibile, permessi di push e
+assenza di branch prima del primo invio. La richiesta autorizza commit e push
+dei sorgenti e supera il rinvio al remoto annotato nelle sezioni storiche.
+
+Aggiornati README, `AGENTS.md` e `OPEN_ITEMS.md` per distinguere questo passaggio
+dalle release e dalla submission EGO, ancora subordinate alle verifiche residue.
+Il controllo dell’estensione resta quello dell’ultima modifica: 64 controlli GJS,
+14 dello script di sessione, 94 Shell isolati e Shexli pulito. Questa
+sincronizzazione non aggiunge prove hardware né installa o ricarica la sessione
+host. ZIP e file generati, note private e configurazioni locali restano esclusi
+dal repository tramite `.gitignore`; il bundle runtime mantiene il manifest
+esplicito.
+
+## Righe dispositivo di sola consultazione — 10 novembre 2026
+
+Modifica realizzata con assistenza AI su richiesta dell’autore: disabilitare il
+click sulle periferiche, fuorviante finché non esiste apertura contestuale.
+
+- `DeviceRow` non riceve più un callback di apertura e non collega `activate`.
+  La riga usa `reactive: false` e `can_focus: false`: il componente GNOME
+  disabilita anche gesto di click e hover. Le puntine conservano reattività e
+  focus, senza rendere inattivi i controlli figli.
+- Il testo accessibile della riga descrive dispositivo e stato. Ogni puntina
+  annuncia anche nome e batteria della propria periferica, per conservare il
+  contesto quando il focus arriva direttamente al pulsante.
+- L’apertura generale resta nell’azione **Mostra la finestra di OpenLogi**.
+  Aggiornati messaggio del menu, metadati, README e catalogo italiano (40 messaggi).
+- Promemoria persistente in `AGENTS.md` e OL-001 di `OPEN_ITEMS.md`: ricontrollare
+  prossime release e issue upstream #1375; considerare un contributo alla
+  richiesta esistente prima di aprirne una nuova. Nessun invio su GitHub.
+
+Verifiche eseguite:
+
+- `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh`: 64 controlli GJS,
+  14 dello script di sessione, ZIP corrispondente al manifest, catalogo italiano
+  e template allineati su 40 messaggi; Shexli senza finding, errori o warning.
+- `./tests/nested.sh`: **94 controlli** Shell superati con backend sintetico.
+  Verificati righe non reattive, focus e hover disabilitati, gesti di click
+  inattivi, nomi accessibili delle puntine e focus sui pulsanti nei quattro
+  casi tema chiaro/scuro e scala testo 1/1,5. Restano superate le prove di
+  puntine multiple, tacche e avvio/attivazione della GUI sintetica.
+- Evidenze in `/tmp/openlogi-nested-5tPXlH`; nessun errore JavaScript o di parsing
+  del tema nel log Shell. Ispezionato il menu chiaro a scala 1,5 della serie
+  precedente (`/tmp/openlogi-nested-YYR5Gi`): righe prive di highlight, testo
+  informativo e puntina con focus visibile; l’ultima serie aggiunge solo il
+  contesto nei nomi accessibili dei pulsanti.
+- Pacchetto aggiornato in
+  `dist/openlogi-companion@giaffa86.shell-extension.zip`, con sole risorse runtime
+  previste dal manifest. Nessun test, documento locale o schema compilato.
+
+Nessuna installazione o ricarica della sessione host e nessuna pubblicazione.
+Le verifiche hardware, screen reader e DPI reali restano quelle ancora aperte in
+`OPEN_ITEMS.md`.
+
+## Apertura contestuale, controllo OpenLogi 0.9.0 — 10 novembre 2026
+
+Verifica aggiornata con assistenza AI su richiesta dell’autore. La versione
+locale è `openlogi 0.9.0`, RPM `openlogi-0.9.0-1.x86_64`. Consultati i sorgenti
+ufficiali fissati al tag v0.9.0, non dedotti dal ramo di sviluppo:
+
+- [Release v0.9.0](https://github.com/AprilNEA/OpenLogi/releases/tag/v0.9.0),
+  pubblicata il 3 novembre 2026, commit indicato `a5b507e`.
+- [`brand.rs`](https://github.com/AprilNEA/OpenLogi/blob/v0.9.0/crates/openlogi-core/src/brand.rs):
+  `DeeplinkCommand` offre soltanto Show, OpenSettings, OpenAbout, CheckForUpdates
+  e Quit. Non contiene un identificatore o comando per selezionare il device;
+  `parse_url` ignora path e query, quindi `show?device=…` rimane un semplice Show.
+- [`main.rs`](https://github.com/AprilNEA/OpenLogi/blob/v0.9.0/crates/openlogi-desktop/src/main.rs):
+  guardia single-instance con uscita se la GUI è già attiva, senza inoltro di
+  URL; nessun parsing di argomenti per aprire una periferica.
+- [`openlogi.desktop`](https://github.com/AprilNEA/OpenLogi/blob/v0.9.0/packaging/linux/desktop/openlogi.desktop):
+  `Exec=openlogi-desktop`, nessun `%u`, MIME handler o azione per dispositivo.
+  Confermato anche leggendo il launcher installato in `/usr/share/applications`.
+- [Documentazione CLI](https://github.com/AprilNEA/OpenLogi/blob/v0.9.0/docs/USAGE.md):
+  non documenta navigazione nella GUI per dispositivo. I selettori delle API
+  hardware non costituiscono un’azione di navigazione.
+- [Issue #1375](https://github.com/AprilNEA/OpenLogi/issues/1375): richiesta
+  equivalente già aperta; stato e commento letti tramite il connettore GitHub.
+  Nessuna issue, PR o risposta inviata.
+
+Esito: la v0.9.0 non aggiunge l’apertura contestuale richiesta. Il companion
+continua ad aprire la finestra generale. Aggiornati OL-001 e il punto 3 della
+checklist in `OPEN_ITEMS.md`; prima di proporre un’API va considerata la richiesta
+upstream esistente.
+
+Solo verifica documentale e letture locali di versione, RPM e desktop file:
+nessuna esecuzione di diagnostiche hardware, modifica a OpenLogi o attivazione
+della GUI. Le prove reali residue di OL-002 restano aperte. Nessuna modifica al
+runtime del companion o allo ZIP già creato; non occorre ripetere i test runtime
+per questo aggiornamento documentale.
+
+## Tacche batteria e puntine multiple — 10 novembre 2026
+
+Modifica realizzata con assistenza AI per uso personale, su richiesta dell’autore
+con riferimento visivo di tastiera e mouse affiancati nel pannello.
+
+- Le puntine diventano scelte indipendenti in un `Set` in memoria, in ordine di
+  selezione. Ogni dispositivo ha la propria icona e lettura; nessuna media o
+  persistenza degli ID. Rimuovere una puntina non modifica le altre.
+- La chiave UI `battery-bar`, booleana e predefinita a `false`, alterna le
+  percentuali con tacche verticali proporzionali. Le preferenze esistenti
+  `show-percentage` e `hide-logo` sono conservate; testo e catalogo italiano
+  aggiornati per più dispositivi (41 messaggi).
+- Tacca verde sopra il 20%, ambra fino al 20%, rossa fino al 10%. Lo 0% è una
+  traccia vuota; una lettura assente non produce una tacca. Livelli qualitativi
+  e stato di carica restano nel dettaglio e nei nomi accessibili, senza inventare
+  percentuali. Un dispositivo in carica senza lettura mantiene la sua icona.
+- Gli actor del pannello vengono riusati durante refresh e cambio modalità,
+  distrutti alla rimozione e liberati al teardown. Scomparsa, disconnessione,
+  ID ambiguo o perdita del supporto batteria rimuovono solo la puntina coinvolta;
+  errore, scansione o disabilitazione azzerano tutte le scelte.
+- Il runner disattiva la finestra di benvenuto soltanto nel suo profilo
+  GSettings temporaneo, così non oscura le acquisizioni grafiche.
+
+Verifiche eseguite:
+
+- `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh`: 64 controlli GJS,
+  14 controlli dello script di sessione, ZIP dal manifest esplicito, traduzioni e
+  template allineati; Shexli 0.2.1 con tree-sitter 0.25.2/0.25.0 senza finding,
+  errori o warning. Scanner installato soltanto nel venv temporaneo `/tmp`.
+- `./tests/nested.sh`: **92 controlli** Shell superati con backend sintetico.
+  Coperti tre pin simultanei, rimozione indipendente, ordine, riuso degli actor,
+  cambio live numero/tacca, zero e lettura assente, barra piena e proporzionale,
+  soglie colore, ripristino dopo occultamento, perdita selettiva di dispositivi
+  assenti/offline/ambigui e cleanup con due puntine attive. Tacche visibili anche
+  nei temi chiaro/scuro a scala testo 1 e 1,5.
+- Evidenze finali in `/tmp/openlogi-nested-PJR4Q7`; ispezionati visivamente il
+  pannello con tastiera e mouse e le preferenze. Nessun errore JavaScript o di
+  parsing del tema nel log Shell; restano gli avvisi ambientali AT-SPI/PipeWire/
+  Adw già osservati. Il primo avvio nel sandbox non poteva creare il socket
+  D-Bus; il runner è riuscito con esecuzione autorizzata mantenendo bus e profilo
+  separati dalla sessione host.
+
+Nessuna installazione o ricarica nella sessione host, né pubblicazione remota.
+La nuova modalità e i pin multipli non sono stati provati con dispositivi reali.
+Restano i limiti di `OPEN_ITEMS.md`, inclusi avvio/ripristino della GUI reale,
+lettore di schermo, DPI frazionari e multi-monitor.
+
+## Preferenza per nascondere il marchio nel pannello — 31 ottobre 2026
+
+Modifica realizzata con assistenza AI per uso personale, su richiesta
+dell’autore: poter nascondere il logo dell’estensione nella barra superiore
+quando un dispositivo è fissato.
+
+- Nuova chiave GSettings `hide-logo` (booleana, default `false`), additiva e
+  indipendente da `show-percentage`; nessun dato di dispositivo viene salvato.
+- `prefs.js` aggiunge una seconda `Adw.SwitchRow` legata con
+  `Gio.SettingsBindFlags.DEFAULT`, quindi nessun segnale GTK da disconnettere a
+  mano.
+- `shell/indicator.js` conserva il riferimento all’icona del marchio
+  (`this._logo`), azzerato in `destroy()`. Il marchio viene nascosto solo se il
+  dispositivo fissato è **effettivamente mostrato** nel pannello: altrimenti il
+  pulsante resterebbe vuoto. Il pulsante continua a esporre un nome accessibile
+  con nome del dispositivo e percentuale.
+- Il segnale delle preferenze passa da `changed::show-percentage` a `changed`,
+  così entrambe le chiavi aggiornano pannello e timer con un solo handler.
+- Traduzione italiana portata a 39 messaggi; template rigenerato.
+
+Verifiche eseguite:
+
+- `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh` superato: sintassi,
+  limiti di riga, 64 controlli GJS, 14 dello script di sessione, ZIP dal
+  manifest, catalogo italiano caricato, template allineato su 39 messaggi e
+  Shexli 0.2.1 con tree-sitter 0.25.2/0.25.0 senza finding, errori o warning
+  (venv ricreato in `/tmp` con le versioni fissate).
+- `./tests/nested.sh`: **63 controlli** Shell (erano 56). Nuovi: marchio
+  nascosto con dispositivo fissato e mostrato, nome accessibile invariato,
+  logo ripristinato disattivando la preferenza, applicazione della modifica
+  senza refresh manuale, logo sempre presente con ID ambiguo, dispositivo
+  offline e `show-percentage` disattivato.
+- Evidenze in `/tmp/openlogi-nested-0k0qDv`: `pinned-percentage.png` (marchio +
+  icona tastiera + `0%`) e `pinned-no-logo.png` (icona tastiera + `100%`, senza
+  marchio), ritagli del pannello ispezionati.
+- Nessuna installazione o ricarica nella sessione host.
+
+Restano aperti i punti di `OPEN_ITEMS.md`, invariati: confronto numerico della
+batteria con la GUI, click con app chiusa/minimizzata, raggruppamento finestra,
+accessibilità con lettore di schermo e DPI/multi-monitor. La nuova preferenza non
+è stata provata con dispositivi reali collegati.
+
+## Correzioni della review dello script di sessione — 30 ottobre 2026
+
+Correzioni realizzate con assistenza AI dopo la revisione dei commit locali:
+
+- lettura centralizzata dello stato con `LC_ALL=C LANGUAGE=C`, confrontando
+  `ACTIVE`/`INACTIVE` invece di `ENABLED`;
+- risposte JSON non leggibili, envelope senza successo, schema incompatibile o
+  inventario senza una lista di dispositivi producono `FAIL`, senza conteggio `?`;
+- il teardown controlla sia l'esito di `disable` sia lo stato `INACTIVE` prima
+  della ricerca dei processi; tenta poi il ripristino e verifica `ACTIVE`.
+  Anche gli errori di riabilitazione producono `FAIL`.
+
+`tests/test-session-check.sh`, incluso in `scripts/verify.sh`, copre 14 casi con
+comandi simulati, senza contattare la Shell host o la CLI reale. Lo script di
+sessione viene caricato solo per le sue funzioni. Queste prove non chiudono i
+limiti hardware e di sessione reale elencati in `OPEN_ITEMS.md`.
+
+Verifiche eseguite: `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh`
+superato (64 controlli GJS, 14 dello script, ZIP e traduzioni; Shexli senza
+finding, errori o warning). `./tests/nested.sh`: 56 controlli Shell superati,
+backend sintetico; evidenze in `/tmp/openlogi-nested-nas5FZ`, avvisi ambientali
+AT-SPI/PipeWire/Adw già noti. Nessuna installazione o ricarica nella sessione host.
+
 ## Script di sessione e stato dell’installazione — 30 ottobre 2026
 
 Aggiunto `scripts/session-check.sh` per le verifiche manuali, deliberatamente

@@ -3,8 +3,18 @@
   <schema id="org.gnome.shell.extensions.openlogi-companion" path="/org/gnome/shell/extensions/openlogi-companion/">
     <key name="show-percentage" type="b">
       <default>false</default>
-      <summary>Show the pinned device in the panel</summary>
-      <description>Show the device pinned in memory for this session, with its kind icon and percentage when the device reports one, and refresh the panel every 60 seconds.</description>
+      <summary>Show pinned devices in the panel</summary>
+      <description>Show devices pinned in memory for this session, each with its kind icon and battery when available, and refresh the panel every 60 seconds.</description>
+    </key>
+    <key name="battery-bar" type="b">
+      <default>false</default>
+      <summary>Show battery as a bar</summary>
+      <description>Use a vertical bar instead of a numeric percentage for each pinned device. Missing readings do not produce a bar.</description>
+    </key>
+    <key name="hide-logo" type="b">
+      <default>false</default>
+      <summary>Hide the extension icon when devices are pinned</summary>
+      <description>While pinned devices are shown in the panel, hide the extension icon and keep their kind icons and batteries. Ignored when no pinned device is shown, so the panel button is never left empty.</description>
     </key>
   </schema>
 </schemalist>

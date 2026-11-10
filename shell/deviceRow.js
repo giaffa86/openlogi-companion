@@ -17,8 +17,8 @@ export function kindIcon(kind) {
 }
 
 export const DeviceRow = GObject.registerClass(class DeviceRow extends PopupMenu.PopupBaseMenuItem {
-    _init(device, openApp, select) {
-        super._init({style_class: 'openlogi-companion-device'});
+    _init(device, select) {
+        super._init({style_class: 'openlogi-companion-device', reactive: false, can_focus: false});
         this._icon = new St.Icon({style_class: 'popup-menu-icon'});
         this.add_child(this._icon);
         const column = new St.BoxLayout({orientation: Clutter.Orientation.VERTICAL, x_expand: true});
@@ -34,7 +34,6 @@ export const DeviceRow = GObject.registerClass(class DeviceRow extends PopupMenu
             child: new St.Icon({icon_name: 'view-pin-symbolic', style_class: 'popup-menu-icon'})});
         this._pin.connect('clicked', () => select(this.device));
         this.add_child(this._pin);
-        this.connect('activate', openApp);
         this.update(device, false, false);
     }
 
@@ -43,11 +42,12 @@ export const DeviceRow = GObject.registerClass(class DeviceRow extends PopupMenu
         this._icon.icon_name = kindIcon(device.kind);
         this._name.text = device.name || _('Unnamed device');
         this._detail.text = `${device.online ? _('Connected') : _('Disconnected')} · ${batteryText(device, _)}`;
-        this.accessible_name = `${this._name.text}. ${this._detail.text}. ${_('Select the device in the OpenLogi app')}`;
+        this.accessible_name = `${this._name.text}. ${this._detail.text}`;
         this._pin.reactive = pinnable;
         this._pin.can_focus = pinnable;
         this._pin.visible = pinnable;
-        this._pin.accessible_name = selected ? _('Remove this device from the panel') : _('Show this device in the panel');
+        const pinAction = selected ? _('Remove this device from the panel') : _('Show this device in the panel');
+        this._pin.accessible_name = `${pinAction}. ${this._name.text}. ${this._detail.text}`;
         if (selected)
             this._pin.add_style_pseudo_class('checked');
         else

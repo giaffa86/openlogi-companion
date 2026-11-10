@@ -21,9 +21,11 @@
 - `scripts/runtime-files.txt` è l’elenco esplicito per sync e ZIP. Non includere
   `gschemas.compiled`, test, prompt, script dev o documentazione locale nel bundle.
 - Non installare/ricaricare la sessione host durante i test di build.
-- Il click apre la finestra generale: non promettere la pagina del dispositivo.
+- Le righe dispositivo sono di sola consultazione; le puntine restano attive.
+  Solo l’azione dedicata apre la finestra generale di OpenLogi. Ricontrollare
+  l’apertura per dispositivo nelle prossime release e nella issue upstream #1375.
 - Conservare i limiti osservati in `docs/OPEN_ITEMS.md` e `docs/VERIFICATION.md`.
-- Git locale autorizzato; creazione del repository remoto, push e release
-  rimandati fino alla verifica con dispositivi reali collegati, come da
-  `docs/OPEN_ITEMS.md`. Non pubblicare durante la sola preparazione locale.
+- Git locale e push dei sorgenti su `giaffa86/openlogi-companion` autorizzati
+  dall’autore il 10 novembre 2026. Release e submission EGO restano rimandate
+  alle verifiche residue in `docs/OPEN_ITEMS.md`; il push non le considera chiuse.
 - Non modificare progetti fratelli, servizi OpenLogi, pacchetti o regole udev.

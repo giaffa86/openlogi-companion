@@ -42,4 +42,7 @@ export PATH="$SANDBOX/bin:$PATH"
 export SOURCE SANDBOX
 # keyfile backend settings are confined to XDG_CONFIG_HOME.
 gsettings set org.gnome.shell enabled-extensions "['openlogi-test@local', '$UUID']"
+# Suppress the first-run modal only in this private profile so captures show UI.
+NESTED_SHELL_VERSION=$(gnome-shell --version)
+gsettings set org.gnome.shell welcome-dialog-last-shown-version "${NESTED_SHELL_VERSION##* }"
 timeout 90 dbus-run-session -- bash "$SOURCE/tests/nested-inner.sh"

@@ -23,14 +23,16 @@ verifiche residue elencate in [OPEN_ITEMS.md](docs/OPEN_ITEMS.md) (OL-002,
 OL-003, OL-005); i commit locali e la creazione del repository remoto la
 precedono.
 
-La pubblicazione remota è rimandata alla verifica con dispositivi reali collegati.
-Preparazione dei sorgenti e commit locali precedono questo passaggio; vedere il
-[punto di ripresa](docs/OPEN_ITEMS.md).
+Il [repository dei sorgenti](https://github.com/giaffa86/openlogi-companion)
+è pubblico su autorizzazione dell’autore del 10 novembre 2026. Questa scelta
+non chiude le verifiche residue né anticipa release o submission EGO; vedere
+[limiti e punto di ripresa](docs/OPEN_ITEMS.md).
 
-**Il click su un dispositivo apre/attiva la finestra generale di OpenLogi.
-La pagina del dispositivo non viene selezionata:** bisogna sceglierlo nell’app.
-Nella release verificata v0.8.18 non è stata individuata un’azione pubblica
-supportata per questa selezione. Vedi
+**Le righe dei dispositivi sono di sola consultazione; le puntine restano attive.**
+L’azione **Mostra la finestra di OpenLogi** apre/attiva la finestra generale;
+la pagina del dispositivo va selezionata nell’app.
+Il controllo dei sorgenti è stato aggiornato alla v0.9.0 il 10 novembre 2026:
+non è stata individuata un’azione pubblica supportata per questa selezione. Vedi
 [limiti e proposta upstream](docs/OPEN_ITEMS.md).
 
 ## Marchi e indipendenza
@@ -60,24 +62,41 @@ batteria, ma non webcam. Osservati due dispositivi reali (MX Master e MX Keys);
 G515 e Keys-To-Go 2 non sono stati provati.
 
 L’indicatore parte con la sola icona. In **Preferenze dell’estensione** si può
-mostrare nel pannello il dispositivo fissato: icona del tipo (mouse, tastiera,
-…​) e percentuale quando il dispositivo la fornisce. Il pulsante a puntina di una
-riga sceglie il dispositivo per la sessione e serve un ID attualmente univoco su
+mostrare nel pannello più dispositivi fissati: ciascuno con icona del tipo (mouse,
+tastiera, …​) e batteria propria. La preferenza **Mostra la batteria a tacca**
+alterna la percentuale numerica (predefinita) con una barra verticale proporzionale
+alla lettura: verde sopra il 20%, ambra fino al 20%, rossa fino al 10%.
+Lo 0% mostra la traccia vuota; senza percentuale non compare alcuna tacca e non
+si deduce un valore dal livello qualitativo. Il menu e il nome accessibile
+mantengono il dettaglio della batteria anche in modalità tacca.
+Il pulsante a puntina di ogni riga aggiunge o rimuove quel solo dispositivo,
+senza sostituire gli altri; l’ordine nel pannello segue quello delle puntine.
+Per fissare un dispositivo serve un ID attualmente univoco su
 un dispositivo online con supporto batteria; **non** serve una lettura valida,
 quindi un dispositivo in carica senza percentuale resta fissabile e nel pannello
-mostra almeno la sua icona.
+mostra almeno la sua icona. Con la preferenza **Nascondi l’icona dell’estensione
+quando ci sono dispositivi fissati** il marchio del companion lascia il posto
+ai dispositivi fissati, riconoscibili dalla propria icona di tipo.
 Non viene calcolata una media. ID null/duplicati non impediscono la visualizzazione
-delle righe, ma impediscono la scelta nel pannello. La scelta resta in memoria e
-si perde dopo scomparsa, disconnessione, errore, nuova scansione o disabilitazione.
+delle righe, ma impediscono la scelta nel pannello. Le scelte restano in memoria:
+scomparsa, disconnessione, ID ambiguo o perdita del supporto batteria rimuovono
+solo la puntina interessata; errore, nuova scansione o disabilitazione le rimuovono tutte.
 Non è un’identità hardware persistente: non sopravvive a cambi della route.
 
 Aggiornamento all’abilitazione, all’apertura del menu e con **Aggiorna**. Mentre
 il menu è aperto il polling è di 5 secondi, così batteria e connessione cambiano
 senza chiudere il pannello; dopo errori il ritardo sale a 10, 20, 40 e massimo 60
-secondi. A menu chiuso l’unico timer è quello della preferenza: con la percentuale
-consentita, polling ogni 60 secondi anche prima della scelta, con ritardo crescente
+secondi. A menu chiuso l’unico timer è quello della preferenza: con i dispositivi
+consentiti nel pannello, polling ogni 60 secondi anche prima della scelta, con ritardo crescente
 120, 240, 480 e massimo 900 secondi dopo errori. Richieste contemporanee vengono
 accorpate. Senza menu aperto e senza la preferenza non ci sono timer di polling.
+
+La preferenza **Nascondi l’icona dell’estensione quando ci sono dispositivi
+fissati** toglie il marchio solo quando almeno un dispositivo fissato viene
+effettivamente mostrato: restano le icone dei tipi e le rispettive batterie.
+Se nessun dispositivo fissato è mostrato (puntine assenti, preferenza disattivata,
+righe ambigue, dispositivi offline o inventario non pronto) il marchio riappare,
+quindi il pannello non può mai diventare un pulsante vuoto.
 
 Le stringhe sono in inglese nel sorgente e tradotte in italiano tramite
 `po/it.po`; il bundle include solo il catalogo compilato in
@@ -199,11 +218,11 @@ Agent OpenLogi (profilo corrente)
   → CLI ufficiale: openlogi api devices
   → Provider: due pipe asincrone, timeout, limite condiviso
   → validazione schema 1, ordinamento stabile
-  → menu Shell, con icona del tipo e percentuale di un solo dispositivo in memoria
+  → menu Shell, con icona del tipo e batteria dei dispositivi fissati in memoria
 
-Click riga / Show OpenLogi window → finestra del launcher openlogi.desktop
+Show OpenLogi window → finestra del launcher openlogi.desktop
   → Main.activateWindow se esiste, Shell.App.activate per avviarla
-Preferenze GTK/Adw → GSettings: solo show-percentage
+Preferenze GTK/Adw → GSettings: solo show-percentage, battery-bar e hide-logo
 ```
 
 Il provider avvia solo la CLI in lettura, con argv fisso; non avvia l’agent,

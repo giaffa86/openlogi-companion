@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenLogi Companion 1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-30 12:17+0100\n"
+"POT-Creation-Date: 2026-11-10 12:23+0100\n"
 "PO-Revision-Date: 2026-10-28 10:00+0100\n"
 "Last-Translator: OpenLogi Companion contributors\n"
 "Language-Team: Italian\n"
@@ -12,121 +12,170 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: prefs.js:11
 msgid "Panel"
 msgstr "Pannello"
 
-msgid "Pin a device from the menu. The choice lasts only for this session."
+#: prefs.js:12
+msgid "Pin devices from the menu. The choices last only for this session."
 msgstr ""
-"Fissa un dispositivo dal menu. La scelta dura solo per questa sessione."
+"Fissa i dispositivi dal menu. Le scelte durano solo per questa sessione."
 
-msgid "Show the pinned device in the panel"
-msgstr "Mostra nel pannello il dispositivo fissato"
+#: prefs.js:13
+msgid "Show pinned devices in the panel"
+msgstr "Mostra nel pannello i dispositivi fissati"
 
+#: prefs.js:14
 msgid ""
-"The percentage appears when the device reports one; refresh every 60 "
-"seconds, with a longer delay after errors."
+"Each device keeps its own icon and battery; refresh every 60 seconds, with a "
+"longer delay after errors."
 msgstr ""
-"La percentuale compare quando il dispositivo la fornisce; aggiornamento ogni "
-"60 secondi, con attesa maggiore dopo errori."
+"Ogni dispositivo mantiene la propria icona e batteria; aggiornamento ogni 60 "
+"secondi, con attesa maggiore dopo errori."
 
+#: prefs.js:17
+msgid "Show battery as a bar"
+msgstr "Mostra la batteria a tacca"
+
+#: prefs.js:18
+msgid ""
+"Use a vertical bar instead of a numeric percentage for each pinned device."
+msgstr ""
+"Usa una tacca verticale al posto della percentuale numerica per ogni "
+"dispositivo fissato."
+
+#: prefs.js:21
+msgid "Hide the extension icon when devices are pinned"
+msgstr "Nascondi l’icona dell’estensione quando ci sono dispositivi fissati"
+
+#: prefs.js:22
+msgid "Requires at least one pinned device to be shown in the panel."
+msgstr "Richiede che almeno un dispositivo fissato sia mostrato nel pannello."
+
+#: shell/contract.js:76
 msgid "Offline; battery reading is not current"
 msgstr "Non in linea; la batteria non è aggiornata"
 
+#: shell/contract.js:79 shell/contract.js:85
 msgid "Battery unavailable"
 msgstr "Batteria non disponibile"
 
+#: shell/contract.js:80
 msgid "Critical"
 msgstr "Critica"
 
+#: shell/contract.js:80
 msgid "Low"
 msgstr "Bassa"
 
+#: shell/contract.js:80
 msgid "Good"
 msgstr "Buona"
 
+#: shell/contract.js:80
 msgid "Full"
 msgstr "Piena"
 
+#: shell/contract.js:81
 msgid "Charging"
 msgstr "In carica"
 
+#: shell/contract.js:81
 msgid "Charging slowly"
 msgstr "Ricarica lenta"
 
+#: shell/contract.js:81
 msgid "Charged"
 msgstr "Carica completa"
 
+#: shell/contract.js:82
 msgid "On battery"
 msgstr "A batteria"
 
+#: shell/contract.js:82
 msgid "Charging error"
 msgstr "Errore di ricarica"
 
+#: shell/deviceRow.js:33 shell/deviceRow.js:49
 msgid "Show this device in the panel"
 msgstr "Mostra questo dispositivo nel pannello"
 
+#: shell/deviceRow.js:43 shell/indicator.js:254 shell/indicator.js:259
 msgid "Unnamed device"
 msgstr "Dispositivo senza nome"
 
+#: shell/deviceRow.js:44
 msgid "Connected"
 msgstr "Connesso"
 
+#: shell/deviceRow.js:44
 msgid "Disconnected"
 msgstr "Disconnesso"
 
-msgid "Select the device in the OpenLogi app"
-msgstr "Seleziona il dispositivo nell’app OpenLogi"
-
+#: shell/deviceRow.js:49
 msgid "Remove this device from the panel"
 msgstr "Rimuovi questo dispositivo dal pannello"
 
+#: shell/indicator.js:49
 msgid "Loading…"
 msgstr "Caricamento…"
 
+#: shell/indicator.js:60
 msgid "Show OpenLogi window"
 msgstr "Mostra la finestra di OpenLogi"
 
+#: shell/indicator.js:61
 msgid "Refresh"
 msgstr "Aggiorna"
 
+#: shell/indicator.js:62
 msgid "Extension preferences"
 msgstr "Preferenze dell’estensione"
 
+#: shell/indicator.js:130
 msgid "Scanning devices…"
 msgstr "Scansione dei dispositivi…"
 
+#: shell/indicator.js:130 shell/indicator.js:153 shell/indicator.js:155
 msgid "Inventory unavailable"
 msgstr "Inventario indisponibile"
 
-msgid ""
-"Select a device in OpenLogi. Pin a device in the panel for this session."
-msgstr ""
-"Seleziona il dispositivo in OpenLogi. Fissa un dispositivo nel pannello per "
-"questa sessione."
+#: shell/indicator.js:134
+msgid "Pin devices in the panel for this session."
+msgstr "Fissa i dispositivi nel pannello per questa sessione."
 
+#: shell/indicator.js:135
 msgid "No devices"
 msgstr "Nessun dispositivo"
 
+#: shell/indicator.js:147
 msgid "OpenLogi CLI is not installed"
 msgstr "La CLI di OpenLogi non è installata"
 
+#: shell/indicator.js:148
 msgid "Cannot reach the OpenLogi agent"
 msgstr "Agent di OpenLogi non raggiungibile"
 
+#: shell/indicator.js:149
 msgid "Incompatible CLI, agent or API schema"
 msgstr "CLI, agent o schema API incompatibili"
 
+#: shell/indicator.js:150
 msgid "Invalid inventory data"
 msgstr "Dati dell’inventario non validi"
 
+#: shell/indicator.js:151
 msgid "OpenLogi request timed out"
 msgstr "Tempo scaduto per la richiesta a OpenLogi"
 
+#: shell/indicator.js:152
 msgid "OpenLogi output exceeds the limit"
 msgstr "L’output di OpenLogi supera il limite"
 
+#: shell/indicator.js:287
 msgid "OpenLogi desktop application is not installed"
 msgstr "L’applicazione OpenLogi non è installata"
 
+#: shell/indicator.js:306
 msgid "Could not open OpenLogi"
 msgstr "Impossibile aprire OpenLogi"

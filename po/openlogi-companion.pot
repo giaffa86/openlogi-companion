@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenLogi Companion 1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-30 12:40+0100\n"
+"POT-Creation-Date: 2026-11-10 12:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,17 +22,34 @@ msgid "Panel"
 msgstr ""
 
 #: prefs.js:12
-msgid "Pin a device from the menu. The choice lasts only for this session."
+msgid "Pin devices from the menu. The choices last only for this session."
 msgstr ""
 
 #: prefs.js:13
-msgid "Show the pinned device in the panel"
+msgid "Show pinned devices in the panel"
 msgstr ""
 
 #: prefs.js:14
 msgid ""
-"The percentage appears when the device reports one; refresh every 60 "
-"seconds, with a longer delay after errors."
+"Each device keeps its own icon and battery; refresh every 60 seconds, with a "
+"longer delay after errors."
+msgstr ""
+
+#: prefs.js:17
+msgid "Show battery as a bar"
+msgstr ""
+
+#: prefs.js:18
+msgid ""
+"Use a vertical bar instead of a numeric percentage for each pinned device."
+msgstr ""
+
+#: prefs.js:21
+msgid "Hide the extension icon when devices are pinned"
+msgstr ""
+
+#: prefs.js:22
+msgid "Requires at least one pinned device to be shown in the panel."
 msgstr ""
 
 #: shell/contract.js:76
@@ -79,27 +96,23 @@ msgstr ""
 msgid "Charging error"
 msgstr ""
 
-#: shell/deviceRow.js:33 shell/deviceRow.js:50
+#: shell/deviceRow.js:33 shell/deviceRow.js:49
 msgid "Show this device in the panel"
 msgstr ""
 
-#: shell/deviceRow.js:44
+#: shell/deviceRow.js:43 shell/indicator.js:254 shell/indicator.js:259
 msgid "Unnamed device"
 msgstr ""
 
-#: shell/deviceRow.js:45
+#: shell/deviceRow.js:44
 msgid "Connected"
 msgstr ""
 
-#: shell/deviceRow.js:45
+#: shell/deviceRow.js:44
 msgid "Disconnected"
 msgstr ""
 
-#: shell/deviceRow.js:46
-msgid "Select the device in the OpenLogi app"
-msgstr ""
-
-#: shell/deviceRow.js:50
+#: shell/deviceRow.js:49
 msgid "Remove this device from the panel"
 msgstr ""
 
@@ -119,51 +132,50 @@ msgstr ""
 msgid "Extension preferences"
 msgstr ""
 
-#: shell/indicator.js:129
+#: shell/indicator.js:130
 msgid "Scanning devices…"
 msgstr ""
 
-#: shell/indicator.js:129 shell/indicator.js:152 shell/indicator.js:154
+#: shell/indicator.js:130 shell/indicator.js:153 shell/indicator.js:155
 msgid "Inventory unavailable"
 msgstr ""
 
-#: shell/indicator.js:133
-msgid ""
-"Select a device in OpenLogi. Pin a device in the panel for this session."
+#: shell/indicator.js:134
+msgid "Pin devices in the panel for this session."
 msgstr ""
 
-#: shell/indicator.js:134
+#: shell/indicator.js:135
 msgid "No devices"
 msgstr ""
 
-#: shell/indicator.js:146
+#: shell/indicator.js:147
 msgid "OpenLogi CLI is not installed"
 msgstr ""
 
-#: shell/indicator.js:147
+#: shell/indicator.js:148
 msgid "Cannot reach the OpenLogi agent"
 msgstr ""
 
-#: shell/indicator.js:148
+#: shell/indicator.js:149
 msgid "Incompatible CLI, agent or API schema"
 msgstr ""
 
-#: shell/indicator.js:149
+#: shell/indicator.js:150
 msgid "Invalid inventory data"
 msgstr ""
 
-#: shell/indicator.js:150
+#: shell/indicator.js:151
 msgid "OpenLogi request timed out"
 msgstr ""
 
-#: shell/indicator.js:151
+#: shell/indicator.js:152
 msgid "OpenLogi output exceeds the limit"
 msgstr ""
 
-#: shell/indicator.js:242
+#: shell/indicator.js:287
 msgid "OpenLogi desktop application is not installed"
 msgstr ""
 
-#: shell/indicator.js:261
+#: shell/indicator.js:306
 msgid "Could not open OpenLogi"
 msgstr ""

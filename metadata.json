@@ -1,7 +1,7 @@
 {
   "uuid": "openlogi-companion@giaffa86",
   "name": "OpenLogi Companion",
-  "description": "Independent companion for the OpenLogi app: lists the devices reported by the read-only OpenLogi CLI in the panel menu, with connection state and battery.\n\nRequires the OpenLogi app with its `openlogi api devices` CLI and a reachable agent in the same profile. The extension only reads the inventory: it never writes data, never opens HID devices and never talks to the app internals.\n\nClicking a device or the menu action opens the general OpenLogi window; selecting the device page still happens inside the app. An optional panel percentage can be pinned to one device for the current session only.\n\nUnofficial personal project, not affiliated with OpenLogi, Logitech or the GNOME Project.",
+  "description": "Independent companion for the OpenLogi app: lists the devices reported by the read-only OpenLogi CLI in the panel menu, with connection state and battery.\n\nRequires the OpenLogi app with its `openlogi api devices` CLI and a reachable agent in the same profile. The extension only reads the inventory: it never writes data, never opens HID devices and never talks to the app internals.\n\nDevice rows display information only. Use the dedicated menu action to open the general OpenLogi window, then select the device page inside the app. Multiple devices can be pinned to the panel for the current session, each with its own icon and battery shown as a percentage or vertical bar. The extension icon can be hidden while pinned devices are shown.\n\nUnofficial personal project, not affiliated with OpenLogi, Logitech or the GNOME Project.",
   "shell-version": [
     "50"
   ],

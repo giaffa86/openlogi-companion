@@ -1,6 +1,16 @@
 # Limiti e verifiche aperte
 
-## Punto di ripresa concordato — 28 ottobre 2026
+## Pubblicazione dei sorgenti autorizzata — 10 novembre 2026
+
+L’autore ha creato il repository pubblico
+[giaffa86/openlogi-companion](https://github.com/giaffa86/openlogi-companion)
+e ha chiesto esplicitamente di sincronizzarlo con il progetto locale.
+Questa istruzione autorizza commit e push dei sorgenti e supera il precedente
+rinvio del passaggio al remoto. Restano aperte le verifiche hardware e GUI sotto
+elencate: release e submission EGO continuano a dipendere da OL-002, OL-003 e
+OL-005. Nessuna compatibilità aggiuntiva è dichiarata.
+
+## Punto di ripresa concordato — 28 ottobre 2026 (storico)
 
 Nota aggiornata con assistenza AI per uso personale.
 
@@ -8,7 +18,7 @@ Al momento del punto di ripresa non erano disponibili dispositivi collegati.
 Le prove hardware restano in attesa; l’inventario vuoto osservato non dimostra
 incompatibilità. Alla ripresa, seguire questa checklist:
 
-**Pubblicazione remota rimandata:** i sorgenti e il commit Git locale possono
+**Decisione del 28 ottobre, superata per i push dall’autorizzazione sopra:** i sorgenti e il commit Git locale possono
 essere preparati ora. Creazione del repository GitHub, push e release restano
 da fare soltanto dopo la verifica dell’estensione con dispositivi reali collegati,
 inclusi inventario/batteria e apertura della GUI descritti nei punti 1 e 2.
@@ -24,17 +34,21 @@ prove con OpenLogi chiuso e minimizzato. La pubblicazione resta quindi rimandata
    GUI: coerente. **Nota non bloccante:** la CLI riporta il nome esteso del
    modello (`Wireless Mouse MX Master`, `MX Keys Wireless Keyboard`), la home
    della GUI i nomi brevi (`MX Master`, `MX Keys`); non è un difetto.
-2. [x] Click sulla riga e azione Apri provati nella sessione reale: portano
+2. [x] Prima della disattivazione del click sulle righe, click e azione Apri
+   provati nella sessione reale: portano
    **entrambi alla finestra generale**, come previsto da OL-001. **Parziale:**
-   mancano le prove con OpenLogi chiuso e minimizzato e del raggruppamento della
-   finestra (OL-002).
-3. [ ] Controllare release successive alla v0.8.18 (in uso: 0.8.19), documentazione e issue upstream
-   per eventuali interfacce pubbliche già disponibili o richieste equivalenti.
-   Questo controllo può essere svolto anche senza hardware.
+   mancano le prove dell’azione dedicata con OpenLogi chiuso e minimizzato e del
+   raggruppamento della finestra (OL-002).
+3. [x] Controllo aggiornato il 10 novembre 2026 sulla v0.9.0, ora installata:
+   sorgenti della release, documentazione CLI e launcher Linux non offrono
+   l’apertura della pagina dispositivo. Esiste la richiesta equivalente
+   [upstream #1375](https://github.com/AprilNEA/OpenLogi/issues/1375), ancora aperta.
+   Verifica dei sorgenti e del pacchetto installato, senza prova di apertura GUI.
 4. [ ] Se il limite persiste, preparare una richiesta upstream concreta per
    identità pubblica stabile e azione di apertura della pagina dispositivo,
    includendo gestione di GUI già avviata ed errori espliciti. La proposta non è
    stata inviata; questa nota non autorizza l’invio.
+   Prima di inviare, coordinarsi con la richiesta equivalente #1375 già esistente.
 5. [ ] Integrare la selezione diretta solo dopo verifica dell’interfaccia pubblica.
    Nel frattempo mantenere l’apertura generale e la puntina soltanto in memoria
    (OL-001 e OL-004).
@@ -47,13 +61,44 @@ dispositivo nella GUI. `brand.rs` definisce comandi generici `show` e
 ma questo non dimostra la registrazione Linux. Il file desktop non dichiara
 un protocol handler. Non vengono inventati deep link, flag o metodi D-Bus.
 
-Il companion chiama il launcher `openlogi.desktop` e attiva una sua finestra esistente con
-`Main.activateWindow`, oppure ne avvia una con `Shell.App.activate()`:
-click sulla riga e azione Apri usano la **finestra generale**. Il testo del menu e
-il nome accessibile della riga richiedono di selezionare il dispositivo nell’app.
-Il pulsante a puntina modifica soltanto la visualizzazione del pannello.
+Ricontrollato il 10 novembre 2026 sulla
+[release v0.9.0](https://github.com/AprilNEA/OpenLogi/releases/tag/v0.9.0),
+identificata anche localmente da `openlogi --version` e RPM
+`openlogi-0.9.0-1.x86_64`. Il
+[vocabolario `DeeplinkCommand`](https://github.com/AprilNEA/OpenLogi/blob/v0.9.0/crates/openlogi-core/src/brand.rs)
+contiene ancora solo `show`, `open-settings`, `open-about`, `check-for-updates`
+e `quit`; il parser ignora path/query dei comandi riconosciuti. Non si può usare
+`show?device=…` per selezionare una periferica. Il
+[bootstrap GUI](https://github.com/AprilNEA/OpenLogi/blob/v0.9.0/crates/openlogi-desktop/src/main.rs)
+esce se esiste già un’istanza, senza inoltro della richiesta. Il
+[launcher Linux della release](https://github.com/AprilNEA/OpenLogi/blob/v0.9.0/packaging/linux/desktop/openlogi.desktop)
+e quello installato conservano `Exec=openlogi-desktop`, senza `%u`, MIME handler
+o azioni per dispositivo. La
+[richiesta equivalente #1375](https://github.com/AprilNEA/OpenLogi/issues/1375)
+risulta ancora aperta. Il limite resta confermato per questa release; nessuna
+prova di avvio reale della GUI è stata aggiunta.
 
-Conferma empirica del 30 ottobre 2026: nella sessione reale con due dispositivi
+Il 10 novembre 2026 l’autore ha chiesto di disattivare il click sulle righe,
+perché l’apertura generale è fuorviante e ridondante rispetto all’azione dedicata.
+Le righe sono ora di sola consultazione, senza attivazione, focus o hover della
+riga; le puntine restano attive e raggiungibili da tastiera. I nomi accessibili
+descrivono soltanto dispositivo e stato, senza inviti alla selezione nell’app.
+L’azione **Mostra la finestra di OpenLogi** chiama il launcher `openlogi.desktop`
+e attiva una finestra esistente con `Main.activateWindow`, oppure ne avvia una
+con `Shell.App.activate()`. Apre sempre la **finestra generale**. Il pulsante a
+puntina modifica soltanto la visualizzazione del pannello.
+
+**Promemoria concordato:** alle prossime release ricontrollare un’API pubblica
+per aprire la pagina del dispositivo e lo stato della
+[issue #1375](https://github.com/AprilNEA/OpenLogi/issues/1375), già esistente.
+Se il limite persiste, preparare un contributo alla richiesta esistente; creare
+una nuova issue solo se manca una richiesta pertinente. Riattivare il click
+solo dopo verifica dell’apertura contestuale su Linux, con GUI chiusa, aperta e
+minimizzata e gestione esplicita degli ID assenti/ambigui. Nessun messaggio
+upstream viene inviato in questa modifica.
+
+Evidenza storica del 30 ottobre 2026, precedente alla disattivazione del click:
+nella sessione reale con due dispositivi
 collegati, sia il click sulla riga sia l’azione di apertura hanno mostrato la
 finestra generale e non la pagina del dispositivo.
 
@@ -107,8 +152,9 @@ journalctl --user -b -o cat /usr/bin/gnome-shell
 
 Non condividere l’output dell’inventario senza oscurare gli ID. Con dispositivi
 reali connessi, confrontare nomi, connessione e batteria con OpenLogi, quindi
-provare riga e Apri con app chiusa/aperta/minimizzata. Verificare che il click
-porti alla finestra generale e richieda ancora la selezione manuale. Provare
+provare l’azione **Mostra la finestra di OpenLogi** con app chiusa/aperta/minimizzata.
+Verificare che apra la finestra generale e richieda ancora la selezione manuale;
+il click sulle righe deve restare senza effetto, con puntine funzionanti. Provare
 riavvio della sola estensione con richieste pendenti, senza fermare l’agent.
 Non usare `openlogi list` per aggirare l’assenza dell’inventario.
 
@@ -116,8 +162,9 @@ Non usare `openlogi list` per aggirare l’assenza dell’inventario.
 
 Ricognizione del 30 ottobre 2026 sulle
 [review guidelines](https://gjs.guide/extensions/review-guidelines/review-guidelines.html).
-Lavori preparatori eseguiti; la pubblicazione resta rimandata alle verifiche di
-OL-002, OL-003 e alla creazione del repository remoto.
+Lavori preparatori eseguiti; release e submission EGO restano rimandate alle
+verifiche di OL-002 e OL-003. Il repository pubblico è stato creato dall’autore
+il 10 novembre 2026, con sincronizzazione dei sorgenti autorizzata.
 
 - **Avviso AI negli header.** Risolto il 30 ottobre 2026: gli header dei file
   contengono solo `SPDX-License-Identifier: GPL-3.0-or-later`. La provenienza AI
@@ -126,8 +173,8 @@ OL-002, OL-003 e alla creazione del repository remoto.
   respingono comunque le submission non giustificabili.
 - **`metadata.json`.** Sistemato: `version` rimosso, `url` aggiunto
   (`https://github.com/giaffa86/openlogi-companion`) e `description` estesa con
-  requisiti, sola lettura, click e indipendenza. **Aperto:** il repository non
-  esiste ancora, quindi l’URL va creato e verificato prima dell’upload;
+  requisiti, sola lettura, apertura generale e indipendenza. Il repository
+  pubblico esiste ed è accessibile dal 10 novembre 2026; l’URL è verificato.
   `tests/check-package.py` rifiuta un bundle con `version` o senza `url` https.
 - **Necessità del subprocess.** Non eliminabile con i vincoli attuali: l’unica
   interfaccia pubblica documentata è `openlogi api devices`. Sono esclusi per
@@ -167,6 +214,12 @@ nomi accessibili, troncamento, scrolling, 200 dispositivi, temi chiaro/scuro,
 scala testo 1 e 1,5 su monitor virtuale 1280×720, conservazione di focus e
 scorrimento durante il refresh live a menu aperto.
 
+Le tacche e le puntine multiple aggiunte il 10 novembre 2026 sono verificate
+soltanto con backend sintetico. Restano da osservare con dispositivi reali,
+insieme alla leggibilità delle tacche a DPI frazionari e su monitor diversi.
+I valori restano disponibili nei nomi accessibili, ma ciò non sostituisce la
+prova con lettore di schermo.
+
 **Non coperto — test manuali rimandati dall’autore**, che li eseguirà con la
 checklist locale non versionata `private/accessibility-tests.md`: lettore di
 schermo (Orca), navigazione fisica Tab/frecce, interazione touch, DPI frazionari,
@@ -183,6 +236,11 @@ valida: un dispositivo online con supporto batteria resta fissabile anche senza
 percentuale, e il pannello mostra almeno l’icona del tipo. Non si deduplicano le
 righe. I cambi della route richiedono una nuova scelta. Non è possibile ricostruire in modo affidabile la stessa periferica
 fisica da nomi o ID riutilizzati dall’upstream.
+
+Si possono fissare più dispositivi indipendenti nella stessa sessione. La perdita
+di un ID valido rimuove soltanto la puntina interessata; errore, scansione o
+disabilitazione azzerano tutte le scelte. Né le puntine né i relativi ID vengono
+salvati in GSettings: la nuova chiave `battery-bar` riguarda soltanto la resa UI.
 
 L’API inventario della release include luci ma non webcam. Non implementati
 sottoscrizione eventi, notifiche batteria, controlli hardware o modifica profili.
