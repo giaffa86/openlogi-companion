@@ -1,40 +1,44 @@
-# Piano per apertura dispositivo in OpenLogi
+# Plan for opening a device page in OpenLogi
 
-Concordato il 28 ottobre 2026: i passi 1, 2 e 3 si eseguono in sequenza;
-i test del passo 3 accompagnano la PR del passo 2.
+Agreed on October 28, 2026: steps 1, 2 and 3 run in sequence; the tests in step 3
+accompany the PR from step 2.
 
-## 1. Concordare l’interfaccia tramite issue
+## 1. Agree on the interface through an issue
 
-- [ ] Ricontrollare il ramo upstream corrente e cercare issue/PR equivalenti.
-- [ ] Preparare una issue breve: caso d’uso del companion GNOME, apertura della
-  pagina dispositivo da app esterne e limite della release verificata 0.8.18.
-- [ ] Proporre un’azione pubblica minima, coerente con i meccanismi upstream;
-  concordare trasporto, identità del dispositivo ed errori prima dell’implementazione.
-- [ ] Pubblicare la issue quando richiesto dall’utente e attendere il confronto
-  con il maintainer. Nessuna issue è stata ancora pubblicata.
+- [ ] Recheck the current upstream branch and search for equivalent issues/PRs.
+- [ ] Prepare a short issue describing the GNOME companion use case, opening a
+  device page from external apps and the limitation in the reviewed 0.8.18 release.
+- [ ] Propose a minimal public action consistent with upstream mechanisms;
+  agree on transport, device identity and errors before implementation.
+- [ ] Publish the issue when requested by the user and wait for maintainer
+  discussion. This project has not published an issue.
 
-## 2. Preparare una PR piccola
+## 2. Prepare a small PR
 
-- [ ] Lavorare in un checkout separato di OpenLogi sul ramo corrente.
-- [ ] Implementare soltanto apertura/attivazione GUI e selezione del dispositivo
-  secondo l’interfaccia concordata, senza modifiche estranee.
-- [ ] Gestire inoltro all’istanza esistente, avvio da chiusa e inventario non pronto.
-- [ ] Documentare contratto, limiti e comportamento degli errori.
-- [ ] Preparare descrizione e risultati dei test; pubblicare la PR quando richiesto.
+- [ ] Work in a separate OpenLogi checkout on the current branch.
+- [ ] Implement only GUI launch/activation and device selection through the
+  agreed interface, without unrelated changes.
+- [ ] Handle forwarding to an existing instance, cold start and inventory not ready.
+- [ ] Document the contract, limitations and error behavior.
+- [ ] Prepare the description and test results; publish the PR when requested.
 
-## 3. Includere i test nella PR
+## 3. Include tests in the PR
 
-- [ ] GUI chiusa: avvio, attesa inventario e selezione corretta.
-- [ ] GUI aperta: selezione e focus senza finestre o processi duplicati.
-- [ ] GUI minimizzata: ripristino, focus e selezione.
-- [ ] Identità mancante, ambigua o dispositivo assente/offline: errore esplicito,
-  senza selezionare una periferica diversa.
-- [ ] Inventario in scansione/indisponibile e richieste ravvicinate.
-- [ ] Verifica Linux reale, test automatici pertinenti e controlli upstream.
-- [ ] Integrare il companion soltanto dopo verifica dell’API nella release che
-  la distribuisce; fino ad allora il click apre la finestra generale.
+- [ ] GUI closed: launch, wait for inventory and select the correct device.
+- [ ] GUI open: select and focus without duplicate windows or processes.
+- [ ] GUI minimized: restore, focus and select.
+- [ ] Missing or ambiguous identity, or absent/offline device: return an explicit
+  error without selecting a different device.
+- [ ] Scanning/unavailable inventory and closely spaced requests.
+- [ ] Verify on real Linux, with relevant automated tests and upstream checks.
+- [ ] Integrate the companion only after checking the API in the release that
+  ships it. Until then, **Show OpenLogi window** opens the general window and
+  device rows remain read-only.
 
-## Stato
+## Status
 
-Piano registrato. Nessuna issue o PR inviata. Nessuna modifica upstream eseguita.
-La proposta tecnica iniziale e i limiti sono in [OPEN_ITEMS.md](OPEN_ITEMS.md).
+Plan recorded. No issue or PR sent by this project; no upstream changes made.
+The November 10, 2026 review of v0.9.0 found the same limitation and an existing
+[equivalent issue, #1375](https://github.com/AprilNEA/OpenLogi/issues/1375).
+Recheck that request before opening another one. The initial technical proposal,
+remaining limitations and reminder are in [OPEN_ITEMS.md](OPEN_ITEMS.md).

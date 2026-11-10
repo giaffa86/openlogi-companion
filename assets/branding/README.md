@@ -1,16 +1,16 @@
-# Identità visiva OpenLogi Companion
+# OpenLogi Companion visual identity
 
-Generata con AI per uso personale il 29 ottobre 2026. GPL-3.0-or-later.
-Marchio indipendente: mouse dentro un cerchio aperto. Nessuna affiliazione
-con OpenLogi, Logitech o GNOME.
+Generated with AI for personal use on October 29, 2026. GPL-3.0-or-later.
+Independent mark: a mouse inside an open circle. No affiliation with OpenLogi,
+Logitech or GNOME.
 
-- `openlogi-companion-logo.png`: logo raster trasparente generato con lo
-  strumento integrato image_gen; conservato come asset di progetto, fuori dal bundle.
-- `../../icons/openlogi-companion-symbolic.svg`: adattamento vettoriale del
-  concetto, disegnato con assistenza AI sulla griglia 16×16. Il pannello usa
-  questa variante simbolica, ricolorata dal tema GNOME tramite St.Icon.
+- `openlogi-companion-logo.png`: transparent raster logo generated with the
+  built-in image_gen tool; kept as a project asset outside the bundle.
+- `../../icons/openlogi-companion-symbolic.svg`: a vector adaptation of the
+  concept, drawn with AI assistance on a 16×16 grid. The panel uses this
+  symbolic variant, recolored by the GNOME theme through St.Icon.
 
-## Prompt finale del logo
+## Final logo prompt
 
 ```text
 Use case: logo-brand
@@ -22,17 +22,14 @@ Text: none.
 Constraints: actual transparent background; original identity, no existing Logitech or GNOME trademarks; avoid tiny details, extra wireless waves, battery symbols, shadows, presentation boards and mockups.
 ```
 
-## Specifica dell’adattamento simbolico
+## Symbolic adaptation specification
 
-Conservare mouse, rotella in negativo e cerchio aperto in alto a destra.
-Usare un solo colore simbolico, fondo trasparente e geometria SVG a 16×16.
-Semplificare il raster per la leggibilità nel pannello, senza scritte o ombre.
+Keep the mouse, the wheel cutout and the circle opening at the upper right.
+Use one symbolic color, a transparent background and SVG geometry on a 16×16
+grid. Simplify the raster for panel readability, without text or shadows.
 
-**Solo riempimenti, nessun `stroke`.** Il recolouring simbolico della Shell
-applica `fill` a tutti i path, quindi un arco tracciato con `stroke` e
-`fill="none"` viene riempito e diventa un disco pieno (difetto osservato il
-30 ottobre 2026). Il cerchio è perciò un anello come path chiuso con
-`fill-rule="evenodd"`, la rotella un foro nello stesso path del mouse.
-`tests/check-package.py` rifiuta un’icona simbolica con `stroke` o
-`fill="none"`.
-
+**Fills only, no `stroke`.** Shell symbolic recoloring applies `fill` to every
+path, so a stroked arc with `fill="none"` becomes a solid disc, a defect observed
+on October 30, 2026. The circle is therefore a ring represented by a closed path
+with `fill-rule="evenodd"`; the wheel is a hole in the same path as the mouse.
+`tests/check-package.py` rejects a symbolic icon with `stroke` or `fill="none"`.

@@ -1,514 +1,505 @@
-# Verifiche locali
+# Local verification
 
-## Autorizzazione alla sincronizzazione GitHub — 10 novembre 2026
+Entries record the state at the time of each check. Earlier results and
+publication decisions are historical; later entries and `OPEN_ITEMS.md` describe
+the current limitations.
 
-Nota aggiornata con assistenza AI. Dopo la creazione da parte dell’autore del
-repository pubblico `https://github.com/giaffa86/openlogi-companion.git`,
-l’autore ha chiesto esplicitamente di sincronizzarlo con il progetto locale.
-Il connettore GitHub ha confermato repository accessibile, permessi di push e
-assenza di branch prima del primo invio. La richiesta autorizza commit e push
-dei sorgenti e supera il rinvio al remoto annotato nelle sezioni storiche.
+## GitHub synchronization authorization, November 10, 2026
 
-Aggiornati README, `AGENTS.md` e `OPEN_ITEMS.md` per distinguere questo passaggio
-dalle release e dalla submission EGO, ancora subordinate alle verifiche residue.
-Il controllo dell’estensione resta quello dell’ultima modifica: 64 controlli GJS,
-14 dello script di sessione, 94 Shell isolati e Shexli pulito. Questa
-sincronizzazione non aggiunge prove hardware né installa o ricarica la sessione
-host. ZIP e file generati, note private e configurazioni locali restano esclusi
-dal repository tramite `.gitignore`; il bundle runtime mantiene il manifest
-esplicito.
+Note updated with AI assistance. After creating the public repository
+`https://github.com/giaffa86/openlogi-companion.git`, the author explicitly
+requested synchronization with the local project. The GitHub connector confirmed
+repository access, push permissions and no branches before the first push.
+The request authorizes source commits and pushes, superseding the postponement
+recorded in historical sections.
 
-## Righe dispositivo di sola consultazione — 10 novembre 2026
+README, `AGENTS.md` and `OPEN_ITEMS.md` were updated to distinguish source
+publication from releases and EGO submission, which still depend on remaining
+checks. The extension's verification remains that of the latest change:
+64 GJS checks, 14 session-script checks, 94 isolated Shell checks and clean
+Shexli output. Synchronization adds no hardware coverage and does not install or
+reload the host session. ZIPs, generated files, private notes and local
+configuration remain excluded through `.gitignore`; the runtime bundle retains
+its explicit manifest.
 
-Modifica realizzata con assistenza AI su richiesta dell’autore: disabilitare il
-click sulle periferiche, fuorviante finché non esiste apertura contestuale.
+## Read-only device rows, November 10, 2026
 
-- `DeviceRow` non riceve più un callback di apertura e non collega `activate`.
-  La riga usa `reactive: false` e `can_focus: false`: il componente GNOME
-  disabilita anche gesto di click e hover. Le puntine conservano reattività e
-  focus, senza rendere inattivi i controlli figli.
-- Il testo accessibile della riga descrive dispositivo e stato. Ogni puntina
-  annuncia anche nome e batteria della propria periferica, per conservare il
-  contesto quando il focus arriva direttamente al pulsante.
-- L’apertura generale resta nell’azione **Mostra la finestra di OpenLogi**.
-  Aggiornati messaggio del menu, metadati, README e catalogo italiano (40 messaggi).
-- Promemoria persistente in `AGENTS.md` e OL-001 di `OPEN_ITEMS.md`: ricontrollare
-  prossime release e issue upstream #1375; considerare un contributo alla
-  richiesta esistente prima di aprirne una nuova. Nessun invio su GitHub.
+Change made with AI assistance at the author's request: disable device clicks,
+which are misleading until contextual opening is available.
 
-Verifiche eseguite:
+- `DeviceRow` no longer receives an opening callback or connects `activate`.
+  Rows use `reactive: false` and `can_focus: false`; the GNOME component also
+  disables the click gesture and hover. Pins retain reactivity and focus without
+  disabling child controls.
+- Row accessible text describes the device and state. Each pin also announces
+  its device name and battery, preserving context when focus goes directly to
+  the button.
+- General opening remains available through **Show OpenLogi window**. The menu
+  message, metadata, README and Italian catalogue were updated (40 messages).
+- Persistent reminder in `AGENTS.md` and OL-001 of `OPEN_ITEMS.md`: recheck future
+  releases and upstream issue #1375; consider contributing to that request
+  before opening another one. No upstream GitHub message was sent.
 
-- `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh`: 64 controlli GJS,
-  14 dello script di sessione, ZIP corrispondente al manifest, catalogo italiano
-  e template allineati su 40 messaggi; Shexli senza finding, errori o warning.
-- `./tests/nested.sh`: **94 controlli** Shell superati con backend sintetico.
-  Verificati righe non reattive, focus e hover disabilitati, gesti di click
-  inattivi, nomi accessibili delle puntine e focus sui pulsanti nei quattro
-  casi tema chiaro/scuro e scala testo 1/1,5. Restano superate le prove di
-  puntine multiple, tacche e avvio/attivazione della GUI sintetica.
-- Evidenze in `/tmp/openlogi-nested-5tPXlH`; nessun errore JavaScript o di parsing
-  del tema nel log Shell. Ispezionato il menu chiaro a scala 1,5 della serie
-  precedente (`/tmp/openlogi-nested-YYR5Gi`): righe prive di highlight, testo
-  informativo e puntina con focus visibile; l’ultima serie aggiunge solo il
-  contesto nei nomi accessibili dei pulsanti.
-- Pacchetto aggiornato in
-  `dist/openlogi-companion@giaffa86.shell-extension.zip`, con sole risorse runtime
-  previste dal manifest. Nessun test, documento locale o schema compilato.
+Checks performed:
 
-Nessuna installazione o ricarica della sessione host e nessuna pubblicazione.
-Le verifiche hardware, screen reader e DPI reali restano quelle ancora aperte in
-`OPEN_ITEMS.md`.
+- `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh`: 64 GJS checks,
+  14 session-script checks, ZIP matching the manifest, Italian catalogue and
+  template aligned on 40 messages; Shexli reported no findings, errors or warnings.
+- `./tests/nested.sh`: **94 Shell checks** passed with a synthetic backend.
+  Covered non-reactive rows, disabled row focus/hover and click gestures, pin
+  accessible names and button focus in all four light/dark theme and text-scale
+  1/1.5 combinations. Multiple pins, battery bars and synthetic GUI launch and
+  activation checks also remained passing.
+- Evidence in `/tmp/openlogi-nested-5tPXlH`; no JavaScript or theme parsing errors
+  in the Shell log. The previous run's light menu at text scale 1.5 was visually
+  inspected (`/tmp/openlogi-nested-YYR5Gi`): no row highlight, informative text
+  and a visible pin focus indicator. The final run adds only device context to
+  button accessible names.
+- Updated package at
+  `dist/openlogi-companion@giaffa86.shell-extension.zip`, containing only runtime
+  resources from the manifest. No tests, local documentation or compiled schema.
 
-## Apertura contestuale, controllo OpenLogi 0.9.0 — 10 novembre 2026
+No installation or reload in the host session, and no publication during this
+change. Real hardware, screen reader and DPI checks remain open in `OPEN_ITEMS.md`.
 
-Verifica aggiornata con assistenza AI su richiesta dell’autore. La versione
-locale è `openlogi 0.9.0`, RPM `openlogi-0.9.0-1.x86_64`. Consultati i sorgenti
-ufficiali fissati al tag v0.9.0, non dedotti dal ramo di sviluppo:
+## Contextual opening, OpenLogi 0.9.0 review, November 10, 2026
+
+Review updated with AI assistance at the author's request. The local version
+is `openlogi 0.9.0`, RPM `openlogi-0.9.0-1.x86_64`. Official source was read at
+tag v0.9.0 rather than inferred from the development branch:
 
 - [Release v0.9.0](https://github.com/AprilNEA/OpenLogi/releases/tag/v0.9.0),
-  pubblicata il 3 novembre 2026, commit indicato `a5b507e`.
+  published November 3, 2026, listed commit `a5b507e`.
 - [`brand.rs`](https://github.com/AprilNEA/OpenLogi/blob/v0.9.0/crates/openlogi-core/src/brand.rs):
-  `DeeplinkCommand` offre soltanto Show, OpenSettings, OpenAbout, CheckForUpdates
-  e Quit. Non contiene un identificatore o comando per selezionare il device;
-  `parse_url` ignora path e query, quindi `show?device=…` rimane un semplice Show.
+  `DeeplinkCommand` offers only Show, OpenSettings, OpenAbout, CheckForUpdates
+  and Quit. It contains no device identifier or selection command. `parse_url`
+  ignores paths and queries, so `show?device=…` is still a plain Show.
 - [`main.rs`](https://github.com/AprilNEA/OpenLogi/blob/v0.9.0/crates/openlogi-desktop/src/main.rs):
-  guardia single-instance con uscita se la GUI è già attiva, senza inoltro di
-  URL; nessun parsing di argomenti per aprire una periferica.
+  single-instance guard exits if the GUI is already running, without URL
+  forwarding; no argument parsing for opening a device.
 - [`openlogi.desktop`](https://github.com/AprilNEA/OpenLogi/blob/v0.9.0/packaging/linux/desktop/openlogi.desktop):
-  `Exec=openlogi-desktop`, nessun `%u`, MIME handler o azione per dispositivo.
-  Confermato anche leggendo il launcher installato in `/usr/share/applications`.
-- [Documentazione CLI](https://github.com/AprilNEA/OpenLogi/blob/v0.9.0/docs/USAGE.md):
-  non documenta navigazione nella GUI per dispositivo. I selettori delle API
-  hardware non costituiscono un’azione di navigazione.
-- [Issue #1375](https://github.com/AprilNEA/OpenLogi/issues/1375): richiesta
-  equivalente già aperta; stato e commento letti tramite il connettore GitHub.
-  Nessuna issue, PR o risposta inviata.
+  `Exec=openlogi-desktop`, without `%u`, a MIME handler or a per-device action.
+  Also confirmed by reading the installed launcher in `/usr/share/applications`.
+- [CLI documentation](https://github.com/AprilNEA/OpenLogi/blob/v0.9.0/docs/USAGE.md):
+  no documented GUI navigation by device. Hardware API selectors do not provide
+  a navigation action.
+- [Issue #1375](https://github.com/AprilNEA/OpenLogi/issues/1375): an equivalent
+  request already exists; its state and comment were read through the GitHub
+  connector. No issue, PR or reply was sent.
 
-Esito: la v0.9.0 non aggiunge l’apertura contestuale richiesta. Il companion
-continua ad aprire la finestra generale. Aggiornati OL-001 e il punto 3 della
-checklist in `OPEN_ITEMS.md`; prima di proporre un’API va considerata la richiesta
-upstream esistente.
+Result: v0.9.0 does not add the requested contextual opening. The companion
+continues to open the general window. OL-001 and checklist item 3 in
+`OPEN_ITEMS.md` were updated. The existing upstream request must be considered
+before proposing an API.
 
-Solo verifica documentale e letture locali di versione, RPM e desktop file:
-nessuna esecuzione di diagnostiche hardware, modifica a OpenLogi o attivazione
-della GUI. Le prove reali residue di OL-002 restano aperte. Nessuna modifica al
-runtime del companion o allo ZIP già creato; non occorre ripetere i test runtime
-per questo aggiornamento documentale.
+Only documentation review and local version, RPM and desktop-file reads were
+performed. No hardware diagnostics, OpenLogi changes or GUI activation. Remaining
+real-world checks in OL-002 stay open. No companion runtime or existing ZIP
+changes; runtime tests did not need repeating for this documentation update.
 
-## Tacche batteria e puntine multiple — 10 novembre 2026
+## Battery bars and multiple pins, November 10, 2026
 
-Modifica realizzata con assistenza AI per uso personale, su richiesta dell’autore
-con riferimento visivo di tastiera e mouse affiancati nel pannello.
+Change made with AI assistance for personal use, at the author's request with
+a visual reference showing a keyboard and mouse side by side in the panel.
 
-- Le puntine diventano scelte indipendenti in un `Set` in memoria, in ordine di
-  selezione. Ogni dispositivo ha la propria icona e lettura; nessuna media o
-  persistenza degli ID. Rimuovere una puntina non modifica le altre.
-- La chiave UI `battery-bar`, booleana e predefinita a `false`, alterna le
-  percentuali con tacche verticali proporzionali. Le preferenze esistenti
-  `show-percentage` e `hide-logo` sono conservate; testo e catalogo italiano
-  aggiornati per più dispositivi (41 messaggi).
-- Tacca verde sopra il 20%, ambra fino al 20%, rossa fino al 10%. Lo 0% è una
-  traccia vuota; una lettura assente non produce una tacca. Livelli qualitativi
-  e stato di carica restano nel dettaglio e nei nomi accessibili, senza inventare
-  percentuali. Un dispositivo in carica senza lettura mantiene la sua icona.
-- Gli actor del pannello vengono riusati durante refresh e cambio modalità,
-  distrutti alla rimozione e liberati al teardown. Scomparsa, disconnessione,
-  ID ambiguo o perdita del supporto batteria rimuovono solo la puntina coinvolta;
-  errore, scansione o disabilitazione azzerano tutte le scelte.
-- Il runner disattiva la finestra di benvenuto soltanto nel suo profilo
-  GSettings temporaneo, così non oscura le acquisizioni grafiche.
+- Pins become independent selections in an in-memory `Set`, in selection order.
+  Each device has its own icon and reading; no averaging or ID persistence.
+  Removing one pin leaves the others unchanged.
+- The Boolean UI key `battery-bar`, default `false`, switches percentages to
+  proportional vertical bars. Existing `show-percentage` and `hide-logo`
+  preferences are preserved. Text and Italian catalogue updated for multiple
+  devices (41 messages).
+- Bars are green above 20%, amber at 20% or below, red at 10% or below. `0%`
+  shows an empty track; a missing reading produces no bar. Qualitative levels
+  and charging status remain in details and accessible names without invented
+  percentages. A charging device without a reading keeps its icon.
+- Panel actors are reused during refresh and mode changes, destroyed when
+  removed and released on teardown. Disappearance, disconnection, an ambiguous
+  ID or loss of battery support removes only that device's pin; errors,
+  scanning or disabling clear all selections.
+- The runner suppresses the welcome dialog only in its temporary GSettings
+  profile so it does not obscure captures.
 
-Verifiche eseguite:
+Checks performed:
 
-- `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh`: 64 controlli GJS,
-  14 controlli dello script di sessione, ZIP dal manifest esplicito, traduzioni e
-  template allineati; Shexli 0.2.1 con tree-sitter 0.25.2/0.25.0 senza finding,
-  errori o warning. Scanner installato soltanto nel venv temporaneo `/tmp`.
-- `./tests/nested.sh`: **92 controlli** Shell superati con backend sintetico.
-  Coperti tre pin simultanei, rimozione indipendente, ordine, riuso degli actor,
-  cambio live numero/tacca, zero e lettura assente, barra piena e proporzionale,
-  soglie colore, ripristino dopo occultamento, perdita selettiva di dispositivi
-  assenti/offline/ambigui e cleanup con due puntine attive. Tacche visibili anche
-  nei temi chiaro/scuro a scala testo 1 e 1,5.
-- Evidenze finali in `/tmp/openlogi-nested-PJR4Q7`; ispezionati visivamente il
-  pannello con tastiera e mouse e le preferenze. Nessun errore JavaScript o di
-  parsing del tema nel log Shell; restano gli avvisi ambientali AT-SPI/PipeWire/
-  Adw già osservati. Il primo avvio nel sandbox non poteva creare il socket
-  D-Bus; il runner è riuscito con esecuzione autorizzata mantenendo bus e profilo
-  separati dalla sessione host.
+- `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh`: 64 GJS checks,
+  14 session-script checks, ZIP from the explicit manifest, translations and
+  template aligned. Shexli 0.2.1 with tree-sitter 0.25.2/0.25.0 reported no
+  findings, errors or warnings. Scanner installed only in a temporary `/tmp` venv.
+- `./tests/nested.sh`: **92 Shell checks** passed with a synthetic backend.
+  Covered three simultaneous pins, independent removal, order, actor reuse,
+  live numeric/bar switching, zero and missing readings, full and proportional
+  fill, color thresholds, restoration after hiding, selective removal of
+  absent/offline/ambiguous devices and cleanup with two active pins. Bars also
+  visible with light/dark themes at text scales 1 and 1.5.
+- Final evidence in `/tmp/openlogi-nested-PJR4Q7`; the keyboard/mouse panel and
+  preferences were visually inspected. No JavaScript or theme parsing errors
+  in the Shell log; previously observed AT-SPI/PipeWire/Adw environment warnings
+  remain. The sandbox initially prevented creating a D-Bus socket; the runner
+  succeeded with authorized execution while keeping its bus and profile
+  separate from the host session.
 
-Nessuna installazione o ricarica nella sessione host, né pubblicazione remota.
-La nuova modalità e i pin multipli non sono stati provati con dispositivi reali.
-Restano i limiti di `OPEN_ITEMS.md`, inclusi avvio/ripristino della GUI reale,
-lettore di schermo, DPI frazionari e multi-monitor.
+No installation or reload in the host session, or remote publication during
+this change. The new mode and multiple pins have not been tested with real
+devices. `OPEN_ITEMS.md` limitations remain, including real GUI launch/restore,
+screen reader, fractional DPI and multiple monitors.
 
-## Preferenza per nascondere il marchio nel pannello — 31 ottobre 2026
+## Preference to hide the panel mark, October 31, 2026
 
-Modifica realizzata con assistenza AI per uso personale, su richiesta
-dell’autore: poter nascondere il logo dell’estensione nella barra superiore
-quando un dispositivo è fissato.
+Change made with AI assistance for personal use, at the author's request to
+hide the extension logo in the top bar while a device is pinned.
 
-- Nuova chiave GSettings `hide-logo` (booleana, default `false`), additiva e
-  indipendente da `show-percentage`; nessun dato di dispositivo viene salvato.
-- `prefs.js` aggiunge una seconda `Adw.SwitchRow` legata con
-  `Gio.SettingsBindFlags.DEFAULT`, quindi nessun segnale GTK da disconnettere a
-  mano.
-- `shell/indicator.js` conserva il riferimento all’icona del marchio
-  (`this._logo`), azzerato in `destroy()`. Il marchio viene nascosto solo se il
-  dispositivo fissato è **effettivamente mostrato** nel pannello: altrimenti il
-  pulsante resterebbe vuoto. Il pulsante continua a esporre un nome accessibile
-  con nome del dispositivo e percentuale.
-- Il segnale delle preferenze passa da `changed::show-percentage` a `changed`,
-  così entrambe le chiavi aggiornano pannello e timer con un solo handler.
-- Traduzione italiana portata a 39 messaggi; template rigenerato.
+- Added Boolean GSettings key `hide-logo`, default `false`, independent of
+  `show-percentage`; no device data is saved.
+- `prefs.js` adds a second `Adw.SwitchRow`, bound with
+  `Gio.SettingsBindFlags.DEFAULT`, without manually managed GTK signal cleanup.
+- `shell/indicator.js` retains a reference to the mark icon (`this._logo`),
+  cleared in `destroy()`. The mark is hidden only while the pinned device is
+  **actually shown**; otherwise the button would be empty. The button retains
+  an accessible name containing the device name and percentage.
+- The preferences signal changes from `changed::show-percentage` to `changed`,
+  letting both keys update the panel and timer through a single handler.
+- Italian translation expanded to 39 messages; template regenerated.
 
-Verifiche eseguite:
+Checks performed:
 
-- `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh` superato: sintassi,
-  limiti di riga, 64 controlli GJS, 14 dello script di sessione, ZIP dal
-  manifest, catalogo italiano caricato, template allineato su 39 messaggi e
-  Shexli 0.2.1 con tree-sitter 0.25.2/0.25.0 senza finding, errori o warning
-  (venv ricreato in `/tmp` con le versioni fissate).
-- `./tests/nested.sh`: **63 controlli** Shell (erano 56). Nuovi: marchio
-  nascosto con dispositivo fissato e mostrato, nome accessibile invariato,
-  logo ripristinato disattivando la preferenza, applicazione della modifica
-  senza refresh manuale, logo sempre presente con ID ambiguo, dispositivo
-  offline e `show-percentage` disattivato.
-- Evidenze in `/tmp/openlogi-nested-0k0qDv`: `pinned-percentage.png` (marchio +
-  icona tastiera + `0%`) e `pinned-no-logo.png` (icona tastiera + `100%`, senza
-  marchio), ritagli del pannello ispezionati.
-- Nessuna installazione o ricarica nella sessione host.
+- `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh` passed: syntax,
+  line limits, 64 GJS checks, 14 session-script checks, ZIP from the manifest,
+  Italian catalogue loading and template aligned on 39 messages. Shexli 0.2.1
+  with tree-sitter 0.25.2/0.25.0 reported no findings, errors or warnings; the
+  `/tmp` venv was recreated with pinned versions.
+- `./tests/nested.sh`: **63 Shell checks**, previously 56. New coverage: mark
+  hidden with a pinned, visible device; accessible name preserved; logo restored
+  when the preference is off; live application without manual refresh; logo
+  always present for ambiguous IDs, offline devices or `show-percentage` off.
+- Evidence in `/tmp/openlogi-nested-0k0qDv`: `pinned-percentage.png` shows mark,
+  keyboard icon and `0%`; `pinned-no-logo.png` shows keyboard and `100%` without
+  the mark. Panel crops were inspected.
+- No installation or reload in the host session.
 
-Restano aperti i punti di `OPEN_ITEMS.md`, invariati: confronto numerico della
-batteria con la GUI, click con app chiusa/minimizzata, raggruppamento finestra,
-accessibilità con lettore di schermo e DPI/multi-monitor. La nuova preferenza non
-è stata provata con dispositivi reali collegati.
+At this checkpoint, the unchanged `OPEN_ITEMS.md` list still included numeric
+GUI battery comparison, closed/minimized app clicks, window grouping, screen
+reader accessibility and DPI/multiple monitors. The new preference was not
+tested with real connected devices.
 
-## Correzioni della review dello script di sessione — 30 ottobre 2026
+## Session-script review fixes, October 30, 2026
 
-Correzioni realizzate con assistenza AI dopo la revisione dei commit locali:
+Changes made with AI assistance after reviewing local commits:
 
-- lettura centralizzata dello stato con `LC_ALL=C LANGUAGE=C`, confrontando
-  `ACTIVE`/`INACTIVE` invece di `ENABLED`;
-- risposte JSON non leggibili, envelope senza successo, schema incompatibile o
-  inventario senza una lista di dispositivi producono `FAIL`, senza conteggio `?`;
-- il teardown controlla sia l'esito di `disable` sia lo stato `INACTIVE` prima
-  della ricerca dei processi; tenta poi il ripristino e verifica `ACTIVE`.
-  Anche gli errori di riabilitazione producono `FAIL`.
+- Centralized state reading with `LC_ALL=C LANGUAGE=C`, comparing
+  `ACTIVE`/`INACTIVE` rather than `ENABLED`.
+- Unreadable JSON, unsuccessful envelopes, incompatible schema or inventory
+  without a device array produce `FAIL`, without a `?` count.
+- Teardown checks both the `disable` result and the `INACTIVE` state before
+  looking for processes, then attempts restoration and verifies `ACTIVE`.
+  Re-enabling errors also produce `FAIL`.
 
-`tests/test-session-check.sh`, incluso in `scripts/verify.sh`, copre 14 casi con
-comandi simulati, senza contattare la Shell host o la CLI reale. Lo script di
-sessione viene caricato solo per le sue funzioni. Queste prove non chiudono i
-limiti hardware e di sessione reale elencati in `OPEN_ITEMS.md`.
+`tests/test-session-check.sh`, included in `scripts/verify.sh`, covers 14 cases
+with mocked commands, without contacting the host Shell or real CLI. The session
+script is sourced only for its functions. These checks do not close the hardware
+and real-session limitations in `OPEN_ITEMS.md`.
 
-Verifiche eseguite: `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh`
-superato (64 controlli GJS, 14 dello script, ZIP e traduzioni; Shexli senza
-finding, errori o warning). `./tests/nested.sh`: 56 controlli Shell superati,
-backend sintetico; evidenze in `/tmp/openlogi-nested-nas5FZ`, avvisi ambientali
-AT-SPI/PipeWire/Adw già noti. Nessuna installazione o ricarica nella sessione host.
+Checks performed: `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh` passed
+(64 GJS checks, 14 script checks, ZIP and translations; Shexli without findings,
+errors or warnings). `./tests/nested.sh`: 56 Shell checks passed with a synthetic
+backend; evidence in `/tmp/openlogi-nested-nas5FZ`, with previously known
+AT-SPI/PipeWire/Adw environment warnings. No installation or reload in the host
+session.
 
-## Script di sessione e stato dell’installazione — 30 ottobre 2026
+## Session script and installation state, October 30, 2026
 
-Aggiunto `scripts/session-check.sh` per le verifiche manuali, deliberatamente
-fuori da `verify.sh` e da `tests/nested.sh` perché installa file e toglie/rimette
-l’estensione nella sessione dell’autore:
+Added `scripts/session-check.sh` for manual checks, deliberately separate from
+`verify.sh` and `tests/nested.sh` because it installs files and disables/re-enables
+the extension in the author's session:
 
-- senza argomenti confronta uno per uno i file elencati in
-  `scripts/runtime-files.txt` con la copia installata, poi riporta stato,
-  versione della CLI, numero di dispositivi (senza ID) e righe di log pertinenti;
-- `--install` rigenera il `.mo` e sincronizza i file runtime;
-- `--teardown` disabilita l’estensione dopo `DELAY` secondi, con il menu aperto,
-  verifica che non restino processi `openlogi api devices` e la riabilita;
-- `--all` concatena i passi; `-h` mostra l’uso.
+- Without arguments, it compares each file in `scripts/runtime-files.txt` with
+  the installed copy, then reports state, CLI version, device count (without
+  IDs) and relevant log lines.
+- `--install` rebuilds the `.mo` and synchronizes runtime files.
+- `--teardown` disables the extension after `DELAY` seconds with the menu open,
+  checks for remaining `openlogi api devices` processes and re-enables it.
+- `--all` runs the steps in sequence; `-h` shows usage.
 
-Prima esecuzione nella sessione reale: tutti i file installati risultano diversi
-dal repository, quindi la copia in uso è quella precedente alle correzioni di
-oggi. Questo spiega perché il refresh live non si osservava e perché la puntina
-seguiva ancora la vecchia regola della percentuale. Stato riportato:
-`Enabled: No`, `State: INACTIVE`, nessuna installazione di sistema: l’estensione
-non era abilitata al momento del controllo.
+First real-session run: every installed file differed from the repository,
+showing that the installed copy predated that day's fixes. This explains why
+live refresh was not visible and pinning still followed the old percentage
+rule. Reported state: `Enabled: No`, `State: INACTIVE`, with no system-wide
+installation. The extension was disabled when checked.
 
-Dato raccolto dalla stessa esecuzione: `openlogi --version` risponde
-`openlogi 0.8.19`, non 0.8.18, e l’inventario reale (2 dispositivi) è leggibile
-con schema 1. Il contratto resta verificato sul tag v0.8.18; nessuna nuova
-verifica hardware per la 0.8.19 oltre a quanto già osservato.
+The same run reported `openlogi --version` as `openlogi 0.8.19`, not 0.8.18, and
+a readable real inventory of 2 devices with schema 1. The contract remains
+verified against tag v0.8.18; no additional 0.8.19 hardware coverage was claimed.
 
-## Puntina e icona del tipo nel pannello — 30 ottobre 2026
+## Panel pin and kind icon, October 30, 2026
 
-Difetto segnalato dall’autore: la puntina del mouse era scomparsa dalla riga.
-Causa: `pinnable` richiedeva `battery.percentage !== null`, quindi un dispositivo
-in carica senza lettura (`Battery unavailable · Charging`) perdeva la puntina
-anche se la selezione era ancora valida.
+Author-reported defect: the mouse pin had disappeared from its row. Cause:
+`pinnable` required `battery.percentage !== null`, so a charging device without
+a reading (`Battery unavailable · Charging`) lost its pin even though the
+selection remained valid.
 
-Correzione:
+Fix:
 
-- la puntina ora dipende solo dalla scelta: ID univoco, dispositivo online e
-  supporto batteria (`battery !== null`); una lettura mancante non la nasconde;
-  l’icona del tipo viene mostrata sempre e la percentuale solo se esiste;
-- nel pannello, dopo l’icona dell’estensione compaiono l’icona del tipo del
-  dispositivo fissato (mouse, tastiera, …) e la percentuale quando disponibile;
-  il nome accessibile del pulsante include nome dispositivo e valore;
-- mappa delle icone di tipo centralizzata in `shell/deviceRow.js` (`kindIcon`),
-  usata sia dalle righe sia dal pannello;
-- stringhe aggiornate: «Show the pinned device in the panel» (preferenza),
-  «Remove this device from the panel» (puntina), «Select a device in OpenLogi.
-  Pin a device in the panel for this session.» (intestazione menu), più
-  descrizione della chiave GSettings; traduzione italiana a 37 messaggi;
-- fixture sintetica estesa con `charging-no-reading`, un mouse in carica senza
-  percentuale, per coprire la regressione.
+- Pin availability now depends only on selection eligibility: a unique ID,
+  an online device and battery support (`battery !== null`). Missing readings
+  do not hide it. The kind icon is always shown; the percentage only when present.
+- After the extension icon, the panel shows the pinned device's kind icon
+  (mouse, keyboard, etc.) and percentage when available. The button's accessible
+  name includes the device name and value.
+- Kind icon mapping is centralized in `shell/deviceRow.js` (`kindIcon`), used
+  by both rows and the panel.
+- Updated strings: “Show the pinned device in the panel” (preference), “Remove
+  this device from the panel” (pin), “Select a device in OpenLogi. Pin a device
+  in the panel for this session.” (menu header), and the GSettings description.
+  Italian translation expanded to 37 messages.
+- Synthetic fixture extended with `charging-no-reading`, a charging mouse
+  without a percentage, to cover the regression.
 
-Verifiche:
+Checks:
 
-- `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh`: 64 controlli GJS
-  (erano 61), ZIP, catalogo italiano, template e Shexli tutti verdi;
-- `./tests/nested.sh`: **56 controlli** Shell (erano 48). Nuovi: puntina visibile
-  e reattiva su dispositivo senza lettura, puntina che sopravvive a un refresh,
-  nessuna puntina su un dispositivo senza batteria, icona di tipo corretta con e
-  senza percentuale, nome accessibile del pannello;
-- evidenze: `/tmp/openlogi-nested-i6QndI/pinned-kind-icon.png` (mouse senza
-  percentuale: icona del topo, nessun valore) e `pinned-percentage.png`
-  (tastiera con `0%`), ritagli del pannello ispezionati.
+- `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh`: 64 GJS checks,
+  previously 61; ZIP, Italian catalogue, template and Shexli all passed.
+- `./tests/nested.sh`: **56 Shell checks**, previously 48. New coverage: visible,
+  reactive pin without a reading; pin surviving refresh; no pin without battery
+  support; correct kind icon with and without a percentage; panel accessible name.
+- Evidence: `/tmp/openlogi-nested-i6QndI/pinned-kind-icon.png` shows a mouse icon
+  without a percentage; `pinned-percentage.png` shows a keyboard with `0%`.
+  Panel crops were inspected.
 
-## Icona simbolica del pannello — 30 ottobre 2026
+## Symbolic panel icon, October 30, 2026
 
-Difetto segnalato dall’autore: nel pannello compariva un pallino bianco al posto
-del marchio. Riprodotto ingrandendo lo screenshot della sessione reale.
+Author-reported defect: a white dot appeared instead of the panel mark.
+Reproduced by enlarging the real-session screenshot.
 
-Causa: l’SVG usava due path con `stroke` e `fill="none"`. Il recolouring
-simbolico della Shell/GTK impone `fill` su tutti i path, quindi l’arco del
-cerchio veniva riempito e diventava un disco pieno che copriva il mouse.
+Cause: the SVG used two paths with `stroke` and `fill="none"`. Shell/GTK symbolic
+recoloring forces `fill` on every path, filling the circle arc into a solid disc
+that covered the mouse.
 
-Correzione in `icons/openlogi-companion-symbolic.svg`:
+Fix in `icons/openlogi-companion-symbolic.svg`:
 
-- cerchio come anello chiuso (due archi, `fill-rule="evenodd"`), niente `stroke`;
-- mouse come capsula con la rotella ritagliata nello stesso path tramite evenodd;
-- unico colore `#2e3436`, che il tema sostituisce; nessuna modifica al nome o al
-  percorso del file, quindi il manifest runtime resta invariato.
+- Circle represented by a closed ring (two arcs, `fill-rule="evenodd"`), no stroke.
+- Mouse represented by a capsule with a wheel cutout in the same path using evenodd.
+- One color, `#2e3436`, replaced by the theme. The file name and path stay the
+  same, so the runtime manifest is unchanged.
 
-Verifiche:
+Checks:
 
-- resa raster a 16, 22 e 32 px ispezionata: anello e mouse distinti, senza fusione;
-- `./tests/nested.sh`: 48 controlli superati e screenshot
-  `/tmp/openlogi-nested-LViwg2`; ritaglio del pannello ispezionato a tema chiaro e
-  scuro a scala testo 1, icona riconoscibile in entrambi (prima era un disco);
-- `tests/check-package.py` ora rifiuta un’icona `-symbolic.svg` con `stroke` o
-  `fill="none"`, così il difetto non può tornare;
-- `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh` superato.
+- Raster rendering at 16, 22 and 32 px inspected: distinct ring and mouse, no merging.
+- `./tests/nested.sh`: 48 checks passed, screenshots in
+  `/tmp/openlogi-nested-LViwg2`. Panel crops inspected with light and dark themes
+  at text scale 1; the icon is recognizable in both, unlike the previous disc.
+- `tests/check-package.py` now rejects `-symbolic.svg` icons with `stroke` or
+  `fill="none"` to prevent regression.
+- `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh` passed.
 
-L’icona quadrata per la pagina EGO è un PNG e non è toccata da questo difetto.
+The square EGO listing icon is a PNG and is unaffected by this defect.
 
-## Icona EGO e marchi — 30 ottobre 2026
+## EGO icon and branding, October 30, 2026
 
-Modifica realizzata con assistenza AI per uso personale.
+Change made with AI assistance for personal use.
 
-- `scripts/make-ego-icon.py` genera `assets/ego/icon-256.png` e `icon-128.png`
-  dal logo esistente: piastra scura arrotondata (raggio 22%) con emblema chiaro
-  al 66% del lato, per leggibilità su schede chiare e scure della pagina EGO.
-  Nessuna modifica al logo o all’SVG simbolico usato dalla Shell.
-- `assets/ego/README.md` documenta rigenerazione e uso; `assets/` non è nel
-  manifest runtime, quindi l’icona non entra nello ZIP.
-- `README.md` ha ora la sezione «Marchi e indipendenza»: nessuna affiliazione,
-  marchio originale, nessun media di terzi nel repository o nel bundle, nomi
-  commerciali dei dispositivi solo a runtime.
-- Verifica visiva delle due dimensioni: emblema centrato, margini regolari,
-  nessun artefatto di ridimensionamento.
+- `scripts/make-ego-icon.py` generates `assets/ego/icon-256.png` and `icon-128.png`
+  from the existing logo: rounded dark background (22% radius) with a light
+  emblem at 66% of the side, readable on light and dark EGO listings. The logo
+  and symbolic Shell SVG were not changed.
+- `assets/ego/README.md` documents regeneration and use. `assets/` is outside
+  the runtime manifest, so the listing icon is not included in the ZIP.
+- README now has a “Trademarks and independence” section: no affiliation,
+  original mark, no third-party media in the repository or bundle, and device
+  trade names supplied only at runtime.
+- Both sizes visually checked: centered emblem, regular margins, no resizing
+  artifacts.
 
-`verify.sh` non è influenzato (nessun file runtime o di test modificato);
-`nested.sh` non rieseguito in questo passaggio.
+`verify.sh` is unaffected: no runtime or test files changed. `nested.sh` was
+not rerun for this change.
 
-## Pulizia per la revisione — 30 ottobre 2026
+## Review cleanup, October 30, 2026
 
-Modifica realizzata con assistenza AI per uso personale, su richiesta esplicita
-dell’autore, in deroga alla precedente regola «conservare l’avviso AI nei file
-generati».
+Change made with AI assistance for personal use at the author's explicit
+request, overriding the previous rule to retain AI notices in generated files.
 
-- Rimossi dagli header di tutti i file (runtime, test, script, CSS) i commenti
-  `Generated with AI for personal use` e `Do NOT upload to extensions.gnome.org`:
-  le review EGO li elencano fra gli indicatori di output AI. Resta solo
-  `SPDX-License-Identifier: GPL-3.0-or-later`.
-- Provenienza AI conservata nella documentazione: `README.md`,
-  `AI_REVIEW_GUIDELINES.md`, `AGENTS.md`, `assets/branding/README.md` e questo
-  file. Aggiornate le regole di progetto di conseguenza.
-- `metadata.json`: rimosso `version` (deprecato, impostato da EGO), aggiunto
-  `url` verso il repository previsto e descrizione estesa su requisiti, sola
-  lettura, comportamento del click e indipendenza.
-- `tests/check-package.py` ora rifiuta un bundle con `version` o senza `url`
-  `https://`.
+- Removed `Generated with AI for personal use` and
+  `Do NOT upload to extensions.gnome.org` comments from runtime, test, script
+  and CSS headers. EGO reviews list them as indicators of AI output. Only
+  `SPDX-License-Identifier: GPL-3.0-or-later` remains.
+- AI provenance retained in documentation: `README.md`,
+  `AI_REVIEW_GUIDELINES.md`, `AGENTS.md`, `assets/branding/README.md` and this
+  file. Project rules updated accordingly.
+- `metadata.json`: removed deprecated `version`, assigned by EGO; added `url`
+  for the planned repository and expanded requirements, read-only behavior,
+  click behavior and independence in the description.
+- `tests/check-package.py` now rejects a bundle with `version` or without an
+  `https://` URL.
 
-Limite noto: `url` punta a `https://github.com/giaffa86/openlogi-companion`, che
-non esiste ancora. Il link va creato prima di qualsiasi upload su EGO.
+Known limitation at this checkpoint: `url` pointed to
+`https://github.com/giaffa86/openlogi-companion`, which did not yet exist.
+The repository had to be created before any EGO upload.
 
-Verifiche: `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh` superato
-(sintassi, 61 controlli GJS, ZIP dal manifest, catalogo italiano, template,
-Shexli senza finding). `./tests/nested.sh` non rieseguito in questo passaggio:
-non sono cambiati `shell/`, la UI o il polling.
+Checks: `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh` passed (syntax,
+61 GJS checks, ZIP from the manifest, Italian catalogue, template and Shexli
+without findings). `./tests/nested.sh` was not rerun because `shell/`, UI and
+polling were unchanged.
 
-## Sessione reale e refresh del menu — 30 ottobre 2026
+## Real session and menu refresh, October 30, 2026
 
-Modifica realizzata con assistenza AI per uso personale, sulla base delle
-osservazioni dell’autore nella sessione GNOME Shell 50 con dispositivi reali
-collegati.
+Change made with AI assistance for personal use, based on the author's
+observations in a GNOME Shell 50 session with real devices connected.
 
-### Riscontri della sessione reale
+### Real-session observations
 
-- L’inventario reale è arrivato e il menu ha elencato due dispositivi con
-  batteria e stato di ricarica; evidenza in `assets/screenshots/menu-devices.png`.
-- Il click sulla riga e l’azione di apertura portano alla **finestra generale** di
-  OpenLogi, che richiede ancora la selezione manuale del dispositivo: è il
-  comportamento previsto da OL-001, non un difetto introdotto dal companion.
-- I nomi non coincidono con la home della GUI, che usa i nomi commerciali brevi
-  (`MX Master`, `MX Keys`) mentre la CLI riporta il nome esteso del modello.
-- La home della GUI non mostra la percentuale di carica: il confronto numerico
-  della batteria con OpenLogi resta non eseguito (evidenza
-  `assets/screenshots/openlogi-gui-home.png`).
+- Real inventory arrived and the menu listed two devices with battery and
+  charging state; evidence in `assets/screenshots/menu-devices.png`.
+- Row clicks and the opening action lead to OpenLogi's **general window**,
+  still requiring manual device selection. This was the expected OL-001 behavior,
+  not a companion defect.
+- Names differ from the GUI home, which uses short trade names (`MX Master`,
+  `MX Keys`), while the CLI reports full model names.
+- The GUI home does not show charge percentages, so the numeric comparison
+  with OpenLogi remained unperformed at this checkpoint; evidence in
+  `assets/screenshots/openlogi-gui-home.png`.
 
-### Etichette
+### Labels
 
-`Open OpenLogi` ripeteva il verbo nel nome dell’applicazione. L’azione del menu
-diventa `Show OpenLogi window` / `Mostra la finestra di OpenLogi`, coerente con
-`Main.activateWindow` e con l’apertura della finestra generale. Il nome
-accessibile della riga diventa `Select the device in the OpenLogi app`. Le
-vecchie stringhe sono state rimosse da `po/it.po` e dal modello; nessun filtro
-aggiunto sul bus, nessuna intercettazione di notifiche.
+`Open OpenLogi` repeated the verb in the application name. The menu action
+became `Show OpenLogi window` / `Mostra la finestra di OpenLogi`, matching
+`Main.activateWindow` and general-window opening. The row accessible name became
+`Select the device in the OpenLogi app`. Old strings were removed from
+`po/it.po` and the template. No bus filters or notification interception added.
 
-### Refresh live a menu aperto
+### Live refresh while the menu is open
 
-Difetto osservato: con il pannello aperto i dati non si aggiornavano, perché il
-timer di polling esisteva solo con la preferenza `show-percentage` attiva e con
-intervallo minimo di 60 s. Il polling ora dipende dalla visibilità del menu:
+Observed defect: data did not update with the panel menu open because the
+polling timer existed only with `show-percentage` enabled, at a minimum interval
+of 60 seconds. Polling now depends on menu visibility:
 
-- menu aperto: 5 s, con backoff `10 → 20 → 40 → 60` s in caso di errori (tetto 60 s);
-- menu chiuso: nessun timer, salvo la preferenza `show-percentage` attiva, che
-  mantiene il poll lento `60 → 900` s;
-- una sola richiesta pendente, timeout 5 s, cancellazione e reaping invariati;
-- le righe vengono riusate quando l’inventario non cambia, quindi focus e scroll
-  non vengono persi a ogni aggiornamento.
+- Menu open: 5 seconds, with error backoff `10 → 20 → 40 → 60` seconds, capped at 60.
+- Menu closed: no timer unless `show-percentage` is enabled, retaining slow
+  polling of `60 → 900` seconds.
+- One pending request, 5-second timeout, cancellation and reaping unchanged.
+- Rows reused for an unchanged inventory, preserving focus and scroll on refresh.
 
-### Traduzioni
+### Translations
 
-Lingua sorgente: inglese (i `msgid`). Italiano: `po/it.po` compilato in
-`locale/it/LC_MESSAGES/openlogi-companion.mo`, che è anche il percorso atteso da
-GNOME Shell per `gettext-domain: openlogi-companion` in `metadata.json`. Ogni
-altra lingua cade sull’inglese. Lo ZIP contiene solo il catalogo compilato: le
-regole EGO elencano `.po` e `.pot` fra i file non necessari alla submission.
+English source strings (`msgid`); Italian in `po/it.po`, compiled to
+`locale/it/LC_MESSAGES/openlogi-companion.mo`, also the path GNOME Shell expects
+for `gettext-domain: openlogi-companion` in `metadata.json`. Other languages
+fall back to English. The ZIP contains only the compiled catalogue; EGO rules
+list `.po` and `.pot` as unnecessary submission files.
 
-Controlli aggiunti a `scripts/verify.sh`:
+Checks added to `scripts/verify.sh`:
 
-- il catalogo compilato esiste nel percorso del dominio dichiarato;
-- `msgfmt --statistics` su `po/it.po` non riporta voci non tradotte o fuzzy;
-- il catalogo si carica davvero e restituisce `Mostra la finestra di OpenLogi`
-  per `Show OpenLogi window` (verifica con il modulo `gettext` di Python, perché
-  il typelib `Gettext` non è installato su questa macchina);
-- `po/openlogi-companion.pot` è allineato ai sorgenti (37 messaggi).
+- Compiled catalogue exists at the declared domain path.
+- `msgfmt --statistics` on `po/it.po` reports no untranslated or fuzzy entries.
+- Catalogue loads and returns `Mostra la finestra di OpenLogi` for
+  `Show OpenLogi window`. Checked with Python's `gettext` module because the
+  `Gettext` typelib is not installed on this machine.
+- `po/openlogi-companion.pot` matches source strings (37 messages).
 
-Stringhe aggiornate in questo passaggio: sottotitolo delle preferenze
+Updated in this change: the preference subtitle
 (`Aggiorna ogni 60 secondi mentre è mostrata nel pannello, con attesa maggiore
-dopo errori.`) e descrizione della chiave GSettings, entrambe coerenti con il
-polling 5 s a menu aperto. Restano in inglese, non tradotte, solo le stringhe di
-marca `OpenLogi Companion` del pannello.
+dopo errori.`) and the GSettings description, both consistent with 5-second
+polling while the menu is open. Only the panel's `OpenLogi Companion` brand
+strings remain untranslated English.
 
-### Verifiche eseguite sui sorgenti modificati
+### Checks on the changed source
 
-- `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh`: sintassi, limiti di
-  riga, 61 controlli GJS, ZIP dal manifest esplicito e `msgcmp` superato su 37
-  messaggi tradotti; Shexli 0.2.1 con tree-sitter 0.25.2 e tree-sitter-javascript 0.25.0
-  senza finding, errori o warning.
-- `./tests/nested.sh`: **48 controlli** Shell superati con backend sintetico (erano
-  42), incluso il refresh live a menu aperto con inventario cambiato nel finto
-  CLI, il ritorno al poll lento alla chiusura e l’apertura della finestra delle
-  preferenze con il nuovo sottotitolo. Evidenze e screenshot
-  `/tmp/openlogi-nested-swZqwi`; menu scuro a scala testo 1 ispezionato, etichetta
-  `Show OpenLogi window` visibile, avvisi ambientali AT-SPI/PipeWire invariati.
-- Nessuna installazione o ricarica nella sessione host durante queste verifiche.
+- `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh`: syntax, line limits,
+  61 GJS checks, ZIP from the explicit manifest and `msgcmp` passed on 37
+  translated messages. Shexli 0.2.1 with tree-sitter 0.25.2 and
+  tree-sitter-javascript 0.25.0 reported no findings, errors or warnings.
+- `./tests/nested.sh`: **48 Shell checks** passed with a synthetic backend,
+  previously 42. Includes live refresh while the menu is open after changing
+  the fake CLI inventory, return to slow polling on close, and opening the
+  preferences window with its new subtitle. Evidence and screenshots in
+  `/tmp/openlogi-nested-swZqwi`. Dark menu at text scale 1 inspected, with
+  `Show OpenLogi window` visible and unchanged AT-SPI/PipeWire environment warnings.
+- No installation or reload in the host session during these checks.
 
-Restano aperti i punti di `OPEN_ITEMS.md`: confronto numerico batteria con la GUI,
-click con app chiusa e minimizzata, raggruppamento finestra, accessibilità con
-lettore di schermo e DPI/multi-monitor.
+At this checkpoint, `OPEN_ITEMS.md` still listed numeric GUI battery comparison,
+closed/minimized app clicks, window grouping, screen reader accessibility and
+DPI/multiple monitors as open.
 
-## Screenshot del menu con dispositivi — 29 ottobre 2026
+## Menu screenshot with devices, October 29, 2026
 
-Nota aggiunta con assistenza AI per uso personale. L'autore ha segnalato il
-funzionamento corretto dell'estensione nella sessione GNOME Shell 50 reale, con
-menu funzionante e dispositivi mostrati, e ha fornito lo screenshot acquisito.
-L'immagine è conservata come `assets/screenshots/menu-devices.png` (972×612,
-SHA-256 `db98d8d5…5e7b`), con provenienza e uso previsto nel relativo README.
-Mostra due dispositivi connessi con batteria e stato di ricarica, senza ID o
-dati sensibili. Resta un'evidenza visiva fornita dall'autore, non una
-riacquisizione automatica: non sostituisce le prove in `tests/nested.sh` né
-aggiunge verifiche hardware oltre a quanto annotato in `OPEN_ITEMS.md`. L'asset
-non è nel manifest runtime e quindi non entra nello ZIP.
+Note added with AI assistance for personal use. The author reported the
+extension working in a real GNOME Shell 50 session, with a functioning menu
+and visible devices, and supplied the captured screenshot.
+`assets/screenshots/menu-devices.png` is 972×612, SHA-256 `db98d8d5…5e7b`;
+provenance and intended use are in its README. It shows two connected devices,
+battery and charging state, without IDs or sensitive data. This is visual
+evidence supplied by the author, not an automated recapture. It does not replace
+`tests/nested.sh` or add hardware coverage beyond `OPEN_ITEMS.md`. The asset is
+outside the runtime manifest and therefore the ZIP.
 
-## Logo e icona — 29 ottobre 2026
+## Logo and icon, October 29, 2026
 
-Modifica realizzata con assistenza AI per uso personale. Logo PNG generato con
-image_gen, con canale alfa verificato, in `assets/branding/`; prompt e provenienza
-nel relativo README. Adattamento SVG simbolico su griglia 16×16 in `icons/`,
-caricato da `St.Icon` tramite `Gio.FileIcon`. Il tema Shell ne determina il colore.
-Il manifest runtime include soltanto l’SVG, senza PNG, prompt o documentazione.
+Change made with AI assistance for personal use. PNG logo generated with
+image_gen, with verified alpha channel, in `assets/branding/`; prompt and
+provenance in its README. Symbolic SVG adaptation on a 16×16 grid in `icons/`,
+loaded by `St.Icon` through `Gio.FileIcon`. The Shell theme determines its color.
+The runtime manifest includes only the SVG, without PNG, prompts or documentation.
 
-Verifiche eseguite sui sorgenti modificati:
+Checks on the changed source:
 
-- `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh`: 61 controlli GJS,
-  ZIP e traduzioni superati; Shexli senza finding, errori o warning.
-- `./tests/nested.sh`: 42 controlli Shell superati con backend sintetico.
-  Il bind D-Bus inizialmente negato nel sandbox è riuscito con esecuzione
-  autorizzata fuori dal sandbox. Evidenze in `/tmp/openlogi-nested-IgFqBv`.
-  Screenshot scuro a scala testo 1 ispezionato; nessun errore di caricamento
-  dell’icona nel log. Restano gli avvisi ambientali AT-SPI/PipeWire/Adw già noti.
+- `SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh`: 61 GJS checks,
+  ZIP and translations passed; Shexli without findings, errors or warnings.
+- `./tests/nested.sh`: 42 Shell checks passed with a synthetic backend. D-Bus
+  binding, initially blocked in the sandbox, succeeded with authorized execution
+  outside it. Evidence in `/tmp/openlogi-nested-IgFqBv`. Dark screenshot at text
+  scale 1 inspected; no icon loading errors in the log. Previously known
+  AT-SPI/PipeWire/Adw environment warnings remain.
 
-Nessuna installazione o ricarica nella sessione host. Nessuna prova hardware o
-della GUI OpenLogi reale aggiunta; restano tutti i limiti in `OPEN_ITEMS.md`.
+No installation or reload in the host session. No new hardware or real OpenLogi
+GUI tests; all `OPEN_ITEMS.md` limitations remain.
 
-## Verifica del 28 ottobre 2026
+## Verification of October 28, 2026
 
-## Preparazione dei sorgenti per GitHub
+## Preparing source for GitHub
 
-Nota aggiornata con assistenza AI per uso personale. Preparazione locale
-completata; nessun repository remoto creato e nessun push eseguito.
+Note updated with AI assistance for personal use. Local preparation completed;
+no remote repository had been created and no push performed at this checkpoint.
 
-Successivamente autorizzata la creazione del repository e del primo commit
-soltanto in locale. Il passaggio al remoto resta rimandato alla verifica con
-dispositivi reali collegati, come registrato in `OPEN_ITEMS.md`. I test sintetici
-riportati sotto non soddisfano questa condizione.
+Creation of the repository and first commit was subsequently authorized only
+locally. Remote publication was still deferred until real connected devices
+were checked, as recorded in `OPEN_ITEMS.md`. The synthetic tests below did not
+satisfy that condition.
 
-- README aggiornato per il progetto sperimentale, con istruzioni dalla radice
-  del repository, dipendenze di build/verifica e limiti hardware/API espliciti.
-- Rimossi i percorsi personali e i riferimenti a progetti locali dalla
-  documentazione destinata alla condivisione. Conservati avvisi AI, licenza,
-  risultati storici, prove residue e piano upstream.
-- `.gitignore` esclude ZIP, cataloghi compilati, `gschemas.compiled`, ambienti
-  Python, cache, configurazioni locali degli agenti e file temporanei.
-- Gli script di packaging e sync creano la directory dei cataloghi prima di
-  compilarli, così funzionano anche senza una directory `locale/` preesistente.
-- Regole di esclusione verificate con Git in una copia temporanea separata:
-  31 file sorgente/documentazione selezionati, senza gli artefatti esclusi.
-  Da questi soli file, senza `locale/` e `dist/`, `./scripts/package.sh` ha
-  rigenerato lo ZIP superando il confronto tra manifest, contenuti e import.
+- README updated for the experimental project, with repository-root commands,
+  build/verification dependencies and explicit hardware/API limitations.
+- Personal paths and references to local projects removed from documentation
+  intended for sharing. AI notices, license, historical results, remaining
+  checks and the upstream plan retained.
+- `.gitignore` excludes ZIPs, compiled catalogues, `gschemas.compiled`, Python
+  environments, caches, local agent configuration and temporary files.
+- Packaging and sync scripts create the catalogue directory before compiling,
+  so they work without an existing `locale/` directory.
+- Exclusion rules checked with Git in a separate temporary copy: 31 source and
+  documentation files selected, without excluded artifacts. Using only those
+  files, without `locale/` or `dist/`, `./scripts/package.sh` rebuilt the ZIP and
+  passed manifest, content and import comparisons.
 
-Controlli rieseguiti dopo le modifiche:
+Checks repeated after these changes:
 
 ```text
 SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh
-  61 controlli GJS superati; ZIP e traduzioni verificati
-  Shexli: 0 finding, 0 errori, 0 warning
+  61 GJS checks passed; ZIP and translations verified
+  Shexli: 0 findings, 0 errors, 0 warnings
 ./tests/nested.sh
-  42 controlli Shell isolati superati; backend sintetico
+  42 isolated Shell checks passed; synthetic backend
 ```
 
-Lo scanner inizialmente mancava: predisposto in un venv sotto `/tmp` con le
-versioni fissate documentate sotto. Il sandbox ha impedito il download e il bind
-del bus D-Bus del test; download e test Shell sono riusciti con esecuzione
-autorizzata fuori dal sandbox, mantenendo bus e dati di test separati dall’host.
-Anche questa esecuzione ha prodotto gli avvisi ambientali AT-SPI/PipeWire/Adw già
-descritti sotto, senza errori JS del companion nel log della Shell isolata.
-Screenshot generati dal runner; nessuna nuova ispezione visiva in questa verifica
-documentale. Nessuna installazione o ricarica nella sessione host e nessuna nuova
-prova con hardware o GUI OpenLogi reali. Il sync verso la sessione host non è
-stato eseguito.
+The scanner was initially absent. A venv under `/tmp` was prepared with the
+pinned versions documented below. The sandbox blocked downloads and test D-Bus
+binding; downloads and Shell tests succeeded with authorized execution outside
+the sandbox while keeping the bus and test data separate from the host. This
+run also produced the AT-SPI/PipeWire/Adw environment warnings described below,
+without companion JavaScript errors in the isolated Shell log. Screenshots were
+generated by the runner; no additional visual inspection was performed during
+this documentation check. No installation or reload in the host session, and
+no new hardware or real OpenLogi GUI tests. No sync to the host session.
 
-## Ambiente e provenienza
+## Environment and provenance
 
-Ricontrollati localmente:
+Rechecked locally:
 
 ```text
 rpm -q openlogi gnome-shell gjs
@@ -518,208 +509,211 @@ gjs-1.88.1-2.fc44.x86_64
 openlogi --version → openlogi 0.8.18
 ```
 
-La Shell headless ha riportato Mutter 50.6. Nessuna altra versione Shell viene
-indicata come compatibile. Gli script non aggiornano pacchetti o servizi.
+The headless Shell reported Mutter 50.6. No other Shell version is claimed to
+be compatible. Scripts do not update packages or services.
 
-Codice ufficiale scaricato in `/tmp/openlogi-upstream-0818` con:
+Official source downloaded to `/tmp/openlogi-upstream-0818` using:
 
 ```bash
 git clone --depth 1 --branch v0.8.18 https://github.com/AprilNEA/OpenLogi.git /tmp/openlogi-upstream-0818
 git -C /tmp/openlogi-upstream-0818 rev-parse HEAD
 ```
 
-Tag annotato `v0.8.18`: `9fb08172f1e4ca9f1b83374fe1532cec3580cc69`;
-commit effettivo: `d9fd33aca1639c377af25b8fe89ee89c6120f187`.
-La rete del sandbox ha inizialmente dato `Could not resolve host: github.com`;
-il clone è riuscito con esecuzione autorizzata fuori dal sandbox. Non si è usato
-`master` per dedurre il contratto della release installata.
+Annotated tag `v0.8.18`: `9fb08172f1e4ca9f1b83374fe1532cec3580cc69`;
+actual commit: `d9fd33aca1639c377af25b8fe89ee89c6120f187`.
+The sandbox network initially returned `Could not resolve host: github.com`;
+the clone succeeded with authorized execution outside the sandbox. `master`
+was not used to infer the installed release's contract.
 
-Fonti lette nel clone, riferimenti pubblici della stessa release:
+Source read in the clone, with public references from the same release:
 
 - [USAGE.md, automation API](https://github.com/AprilNEA/OpenLogi/blob/v0.8.18/docs/USAGE.md)
-- [Proiezione JSON e codici errore](https://github.com/AprilNEA/OpenLogi/blob/v0.8.18/crates/openlogi-cli/src/cmd/api/output.rs)
-- [Comando api devices](https://github.com/AprilNEA/OpenLogi/blob/v0.8.18/crates/openlogi-cli/src/cmd/api.rs)
-- [Tipi dispositivo e batteria](https://github.com/AprilNEA/OpenLogi/blob/v0.8.18/crates/openlogi-core/src/device.rs)
-- [Launcher Linux](https://github.com/AprilNEA/OpenLogi/blob/v0.8.18/packaging/linux/desktop/openlogi.desktop)
-- [Vocabolario deep link](https://github.com/AprilNEA/OpenLogi/blob/v0.8.18/crates/openlogi-core/src/brand.rs)
-- [Bootstrap GUI e single instance](https://github.com/AprilNEA/OpenLogi/blob/v0.8.18/crates/openlogi-desktop/src/main.rs)
-- [IPC agent](https://github.com/AprilNEA/OpenLogi/blob/v0.8.18/crates/openlogi-ipc/src/lib.rs)
+- [JSON projection and error codes](https://github.com/AprilNEA/OpenLogi/blob/v0.8.18/crates/openlogi-cli/src/cmd/api/output.rs)
+- [api devices command](https://github.com/AprilNEA/OpenLogi/blob/v0.8.18/crates/openlogi-cli/src/cmd/api.rs)
+- [Device and battery types](https://github.com/AprilNEA/OpenLogi/blob/v0.8.18/crates/openlogi-core/src/device.rs)
+- [Linux launcher](https://github.com/AprilNEA/OpenLogi/blob/v0.8.18/packaging/linux/desktop/openlogi.desktop)
+- [Deep-link vocabulary](https://github.com/AprilNEA/OpenLogi/blob/v0.8.18/crates/openlogi-core/src/brand.rs)
+- [GUI bootstrap and single instance](https://github.com/AprilNEA/OpenLogi/blob/v0.8.18/crates/openlogi-desktop/src/main.rs)
+- [Agent IPC](https://github.com/AprilNEA/OpenLogi/blob/v0.8.18/crates/openlogi-ipc/src/lib.rs)
 
-Conferme: envelope schema 1; successo exit 0, errore runtime exit 1 e sintassi
-exit 2; `inventory` scanning/ready/unavailable; campi nullable e ID opachi non
-persistenti. BatteryLevel critical/low/good/full/unknown e BatteryStatus
-charging/charging_slow/discharging/full/error/unknown. Nessuna sottoscrizione
-pubblica di inventario o interfaccia D-Bus supportata individuata nei documenti
-API e nel relativo codice. L’estensione upstream per finestra attiva non è
-un servizio di inventario. Scelta: CLI asincrona, nessun protocollo IPC interno.
+Confirmed: schema 1 envelope; success exits 0, runtime error 1 and syntax error
+2; `inventory` states scanning/ready/unavailable; nullable fields and opaque,
+non-persistent IDs. BatteryLevel values critical/low/good/full/unknown and
+BatteryStatus values charging/charging_slow/discharging/full/error/unknown.
+No public inventory subscription or supported D-Bus interface was found in API
+documentation or its code. The upstream active-window extension is not an
+inventory service. Chosen approach: asynchronous CLI, no internal IPC protocol.
 
-Il desktop file installato coincide nei campi consumati con upstream:
+The installed desktop file matches the upstream fields consumed:
 `openlogi.desktop`, `Exec=openlogi-desktop`,
-`StartupWMClass=org.openlogi.openlogi`. Il WM_CLASS differisce dal nome del file.
-Il vocabolario deep link non contiene selezione dispositivo; `on_open_urls` nel
-bootstrap non prova la registrazione Linux. Il processo GUI secondario può uscire
-per single-instance: non è sufficiente lanciare nuovamente il binario per dare focus.
+`StartupWMClass=org.openlogi.openlogi`. WM_CLASS differs from the file name.
+The deep-link vocabulary has no device selection; bootstrap `on_open_urls` does
+not prove Linux registration. A second GUI process can exit through the
+single-instance guard: relaunching the binary alone is insufficient to focus
+an existing window.
 
-Consultate il 28 ottobre le [Review Guidelines](https://gjs.guide/extensions/review-guidelines/review-guidelines.html)
-e [Best Practices](https://gjs.guide/extensions/review-guidelines/best-practices.html).
-Conservato l’avviso AI. La revisione locale ha incluso riferimenti di sviluppo
-esterni al repository; nessun modulo o documento privato è incluso nel bundle.
-La successiva preparazione dei sorgenti per GitHub non estende la copertura
-delle prove né costituisce una submission EGO.
+The [Review Guidelines](https://gjs.guide/extensions/review-guidelines/review-guidelines.html)
+and [Best Practices](https://gjs.guide/extensions/review-guidelines/best-practices.html)
+were consulted on October 28. The AI notice was retained at that time. Local
+review included development references outside the repository; no private
+module or document is included in the bundle. Subsequent GitHub source
+preparation does not extend test coverage or constitute an EGO submission.
 
-## Inventario reale
+## Real inventory
 
-Nel sandbox `openlogi api devices` ha restituito exit 1, schema 1,
-`agent_unavailable`, con errore IPC `Operation not permitted (os error 1)`.
-Questo non dimostra che l’agent sia spento.
+Inside the sandbox, `openlogi api devices` returned exit 1, schema 1 and
+`agent_unavailable`, with IPC error `Operation not permitted (os error 1)`.
+This does not demonstrate that the agent was stopped.
 
-La stessa CLI in lettura, autorizzata fuori dal sandbox, ha restituito:
+The same read-only CLI, authorized outside the sandbox, returned:
 
 ```json
 {"schema_version":1,"ok":true,"data":{"inventory":"ready","devices":[]}}
 ```
 
-Exit 0. L’output è stato sintetizzato prima della stampa per non esporre ID o
-nomi hardware. È una prova di comunicazione con l’agent e di inventario vuoto in
-quel momento, non una prova di compatibilità o incompatibilità delle periferiche.
-Nessun dispositivo reale o stato batteria è stato osservato. Nessun servizio,
-configurazione privata, pacchetto o regola udev è stato modificato.
+Exit 0. Output was summarized before printing to avoid exposing IDs or hardware
+names. This demonstrates communication with the agent and an empty inventory at
+that moment, not peripheral compatibility or incompatibility. No real device
+or battery state was observed at this checkpoint. No service, private
+configuration, package or udev rule was changed.
 
-## Controlli indipendenti e provider GJS
+## Independent checks and GJS provider
 
-Comando riproducibile dalla radice del progetto:
+Reproducible command from the project root:
 
 ```bash
 SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh
 ```
 
-Il controllo esegue parsing sintattico ESM con Node (senza dipendenze Node),
-`bash -n`, validazione JSON, limite 200 colonne JS/CSS, test GJS,
-`msgfmt --check`, `glib-compile-schemas --strict --dry-run schemas`, build ZIP,
-confronto esatto manifest/contenuti/import relativi e Shexli.
-Catalogo italiano controllato anche con estrazione `xgettext` e `msgcmp`:
-nessun messaggio UI mancante. Caricamento gettext GJS con `LC_ALL=it_IT.UTF-8`
-verificato: `Battery unavailable` diventa `Batteria non disponibile`.
-Il syntax check Node non prova le API GJS: queste vengono esercitate nei test
-provider e nella Shell isolata.
+Verification runs ESM syntax parsing through Node (without Node dependencies),
+`bash -n`, JSON validation, a 200-column JS/CSS limit, GJS tests,
+`msgfmt --check`, `glib-compile-schemas --strict --dry-run schemas`, ZIP build,
+exact manifest/content/relative-import comparisons and Shexli. The Italian
+catalogue is also checked with `xgettext` extraction and `msgcmp`: no UI messages
+missing. GJS gettext loading with `LC_ALL=it_IT.UTF-8` verified:
+`Battery unavailable` becomes `Batteria non disponibile`. Node syntax checking
+does not test GJS APIs; those are exercised by provider tests and the isolated
+Shell.
 
-`gjs -m tests/test.js`: **61 controlli superati** con dati sintetici e figli CLI
-Python reali. Copertura:
+`gjs -m tests/test.js`: **61 checks passed** with synthetic data and real Python
+CLI child processes. Coverage:
 
-- Otto dispositivi con ID null/duplicati, nomi uguali/lunghi, 0/100%, livello senza
-  percentuale, ricarica lenta, luce senza batteria e offline con lettura precedente.
-- Stati scanning/unavailable/ready vuoto e distinzione zero/null.
-- JSON vuoto/malformato, envelope invalido, schema sconosciuto, tipi invalidi,
-  percentuali fuori intervallo, exit status incoerente.
-- CLI assente, agent irraggiungibile, version mismatch, handshake failure,
-  timeout API, codice errore ignoto, sintassi CLI incompatibile.
-- Output stdout e stderr oltre 1 MiB, timeout finito, drenaggio simultaneo dei due
-  stream senza deadlock. Lo stderr non è accumulato in memoria.
-- Refresh sovrapposti accorpati nello stesso Promise, cancellazione durante
-  teardown, figlio terminato e raccolto (`get_if_signaled`), nuova istanza dopo
-  teardown. Timeout e limite rilasciano l’identità della richiesta.
+- Eight devices with null/duplicate IDs, matching/long names, 0/100%, qualitative
+  level without a percentage, slow charging, a batteryless light and an offline
+  device with an earlier reading.
+- Scanning/unavailable/empty-ready states and zero/null distinction.
+- Empty/malformed JSON, invalid envelopes, unknown schema, invalid types,
+  out-of-range percentages and inconsistent exit status.
+- Missing CLI, unreachable agent, version mismatch, handshake failure, API
+  timeout, unknown error code and incompatible CLI syntax.
+- Stdout and stderr above 1 MiB, finite timeout, simultaneous stream draining
+  without deadlock. Stderr is not accumulated in memory.
+- Overlapping refreshes coalesced into the same Promise, teardown cancellation,
+  child termination and reaping (`get_if_signaled`), fresh instance after
+  teardown. Timeout and limit release request identity.
 
-## Shell isolata e preferenze
+## Isolated Shell and preferences
 
-Comando: `./tests/nested.sh`. Il primo tentativo nel sandbox ha fallito prima
-dell’avvio: `Failed to bind socket … Operation not permitted`. Le prove sono
-poi riuscite con esecuzione autorizzata fuori dal sandbox, mantenendo l’isolamento.
+Command: `./tests/nested.sh`. The first sandbox attempt failed before startup:
+`Failed to bind socket … Operation not permitted`. Tests then succeeded with
+authorized execution outside the sandbox, preserving isolation.
 
-Il runner crea un bus D-Bus nuovo, XDG_RUNTIME_DIR/DATA_HOME/CONFIG_HOME separati,
-backend GSettings keyfile e monitor virtuale 1280×720, quindi avvia:
+The runner creates a fresh D-Bus session, separate XDG_RUNTIME_DIR/DATA_HOME/CONFIG_HOME,
+a keyfile GSettings backend and a virtual 1280×720 monitor, then starts:
 
 ```bash
 gnome-shell --headless --virtual-monitor 1280x720 --debug-control
 ```
 
-Non inoltra l’indirizzo del bus host. La CLI finta legge soltanto una fixture
-sintetica; il launcher OpenLogi è mascherato e poi sostituito da una GUI GTK di
-test nella sola directory XDG temporanea. Il helper Eval è locale ai test e
-non è presente nel manifest runtime. Lo script arresta e raccoglie il PID della
-Shell creata, non cerca processi tramite pattern. Non installa né ricarica
-estensioni nella sessione host.
+It does not forward the host bus address. The fake CLI reads only a synthetic
+fixture; the OpenLogi launcher is masked, then replaced by a GTK test GUI only
+inside the temporary XDG directory. The Eval helper is test-local and absent
+from the runtime manifest. The script stops and reaps the Shell PID it created,
+without searching for processes by pattern. It does not install or reload
+extensions in the host session.
 
-La prima serie completata ha superato **37 controlli**, con:
+The first completed run passed **37 checks**, covering:
 
-- Otto righe comprese le duplicate; nessun 84% offline nel dettaglio.
-- Menu, focus delle righe e nomi accessibili, larghezza limitata.
-- Percentuale 0 e 100, rifiuto ID ambigui/offline, righe riutilizzate a refresh
-  immutato, reset della scelta quando il dispositivo scompare.
-- Errore reale della CLI finta: snapshot e righe cancellati, retry dopo riapertura
-  rapida del menu; nessuna percentuale corrente dopo errore.
-- Disable mentre è pendente un figlio ritardato, riferimenti e timer rimossi,
-  tre cicli enable/disable/enable e ripristino delle otto righe.
-- Preferenza live che crea/rimuove il polling.
-- 200 dispositivi, temi prefer-light/prefer-dark, scala testo 1 e 1,5; menu entro
-  lo schermo e lista scorrevole in tutte e quattro le combinazioni.
-- Apertura e chiusura delle vere preferenze GTK dell’estensione.
+- Eight rows, including duplicates; no offline 84% in the details.
+- Menu, row focus, accessible names and bounded width.
+- Percentages 0 and 100, rejection of ambiguous/offline IDs, unchanged-refresh
+  row reuse and selection reset when a device disappears.
+- Actual fake-CLI failure: snapshot and rows cleared; retry after rapid menu
+  reopening; no current percentage after an error.
+- Disable with a delayed child pending, references and timers removed, three
+  enable/disable/enable cycles and restoration of eight rows.
+- Live preference changes that create/remove polling.
+- 200 devices, prefer-light/prefer-dark themes and text scales 1 and 1.5;
+  menu within the screen and scrolling list in all four combinations.
+- Opening and closing the extension's real GTK preferences window.
 
-Screenshot delle quattro combinazioni acquisiti tramite Screenshot D-Bus della
-Shell isolata; ispezionati visivamente chiaro 1,5 e scuro 1. Testo troncato,
-scorrimento, contrasto del tema e indicatori di focus osservabili. La finestra di
-benvenuto Fedora sullo sfondo appartiene soltanto alla nuova sessione di test.
-Scala testo non equivale a scala monitor frazionaria. Nessuna prova con screen
-reader o navigazione fisica completa; il bus AT-SPI ha dato `Permission denied`.
+Screenshots of all four combinations were captured through the isolated Shell's
+Screenshot D-Bus service. Light at 1.5 and dark at 1 were visually inspected:
+truncated text, scrolling, theme contrast and focus indicators visible. The
+Fedora welcome window in the background belonged only to the new test session.
+Text scaling is not fractional monitor scaling. No screen reader or full
+physical navigation test; the AT-SPI bus returned `Permission denied`.
 
-La serie estesa del launcher ha inizialmente rilevato la mancata attivazione della
-finestra sintetica minimizzata. Correzione: preferire la finestra di `Shell.App`,
-poi cercare il WM_CLASS dichiarato dal launcher se il desktop ID è diverso;
-attivare la finestra con `Main.activateWindow`. In assenza di finestra, usare
-`Shell.App.activate()` per l’avvio. La serie finale estesa ha superato **42 controlli**, inclusi applicazione assente,
-avvio da chiusa, finestra già aperta senza duplicati e ripristino da minimizzata,
-tutti sulla sola GUI sintetica. Evidenze e screenshot sono stati conservati
-nella directory temporanea stampata dal runner (`results.txt`, `shell.log` e PNG);
-nessun errore JS del companion nel relativo `shell.log`. Questi artefatti locali
-non sono distribuiti con i sorgenti e possono non essere più disponibili.
-Non equivale a una prova della GUI OpenLogi reale.
+Extended launcher testing initially found that the minimized synthetic window
+was not activated. Fix: prefer the `Shell.App` window, then look for the
+launcher's declared WM_CLASS when the desktop ID differs. Activate with
+`Main.activateWindow`; if no window exists, launch with `Shell.App.activate()`.
+The final extended run passed **42 checks**, including missing application,
+cold launch, an already-open window without duplicates and restore from
+minimized, all using only the synthetic GUI. Evidence and screenshots were
+kept in the temporary directory printed by the runner (`results.txt`,
+`shell.log` and PNGs), without companion JavaScript errors in `shell.log`.
+These local artifacts are not distributed with source and may no longer exist.
+This does not test the real OpenLogi GUI.
 
-Avvisi ambientali osservati: AT-SPI non avviabile, PipeWire non collegato,
-permission store geolocation vuoto, authentication agent indisponibile e warning
-GI su Adw.PreferencesWindow. Non equivalgono a errori dell’estensione. I log completi
-restano in `/tmp`; non vengono copiati nel progetto o nel pacchetto.
+Observed environment warnings: AT-SPI unavailable, PipeWire disconnected, empty
+geolocation permission store, unavailable authentication agent and GI warnings
+for Adw.PreferencesWindow. These are not extension errors. Full logs stay under
+`/tmp`; they are not copied into the project or package.
 
-## Pacchetto, licenza e revisione
+## Package, license and review
 
-`scripts/runtime-files.txt` contiene l’elenco esatto dei file runtime. Lo ZIP
-conserva `shell/`, schema XML, catalogo `.mo` e LICENSE GPLv3. Confrontati tutti
-i byte con i sorgenti e risolti gli import relativi. Esclusi `gschemas.compiled`,
-script, test, prompt, documentazione, directory agent e altri dati locali.
+`scripts/runtime-files.txt` contains the exact runtime file list. The ZIP
+preserves `shell/`, schema XML, `.mo` catalogue and GPLv3 LICENSE. All bytes
+were compared with source and relative imports resolved. Excluded:
+`gschemas.compiled`, scripts, tests, prompts, documentation, agent directories
+and other local data.
 
 Shexli **0.2.1**, tree-sitter **0.25.2**, tree-sitter-javascript **0.25.0**:
-**zero finding, zero errori, zero warning**. Nessun crash su questa combinazione;
-lo scanner non è stato modificato. Non è stato usato tree-sitter 0.26.0, segnalato
-come problematico nei riferimenti locali.
+**zero findings, zero errors, zero warnings**. No crash with this combination;
+the scanner was not modified. Tree-sitter 0.26.0, reported as problematic in
+local references, was not used.
 
-Nessun finding `manual_review` per i subprocessi; valutazione esplicita: il provider
-esegue la sola CLI ufficiale con argv fisso e privilegi utente, budget condiviso,
-timeout, cancellazione, terminazione e wait non cancellabile. Non esegue input
-hardware o nomi dispositivo. I costruttori parametrizzabili servono al backend
-sintetico dei test e non sono esposti nelle preferenze.
+No `manual_review` findings for subprocesses. Explicit assessment: the provider
+executes only the official CLI with fixed arguments and user privileges,
+shared budget, timeout, cancellation, termination and non-cancellable wait.
+It does not execute hardware input or device names. Parameterized constructors
+serve the synthetic test backend and are not exposed in preferences.
 
-Non è una certificazione EGO o un audit dell’RPM OpenLogi. La revisione della
-manutenibilità resta responsabilità dell’autore prima di qualsiasi pubblicazione.
+This is not EGO certification or an OpenLogi RPM audit. Maintainability review
+remains the author's responsibility before any publication.
 
-## Prove residue e comandi utente
+## Remaining checks and user commands
 
-Vedere [OPEN_ITEMS.md](OPEN_ITEMS.md) per la selezione pagina dispositivo
-**non soddisfatta**, la GUI OpenLogi reale non collaudata e le verifiche hardware.
-Per riprodurre controlli in un terminale senza restrizioni sandbox:
+See [OPEN_ITEMS.md](OPEN_ITEMS.md) for the **unmet** device-page selection
+requirement, the untested real OpenLogi GUI paths and hardware checks.
+To reproduce verification in a terminal without sandbox restrictions:
 
 ```bash
-# Dalla radice del repository:
+# From the repository root:
 SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh
 ./tests/nested.sh
 openlogi --version
 openlogi api devices
 ```
 
-Se il venv non esiste, predisporlo esplicitamente senza alterare lo scanner:
+If the venv does not exist, prepare it explicitly without changing the scanner:
 
 ```bash
 python3 -m venv /tmp/shexli-venv
 /tmp/shexli-venv/bin/pip install shexli==0.2.1 tree-sitter==0.25.2 tree-sitter-javascript==0.25.0
 ```
 
-Per test interattivi significativi: `dbus-run-session -- gnome-shell --devkit`
-con `mutter-devkit` disponibile, copia del runtime nel relativo XDG isolato e
-backend sintetico come nel runner. Non esporre il bus host al devkit.
+For meaningful interactive tests: `dbus-run-session -- gnome-shell --devkit`
+with `mutter-devkit` available, runtime copied into the isolated XDG tree and
+a synthetic backend as in the runner. Do not expose the host bus to the devkit.

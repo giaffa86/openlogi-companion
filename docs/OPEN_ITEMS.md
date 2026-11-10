@@ -1,147 +1,143 @@
-# Limiti e verifiche aperte
+# Limitations and open checks
 
-## Pubblicazione dei sorgenti autorizzata — 10 novembre 2026
+## Source publication authorized, November 10, 2026
 
-L’autore ha creato il repository pubblico
+The author created the public
 [giaffa86/openlogi-companion](https://github.com/giaffa86/openlogi-companion)
-e ha chiesto esplicitamente di sincronizzarlo con il progetto locale.
-Questa istruzione autorizza commit e push dei sorgenti e supera il precedente
-rinvio del passaggio al remoto. Restano aperte le verifiche hardware e GUI sotto
-elencate: release e submission EGO continuano a dipendere da OL-002, OL-003 e
-OL-005. Nessuna compatibilità aggiuntiva è dichiarata.
+repository and explicitly requested synchronization with the local project.
+This authorizes source commits and pushes, superseding the earlier postponement
+of remote publication. The hardware and GUI checks below remain open: releases
+and EGO submission still depend on OL-002, OL-003 and OL-005. No additional
+compatibility is claimed.
 
-## Punto di ripresa concordato — 28 ottobre 2026 (storico)
+## Agreed resumption point, October 28, 2026 (historical)
 
-Nota aggiornata con assistenza AI per uso personale.
+Note updated with AI assistance for personal use.
 
-Al momento del punto di ripresa non erano disponibili dispositivi collegati.
-Le prove hardware restano in attesa; l’inventario vuoto osservato non dimostra
-incompatibilità. Alla ripresa, seguire questa checklist:
+No connected devices were available at this checkpoint. Hardware checks were
+pending; the observed empty inventory did not demonstrate incompatibility.
+Use the following checklist when resuming.
 
-**Decisione del 28 ottobre, superata per i push dall’autorizzazione sopra:** i sorgenti e il commit Git locale possono
-essere preparati ora. Creazione del repository GitHub, push e release restano
-da fare soltanto dopo la verifica dell’estensione con dispositivi reali collegati,
-inclusi inventario/batteria e apertura della GUI descritti nei punti 1 e 2.
-Registrare qui e in `VERIFICATION.md` i risultati prima di riprendere il passaggio
-al remoto. La preparazione locale non autorizza la pubblicazione anticipata.
-Il 30 ottobre 2026 i punti 1 e 2 sono stati provati con dispositivi reali e sono
-chiusi solo in parte: restano il confronto numerico della batteria con la GUI e le
-prove con OpenLogi chiuso e minimizzato. La pubblicazione resta quindi rimandata.
+**October 28 decision, superseded for pushes by the authorization above:** source
+and a local Git commit could be prepared. Creating the GitHub repository,
+pushing and releasing were deferred until the extension had been checked with
+real connected devices, including inventory/battery and GUI opening in items
+1 and 2. Results were to be recorded here and in `VERIFICATION.md` before
+resuming remote publication. Local preparation did not authorize early
+publication. The October 30, 2026 checkpoint recorded items 1 and 2 as partly tested,
+with the numeric GUI battery comparison and closed/minimized OpenLogi checks
+still listed as pending. The updated checklist below records subsequent results.
 
-1. [x] Inventario reale osservato il 30 ottobre 2026: due dispositivi con
-   batteria nel menu, con GUI OpenLogi aperta sugli stessi due dispositivi.
-   Confronto numerico della batteria eseguito con la pagina dispositivo della
-   GUI: coerente. **Nota non bloccante:** la CLI riporta il nome esteso del
-   modello (`Wireless Mouse MX Master`, `MX Keys Wireless Keyboard`), la home
-   della GUI i nomi brevi (`MX Master`, `MX Keys`); non è un difetto.
-2. [x] Prima della disattivazione del click sulle righe, click e azione Apri
-   provati nella sessione reale: portano
-   **entrambi alla finestra generale**, come previsto da OL-001. **Parziale:**
-   mancano le prove dell’azione dedicata con OpenLogi chiuso e minimizzato e del
-   raggruppamento della finestra (OL-002).
-3. [x] Controllo aggiornato il 10 novembre 2026 sulla v0.9.0, ora installata:
-   sorgenti della release, documentazione CLI e launcher Linux non offrono
-   l’apertura della pagina dispositivo. Esiste la richiesta equivalente
-   [upstream #1375](https://github.com/AprilNEA/OpenLogi/issues/1375), ancora aperta.
-   Verifica dei sorgenti e del pacchetto installato, senza prova di apertura GUI.
-4. [ ] Se il limite persiste, preparare una richiesta upstream concreta per
-   identità pubblica stabile e azione di apertura della pagina dispositivo,
-   includendo gestione di GUI già avviata ed errori espliciti. La proposta non è
-   stata inviata; questa nota non autorizza l’invio.
-   Prima di inviare, coordinarsi con la richiesta equivalente #1375 già esistente.
-5. [ ] Integrare la selezione diretta solo dopo verifica dell’interfaccia pubblica.
-   Nel frattempo mantenere l’apertura generale e la puntina soltanto in memoria
-   (OL-001 e OL-004).
+1. [x] Real inventory observed on October 30, 2026: two devices with battery
+   readings in the menu, with the OpenLogi GUI open on those same devices.
+   Numeric comparison against the GUI's device page was consistent.
+   **Non-blocking note:** the CLI reports full model names
+   (`Wireless Mouse MX Master`, `MX Keys Wireless Keyboard`), while the GUI home uses short names
+   (`MX Master`, `MX Keys`). This is not a defect.
+2. [x] Before device row clicks were disabled, row clicks and the Open action
+   were tested in the real session: **both opened the general window**, as
+   expected under OL-001. **Partial:** the dedicated action still needs testing
+   with OpenLogi closed or minimized, along with window grouping (OL-002).
+3. [x] Review updated on November 10, 2026 against v0.9.0, now installed:
+   release source, CLI documentation and the Linux launcher do not offer direct
+   device-page opening. The equivalent [upstream issue #1375](https://github.com/AprilNEA/OpenLogi/issues/1375)
+   already exists and remains open. This was a source and installed-package
+   review, without a GUI launch test.
+4. [ ] If the limitation persists, prepare a concrete upstream request for a
+   stable public identity and an action to open a device page, including an
+   already-running GUI and explicit errors. No proposal has been sent; this
+   note does not authorize sending it. Coordinate with the existing equivalent
+   issue #1375 first.
+5. [ ] Integrate direct selection only after verifying the public interface.
+   Until then, keep general-window opening and session-only in-memory pins
+   (OL-001 and OL-004).
 
-## OL-001: apertura diretta della pagina dispositivo, requisito non soddisfatto
+## OL-001: direct device-page opening, requirement not met
 
-OpenLogi v0.8.18 non offre un’azione pubblica verificata per selezionare un
-dispositivo nella GUI. `brand.rs` definisce comandi generici `show` e
-`open-settings`, senza selezione dispositivo; `main.rs` registra `on_open_urls`
-ma questo non dimostra la registrazione Linux. Il file desktop non dichiara
-un protocol handler. Non vengono inventati deep link, flag o metodi D-Bus.
+OpenLogi v0.8.18 provides no verified public action for selecting a device in
+the GUI. `brand.rs` defines generic `show` and `open-settings` commands, without
+device selection. `main.rs` registers `on_open_urls`, but that does not prove
+Linux registration. The desktop file declares no protocol handler. No deep
+links, flags or D-Bus methods are invented.
 
-Ricontrollato il 10 novembre 2026 sulla
-[release v0.9.0](https://github.com/AprilNEA/OpenLogi/releases/tag/v0.9.0),
-identificata anche localmente da `openlogi --version` e RPM
-`openlogi-0.9.0-1.x86_64`. Il
-[vocabolario `DeeplinkCommand`](https://github.com/AprilNEA/OpenLogi/blob/v0.9.0/crates/openlogi-core/src/brand.rs)
-contiene ancora solo `show`, `open-settings`, `open-about`, `check-for-updates`
-e `quit`; il parser ignora path/query dei comandi riconosciuti. Non si può usare
-`show?device=…` per selezionare una periferica. Il
-[bootstrap GUI](https://github.com/AprilNEA/OpenLogi/blob/v0.9.0/crates/openlogi-desktop/src/main.rs)
-esce se esiste già un’istanza, senza inoltro della richiesta. Il
-[launcher Linux della release](https://github.com/AprilNEA/OpenLogi/blob/v0.9.0/packaging/linux/desktop/openlogi.desktop)
-e quello installato conservano `Exec=openlogi-desktop`, senza `%u`, MIME handler
-o azioni per dispositivo. La
-[richiesta equivalente #1375](https://github.com/AprilNEA/OpenLogi/issues/1375)
-risulta ancora aperta. Il limite resta confermato per questa release; nessuna
-prova di avvio reale della GUI è stata aggiunta.
+Rechecked on November 10, 2026 against
+[release v0.9.0](https://github.com/AprilNEA/OpenLogi/releases/tag/v0.9.0), also
+identified locally through `openlogi --version` and RPM
+`openlogi-0.9.0-1.x86_64`. The
+[`DeeplinkCommand` vocabulary](https://github.com/AprilNEA/OpenLogi/blob/v0.9.0/crates/openlogi-core/src/brand.rs)
+still contains only `show`, `open-settings`, `open-about`, `check-for-updates`
+and `quit`. Its parser ignores paths and queries for recognized commands;
+`show?device=…` cannot select a peripheral. The
+[GUI bootstrap](https://github.com/AprilNEA/OpenLogi/blob/v0.9.0/crates/openlogi-desktop/src/main.rs)
+exits when another instance exists, without forwarding the request. The
+[release's Linux launcher](https://github.com/AprilNEA/OpenLogi/blob/v0.9.0/packaging/linux/desktop/openlogi.desktop)
+and the installed launcher retain `Exec=openlogi-desktop`, without `%u`, a MIME
+handler or device actions. The [equivalent request #1375](https://github.com/AprilNEA/OpenLogi/issues/1375)
+remains open. The limitation is confirmed for this release; no new real GUI
+launch test was added.
 
-Il 10 novembre 2026 l’autore ha chiesto di disattivare il click sulle righe,
-perché l’apertura generale è fuorviante e ridondante rispetto all’azione dedicata.
-Le righe sono ora di sola consultazione, senza attivazione, focus o hover della
-riga; le puntine restano attive e raggiungibili da tastiera. I nomi accessibili
-descrivono soltanto dispositivo e stato, senza inviti alla selezione nell’app.
-L’azione **Mostra la finestra di OpenLogi** chiama il launcher `openlogi.desktop`
-e attiva una finestra esistente con `Main.activateWindow`, oppure ne avvia una
-con `Shell.App.activate()`. Apre sempre la **finestra generale**. Il pulsante a
-puntina modifica soltanto la visualizzazione del pannello.
+On November 10, 2026, the author requested disabling row clicks because general
+opening is misleading and redundant with the dedicated action. Rows now display
+information only, without row activation, focus or hover. Pin buttons remain
+active and keyboard-focusable. Row accessible names describe only the device
+and its state, without instructions to select it in the app.
+**Show OpenLogi window** calls the `openlogi.desktop` launcher and activates an
+existing window with `Main.activateWindow`, or starts one with
+`Shell.App.activate()`. It always opens the **general window**. Pin buttons
+change only what is displayed in the panel.
 
-**Promemoria concordato:** alle prossime release ricontrollare un’API pubblica
-per aprire la pagina del dispositivo e lo stato della
-[issue #1375](https://github.com/AprilNEA/OpenLogi/issues/1375), già esistente.
-Se il limite persiste, preparare un contributo alla richiesta esistente; creare
-una nuova issue solo se manca una richiesta pertinente. Riattivare il click
-solo dopo verifica dell’apertura contestuale su Linux, con GUI chiusa, aperta e
-minimizzata e gestione esplicita degli ID assenti/ambigui. Nessun messaggio
-upstream viene inviato in questa modifica.
+**Agreed reminder:** with future releases, recheck a public device-page opening
+API and the status of the existing [issue #1375](https://github.com/AprilNEA/OpenLogi/issues/1375).
+If the limitation persists, prepare a contribution to that request; create a
+new issue only if no relevant request exists. Re-enable row clicks only after
+verifying contextual opening on Linux with the GUI closed, open and minimized,
+and explicit handling of missing or ambiguous IDs. No upstream message is sent
+as part of this change.
 
-Evidenza storica del 30 ottobre 2026, precedente alla disattivazione del click:
-nella sessione reale con due dispositivi
-collegati, sia il click sulla riga sia l’azione di apertura hanno mostrato la
-finestra generale e non la pagina del dispositivo.
+Historical evidence from October 30, 2026, before row clicks were disabled:
+with two real connected devices, both the row click and the opening action
+showed the general window, not the device page.
 
-Proposta upstream, separata e non inviata: introdurre un’azione Linux pubblica e
-versionata `OpenDevice`, tramite desktop action/D-Bus o deep link registrato,
-con identità pubblica stabile del dispositivo e metodo di risoluzione alla route
-corrente. Un ID nullo/duplicato deve produrre un errore, mai selezionare la prima
-corrispondenza. GUI chiusa: avvio e applicazione della selezione dopo inventario
-pronto; GUI aperta/minimizzata: inoltro all’istanza esistente, selezione e focus.
-Il client deve poter distinguere successo, dispositivo assente/offline, identità
-ambigua e inventario non pronto. Evitare seriali in URL/log pubblici. Fino alla
-verifica di questa interfaccia, la selezione diretta resta non implementata.
+Separate, unsent upstream proposal: introduce a public, versioned Linux
+`OpenDevice` action through a desktop action, D-Bus or registered deep link,
+with a stable public device identity and a way to resolve its current route.
+A null or duplicate ID must produce an error, never select the first match.
+GUI closed: launch and apply selection after inventory becomes ready. GUI
+open/minimized: forward to the existing instance, select and focus. The client
+must distinguish success, absent/offline device, ambiguous identity and
+inventory not ready. Avoid serial numbers in public URLs/logs. Direct selection
+remains unimplemented until this interface is verified.
 
-## OL-002: periferiche reali e integrazione con la GUI OpenLogi
+## OL-002: real peripherals and OpenLogi GUI integration
 
-Prima osservazione con dispositivi reali il 30 ottobre 2026: inventario `ready`
-con due dispositivi connessi (mouse e tastiera), batteria e stato di ricarica
-mostrati correttamente nel menu; nessun errore nel log della Shell. Evidenze in
+First real-device observation on October 30, 2026: a `ready` inventory with two
+connected devices (mouse and keyboard), battery and charging state displayed
+correctly in the menu, and no errors in the Shell log. Evidence is in
 `assets/screenshots/`.
 
-Chiuso il 30 ottobre 2026: **confronto numerico della batteria** con la pagina
-dispositivo di OpenLogi, coerente con la riga del menu (la home della GUI non
-espone la percentuale). Osservato anche il caso reale «Battery unavailable ·
-Charging» senza lettura: prima della correzione la puntina spariva, ora resta
-fissabile e il pannello mostra l’icona del tipo.
+Closed on October 30, 2026: the **numeric battery comparison** with OpenLogi's
+device page matched the menu row; the GUI home does not expose the percentage.
+The real case `Battery unavailable · Charging`, without a reading, was also
+observed. Before the fix the pin disappeared; the device now remains pinnable
+and the panel shows its kind icon.
 
-Limiti residui:
+Remaining limitations:
 
-- Nomi: la CLI espone il nome esteso del modello, la home della GUI il nome
-  commerciale breve. Il companion non rinomina nulla e non deduce alias.
-- Avvio della GUI: provati solo con OpenLogi già aperto. Restano chiuso,
-  minimizzato e raggruppamento finestra (GPUI reale, `StartupWMClass`).
-- Altri modelli (es. G515, Keys-To-Go 2) non sono disponibili all’autore: sono
-  periferiche di terzi, quindi nessuna compatibilità è dichiarata e la loro
-  verifica non è un requisito di pubblicazione.
-- Non sono state avviate GUI reali o installate estensioni nella sessione host
-  durante le build; la prova reale è stata fatta dall’autore.
+- Names: the CLI exposes the full model name; the GUI home uses the short trade
+  name. The companion neither renames devices nor infers aliases.
+- GUI launch: tested only with OpenLogi already open. Closed, minimized and
+  window grouping remain to be checked (real GPUI, `StartupWMClass`).
+- Other models, such as G515 and Keys-To-Go 2, are not available to the author.
+  They belong to others, so compatibility is not claimed and testing them is
+  not a publication requirement.
+- Builds did not launch real GUIs or install extensions in the host session.
+  The real-device test was performed by the author.
 
-Il percorso Shell di avvio/attivazione è testato con un’app GTK sintetica e il
-medesimo desktop ID/StartupWMClass in una sessione separata. Non è una prova di
-OpenLogi GPUI.
+The Shell launch/activation path is tested using a synthetic GTK app with the
+same desktop ID/StartupWMClass in a separate session. This does not test OpenLogi
+GPUI.
 
-Per chiudere il punto, dopo installazione esplicita del companion:
+To close this item, after explicitly installing the companion:
 
 ```bash
 openlogi --version
@@ -150,99 +146,98 @@ gnome-extensions info openlogi-companion@giaffa86
 journalctl --user -b -o cat /usr/bin/gnome-shell
 ```
 
-Non condividere l’output dell’inventario senza oscurare gli ID. Con dispositivi
-reali connessi, confrontare nomi, connessione e batteria con OpenLogi, quindi
-provare l’azione **Mostra la finestra di OpenLogi** con app chiusa/aperta/minimizzata.
-Verificare che apra la finestra generale e richieda ancora la selezione manuale;
-il click sulle righe deve restare senza effetto, con puntine funzionanti. Provare
-riavvio della sola estensione con richieste pendenti, senza fermare l’agent.
-Non usare `openlogi list` per aggirare l’assenza dell’inventario.
+Do not share inventory output without redacting IDs. With real devices
+connected, compare names, connection state and battery with OpenLogi, then test
+**Show OpenLogi window** with the app closed, open and minimized. Check that it
+opens the general window and still requires manual device selection. Row clicks
+must have no effect while pins keep working. Restart only the extension with
+requests pending, without stopping the agent. Do not use `openlogi list` to
+bypass missing inventory.
 
-## OL-005: blocchi per una eventuale submission EGO
+## OL-005: blockers for a possible EGO submission
 
-Ricognizione del 30 ottobre 2026 sulle
-[review guidelines](https://gjs.guide/extensions/review-guidelines/review-guidelines.html).
-Lavori preparatori eseguiti; release e submission EGO restano rimandate alle
-verifiche di OL-002 e OL-003. Il repository pubblico è stato creato dall’autore
-il 10 novembre 2026, con sincronizzazione dei sorgenti autorizzata.
+Review of the [review guidelines](https://gjs.guide/extensions/review-guidelines/review-guidelines.html)
+on October 30, 2026. Preparation is complete; releases and EGO submission remain
+deferred pending OL-002 and OL-003. The author created the public repository on
+November 10, 2026 and authorized source synchronization.
 
-- **Avviso AI negli header.** Risolto il 30 ottobre 2026: gli header dei file
-  contengono solo `SPDX-License-Identifier: GPL-3.0-or-later`. La provenienza AI
-  resta documentata in `README.md`, `AI_REVIEW_GUIDELINES.md` e `docs/`. Resta a
-  carico dell’autore poter spiegare e mantenere il codice: le linee guida
-  respingono comunque le submission non giustificabili.
-- **`metadata.json`.** Sistemato: `version` rimosso, `url` aggiunto
-  (`https://github.com/giaffa86/openlogi-companion`) e `description` estesa con
-  requisiti, sola lettura, apertura generale e indipendenza. Il repository
-  pubblico esiste ed è accessibile dal 10 novembre 2026; l’URL è verificato.
-  `tests/check-package.py` rifiuta un bundle con `version` o senza `url` https.
-- **Necessità del subprocess.** Non eliminabile con i vincoli attuali: l’unica
-  interfaccia pubblica documentata è `openlogi api devices`. Sono esclusi per
-  regola di progetto IPC interno, HID diretto, `openlogi list`, daemon aggiuntivi
-  e lettura di `config.toml`. La motivazione da usare nella submission è in
-  `README.md` e in questo file: CLI ufficiale in sola lettura, argv fisso, nessuna
-  shell, timeout, limiti, cancellazione e reaping.
-- **Marchio.** Chiarito il 30 ottobre 2026: dichiarazione di indipendenza nella
-  `description` di `metadata.json`, in `README.md` (sezione «Marchi e
-  indipendenza») e nella nota privata `private/ego-subprocess.md`. Il marchio è
-  originale, e nel bundle non ci sono media di terzi. **Aperto:** la scelta del
-  nome resta dell’autore. Le linee guida EGO elencano «nomi di marchio» fra i
-  contenuti protetti privi di permesso: `OpenLogi Companion` può quindi essere
-  contestato in review. Alternative pronte, da usare solo se richiesto: nome
-  neutro (es. «Wireless Peripheral Battery») con OpenLogi citato nella sola
-  descrizione.
-- **Icona della scheda EGO.** Pronta: `assets/ego/icon-256.png` e `icon-128.png`,
-  piastra scura arrotondata con emblema chiaro per restare leggibili su schede
-  chiare e scure, rigenerabili con `scripts/make-ego-icon.py`. Si caricano dal
-  modulo web, non dallo ZIP. Resta da valutarne la resa sulla scheda reale dopo
-  l’upload.
-- **Screenshot.** `assets/screenshots/menu-devices.png` è pronto; conviene
-  ricatturare a ≥1200 px di larghezza. `openlogi-gui-home.png` non va caricato.
-- **File non necessari.** Le regole EGO elencano `.po`, `.pot`, script di build e
-  media inutilizzati: lo ZIP attuale contiene solo runtime, icona, schema,
-  catalogo compilato e `LICENSE`, quindi è già conforme su questo punto.
-- **Lingua.** Inglese come sorgente, italiano come catalogo compilato; le altre
-  lingue cadono sull’inglese. Un eventuale portale di traduzione EGO lavora sui
-  sorgenti del repository, non sullo ZIP.
-- **Accessibilità.** Restano le prove con lettore di schermo e i DPI frazionari
-  descritti in OL-003.
+- **AI notices in headers.** Resolved on October 30, 2026: file headers contain
+  only `SPDX-License-Identifier: GPL-3.0-or-later`. AI provenance remains in
+  `README.md`, `AI_REVIEW_GUIDELINES.md` and `docs/`. The author must still be
+  able to explain and maintain the code; the guidelines also reject submissions
+  that cannot be justified.
+- **`metadata.json`.** Fixed: `version` removed, `url` added
+  (`https://github.com/giaffa86/openlogi-companion`), and `description` expanded
+  with requirements, read-only behavior, general opening and independence.
+  The public repository has existed and been accessible since November 10,
+  2026; its URL is verified. `tests/check-package.py` rejects a bundle with
+  `version` or without an HTTPS `url`.
+- **Subprocess requirement.** Cannot be removed under the current constraints:
+  the only documented public interface used is `openlogi api devices`. Project
+  rules exclude internal IPC, direct HID, `openlogi list`, additional daemons
+  and reading `config.toml`. The submission rationale is in `README.md` and here:
+  official read-only CLI, fixed arguments, no shell, timeout, limits,
+  cancellation and reaping.
+- **Branding.** Clarified on October 30, 2026: independence statement in the
+  `metadata.json` description, the README's “Trademarks and independence” section
+  and the private note `private/ego-subprocess.md`. The mark is original; the
+  bundle contains no third-party media. **Open:** the name remains the author's
+  choice. EGO guidelines list trademarked names among protected content without
+  permission, so `OpenLogi Companion` may be challenged during review.
+  Alternatives are ready if requested: a neutral name such as “Wireless
+  Peripheral Battery”, mentioning OpenLogi only in the description.
+- **EGO listing icon.** Ready: `assets/ego/icon-256.png` and `icon-128.png`,
+  a light emblem on a rounded dark background, readable on light and dark
+  listings. Regenerate with `scripts/make-ego-icon.py`. Upload through the web
+  form, separately from the ZIP. Appearance on the actual listing still needs
+  evaluation after upload.
+- **Screenshots.** `assets/screenshots/menu-devices.png` is ready; recapturing
+  at a width of at least 1200 px is preferable. Do not upload
+  `openlogi-gui-home.png`.
+- **Unnecessary files.** EGO rules list `.po`, `.pot`, build scripts and unused
+  media. The current ZIP contains only runtime files, the icon, schema, compiled
+  catalogue and `LICENSE`, meeting this requirement.
+- **Language.** English source strings, compiled Italian catalogue; other
+  languages fall back to English. A future EGO translation portal would work
+  on repository source, not the ZIP.
+- **Accessibility.** Screen reader and fractional-DPI checks in OL-003 remain open.
 
-## OL-003: accessibilità e layout residui
+## OL-003: remaining accessibility and layout checks
 
-Coperto dai test automatici nella Shell isolata: focus programmatico delle righe,
-nomi accessibili, troncamento, scrolling, 200 dispositivi, temi chiaro/scuro,
-scala testo 1 e 1,5 su monitor virtuale 1280×720, conservazione di focus e
-scorrimento durante il refresh live a menu aperto.
+Automated coverage in the isolated Shell includes programmatic row focus,
+accessible names, truncation, scrolling, 200 devices, light/dark themes, text
+scales 1 and 1.5 on a virtual 1280×720 monitor, and preserved focus/scroll during
+live menu refresh. With read-only rows, focus is now tested on pin buttons.
 
-Le tacche e le puntine multiple aggiunte il 10 novembre 2026 sono verificate
-soltanto con backend sintetico. Restano da osservare con dispositivi reali,
-insieme alla leggibilità delle tacche a DPI frazionari e su monitor diversi.
-I valori restano disponibili nei nomi accessibili, ma ciò non sostituisce la
-prova con lettore di schermo.
+Battery bars and multiple pins added on November 10, 2026 have been tested only
+with a synthetic backend. They still need observation with real devices,
+including bar readability at fractional DPI and on different monitors. Values
+remain available in accessible names, which does not replace a screen reader
+test.
 
-**Non coperto — test manuali rimandati dall’autore**, che li eseguirà con la
-checklist locale non versionata `private/accessibility-tests.md`: lettore di
-schermo (Orca), navigazione fisica Tab/frecce, interazione touch, DPI frazionari,
-multi-monitor e monitor molto piccoli. Il bus AT-SPI nella sessione isolata ha
-segnalato `Permission denied`; non dimostra incompatibilità, ma la prova con il
-lettore di schermo resta assente e non va considerata coperta.
+**Not covered, manual tests deferred by the author:** the local, unversioned
+`private/accessibility-tests.md` checklist covers a screen reader (Orca),
+physical Tab/arrow navigation, touch, fractional DPI, multiple monitors and
+very small displays. AT-SPI reported `Permission denied` in the isolated
+session. This does not demonstrate incompatibility, but screen reader coverage
+is still absent and must not be claimed.
 
-## OL-004: identità e copertura API
+## OL-004: identity and API coverage
 
-Nessun favorito persistente fino a un’identità pubblica stabile verificata.
-ID opachi attuali soltanto in memoria; se mancanti o duplicati non si può fissare
-il dispositivo nel pannello. La puntina non richiede una lettura di batteria
-valida: un dispositivo online con supporto batteria resta fissabile anche senza
-percentuale, e il pannello mostra almeno l’icona del tipo. Non si deduplicano le
-righe. I cambi della route richiedono una nuova scelta. Non è possibile ricostruire in modo affidabile la stessa periferica
-fisica da nomi o ID riutilizzati dall’upstream.
+No persistent favorites until a stable public identity is verified. Current
+opaque IDs stay in memory only. Missing or duplicate IDs prevent panel pinning.
+A pin does not require a valid battery reading: an online device with battery
+support remains pinnable without a percentage, and the panel shows at least
+its kind icon. Rows are not deduplicated. Route changes require a new selection.
+The same physical device cannot reliably be reconstructed from names or IDs
+reused by upstream.
 
-Si possono fissare più dispositivi indipendenti nella stessa sessione. La perdita
-di un ID valido rimuove soltanto la puntina interessata; errore, scansione o
-disabilitazione azzerano tutte le scelte. Né le puntine né i relativi ID vengono
-salvati in GSettings: la nuova chiave `battery-bar` riguarda soltanto la resa UI.
+Multiple devices can be pinned independently in the same session. Loss of a
+valid ID removes only the affected pin; errors, scanning or disabling clear
+all selections. Neither pins nor their IDs are stored in GSettings. The new
+`battery-bar` key controls UI rendering only.
 
-L’API inventario della release include luci ma non webcam. Non implementati
-sottoscrizione eventi, notifiche batteria, controlli hardware o modifica profili.
-Il profilo corrente della CLI deve coincidere con quello dell’agent; il companion
-non legge o cambia configurazioni private per forzarne la corrispondenza.
+The release's inventory API includes lights but not webcams. Event
+subscriptions, battery notifications, hardware controls and profile changes
+are not implemented. The CLI's current profile must match the agent's; the
+companion does not read or change private configuration to force a match.

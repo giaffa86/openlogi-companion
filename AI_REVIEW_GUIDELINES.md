@@ -1,37 +1,38 @@
-# Revisione per uso personale
+# Review for personal use
 
-Riferimenti ufficiali consultati il 28 ottobre 2026:
+Official references consulted on October 28, 2026:
 
 - https://gjs.guide/extensions/review-guidelines/review-guidelines.html
 - https://gjs.guide/extensions/review-guidelines/best-practices.html
 
-Conservare la provenienza AI, ma solo nella documentazione di progetto. I file
-sorgente e di runtime portano esclusivamente l’SPDX `GPL-3.0-or-later`: le
+Keep AI provenance in project documentation only. Source and runtime files
+carry only the `GPL-3.0-or-later` SPDX identifier. The
 [review guidelines](https://gjs.guide/extensions/review-guidelines/review-guidelines.html)
-indicano come motivi di rifiuto i «commenti che sembrano prompt LLM o altre
-indicazioni di output AI». L’autore resta responsabile della comprensione e della
-manutenzione del JavaScript: nessuna submission senza questa revisione.
+list comments resembling LLM prompts or other indications of AI output as
+reasons for rejection. The author remains responsible for understanding and
+maintaining the JavaScript; do not submit without this review.
 
-Lo ZIP non contiene avvisi AI, prompt, note di provenienza o documentazione:
-`README.md`, questo file e `docs/` restano nel repository e non nel bundle.
-Le precedenti review locali suggeriscono di
-verificare API, cleanup e semplicità, non di nascondere la provenienza del codice
-al repository.
+The ZIP contains no AI notices, prompts, provenance notes or documentation.
+`README.md`, this file and `docs/` stay in the repository, outside the bundle.
+Previous local reviews recommend checking APIs, cleanup and simplicity, while
+keeping code provenance documented in the repository.
 
-Controllare prima di ogni consegna:
+Check before every delivery:
 
-1. API reali GNOME 50, niente compatibilità speculativa o metodi inventati.
-2. Niente flag lifecycle `_enabled`/`_destroyed` o optional call su API garantite.
-3. Catch solo ai confini che possono fallire: spawn/letture/wait, JSON, avvio GUI.
-   I fallimenti dati hanno codici locali, senza log dei messaggi upstream.
-4. Timer rimossi accanto alla sostituzione; cancellabili, segnali e processi
-   liberati dal proprietario. Non terminare GUI o agent durante disable.
-5. Risposte obsolete invalidate prima della distruzione degli actor.
-6. ZIP con elenco esplicito, directory dei moduli conservate, licenza e schema XML.
-7. Test GJS e Shell separati dai test hardware reali; limiti dichiarati.
+1. Use real GNOME 50 APIs, without speculative compatibility or invented methods.
+2. No `_enabled`/`_destroyed` lifecycle flags or optional calls to guaranteed APIs.
+3. Catch only at fallible boundaries: spawn, reads, wait, JSON and GUI launch.
+   Data failures use local codes, without logging upstream messages.
+4. Remove timers alongside their replacement. Their owner releases cancellables,
+   signals and processes. Do not terminate the GUI or agent on disable.
+5. Invalidate stale responses before destroying actors.
+6. Build the ZIP from an explicit file list, preserving module directories,
+   license and schema XML.
+7. Keep GJS and Shell tests separate from real hardware checks; state limitations.
 
-Shexli 0.2.1 sul pacchetto ha dato zero finding, errori e warning. La mancanza di
-`manual_review` non evita la revisione umana dei subprocessi: l’unica esecuzione
-runtime è la CLI ufficiale in lettura con argv fisso, limiti, timeout e reaping.
-Gli argv configurabili nel costruttore del provider servono ai test; non sono
-esposti da preferenze o input del menu. Nessun `sh -c` o interpolazione di nomi.
+Shexli 0.2.1 reported zero findings, errors and warnings on the package. The
+absence of `manual_review` does not remove the need for human subprocess
+review. The only runtime execution is the official read-only CLI, with fixed
+arguments, limits, timeout and reaping. Configurable constructor arguments in
+the provider exist for tests; they are not exposed through preferences or menu
+input. No `sh -c` or interpolation of device names.

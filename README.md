@@ -1,251 +1,255 @@
 # OpenLogi Companion
 
-Companion indipendente per GNOME Shell 50: un indicatore mostra i dispositivi
-restituiti dall’agent [OpenLogi](https://github.com/AprilNEA/OpenLogi) e la loro
-batteria. Progetto sperimentale nato per uso personale, indipendente da OpenLogi.
-Licenza [GPL-3.0-or-later](LICENSE).
+An independent companion for GNOME Shell 50: a panel indicator shows the devices
+reported by the [OpenLogi](https://github.com/AprilNEA/OpenLogi) agent and their
+battery levels. An experimental project created for personal use, independent
+of OpenLogi. Licensed under [GPL-3.0-or-later](LICENSE).
 
-Il marchio è un mouse dentro un cerchio aperto. Il pannello usa una
-[icona SVG simbolica](icons/openlogi-companion-symbolic.svg) che segue il tema
-GNOME; [logo trasparente e provenienza AI](assets/branding/README.md) sono
-conservati separatamente dal pacchetto runtime. L’[icona quadrata per la pagina
-EGO](assets/ego/README.md) è generata dallo stesso marchio.
+The project mark is a mouse inside an open circle. The panel uses a
+[symbolic SVG icon](icons/openlogi-companion-symbolic.svg) that follows the GNOME
+theme; the [transparent logo and AI provenance](assets/branding/README.md) are
+kept outside the runtime package. The [square EGO listing icon](assets/ego/README.md)
+is generated from the same mark.
 
-**Stato sperimentale:** i test automatici usano dispositivi sintetici. Sono stati
-osservati due dispositivi reali (MX Master e MX Keys) con inventario, batteria e
-confronto della percentuale con la pagina dispositivo di OpenLogi. Restano da
-provare l’apertura della GUI con app chiusa/minimizzata e le verifiche di
-accessibilità. Altri modelli non sono disponibili all’autore e non sono
-dichiarati compatibili. È supportata soltanto GNOME Shell 50.
+**Experimental status:** automated tests use synthetic devices. Two real devices
+(MX Master and MX Keys) have been observed, including inventory, battery readings
+and a percentage comparison with OpenLogi's device page. Launching the GUI when
+closed or minimized and accessibility checks remain untested. Other models are
+not available to the author and are not claimed to be compatible. Only GNOME
+Shell 50 is supported.
 
-La pubblicazione su extensions.gnome.org è pianificata ma **subordinata** alle
-verifiche residue elencate in [OPEN_ITEMS.md](docs/OPEN_ITEMS.md) (OL-002,
-OL-003, OL-005); i commit locali e la creazione del repository remoto la
-precedono.
+Publication on extensions.gnome.org is planned but **depends on** the remaining
+checks in [OPEN_ITEMS.md](docs/OPEN_ITEMS.md) (OL-002, OL-003, OL-005). Local
+commits and the remote source repository precede that step.
 
-Il [repository dei sorgenti](https://github.com/giaffa86/openlogi-companion)
-è pubblico su autorizzazione dell’autore del 10 novembre 2026. Questa scelta
-non chiude le verifiche residue né anticipa release o submission EGO; vedere
-[limiti e punto di ripresa](docs/OPEN_ITEMS.md).
+The [source repository](https://github.com/giaffa86/openlogi-companion) is public
+with the author's authorization of November 10, 2026. This does not close the
+remaining checks or authorize an early release or EGO submission; see the
+[limitations and resumption checklist](docs/OPEN_ITEMS.md).
 
-**Le righe dei dispositivi sono di sola consultazione; le puntine restano attive.**
-L’azione **Mostra la finestra di OpenLogi** apre/attiva la finestra generale;
-la pagina del dispositivo va selezionata nell’app.
-Il controllo dei sorgenti è stato aggiornato alla v0.9.0 il 10 novembre 2026:
-non è stata individuata un’azione pubblica supportata per questa selezione. Vedi
-[limiti e proposta upstream](docs/OPEN_ITEMS.md).
+**Device rows display information only; pin buttons remain active.**
+**Show OpenLogi window** opens or activates the general window; select the device
+page inside the app. The source review was updated to v0.9.0 on November 10,
+2026: no supported public action for selecting a device was found. See the
+[limitations and upstream proposal](docs/OPEN_ITEMS.md).
 
-## Marchi e indipendenza
+## Trademarks and independence
 
-Il progetto è indipendente: nessuna affiliazione, sponsorizzazione o approvazione
-da parte di OpenLogi, Logitech o del GNOME Project. “OpenLogi” è usato solo in
-senso descrittivo, per indicare l’app di cui l’estensione legge l’inventario, e
-compare anche nel nome scelto dall’autore per riconoscibilità.
+This project is independent, with no affiliation, sponsorship or endorsement
+from OpenLogi, Logitech or the GNOME Project. “OpenLogi” is used descriptively to
+identify the app whose inventory the extension reads, and appears in the name
+chosen by the author to make the companion recognizable.
 
-- Il marchio (mouse in un cerchio aperto) è originale, generato con assistenza
-  AI; non riproduce loghi Logitech, OpenLogi o GNOME.
-- Nel repository e nel bundle non ci sono loghi, icone, screenshot o altri
-  media di terzi. `LICENSE` è il solo testo di terzi distribuito.
-- I nomi commerciali dei dispositivi (`MX Master`, `MX Keys`, …) arrivano a
-  runtime dalla CLI di OpenLogi e non sono inclusi nel pacchetto.
-- La scheda EGO userà la stessa dichiarazione di indipendenza della
-  `description` in `metadata.json`.
+- The original mark, a mouse inside an open circle, was generated with AI
+  assistance. It does not reproduce Logitech, OpenLogi or GNOME logos.
+- The runtime bundle contains no third-party logos, icons, screenshots or
+  other media. The repository keeps an OpenLogi GUI screenshot only as
+  verification evidence, not for promotional use or EGO upload. `LICENSE` is
+  the only third-party text distributed.
+- Device trade names (`MX Master`, `MX Keys`, etc.) come from the OpenLogi CLI at
+  runtime and are not included in the package.
+- The EGO listing will use the same independence statement as the `description`
+  in `metadata.json`.
 
-## Requisiti e comportamento
+## Requirements and behavior
 
-Fedora, GNOME Shell 50, GJS, OpenLogi RPM con CLI `openlogi api devices`,
-agent raggiungibile nello stesso profilo della CLI e launcher `openlogi.desktop`.
-Contratto verificato sul tag OpenLogi v0.8.18, schema JSON 1; la CLI reale
-osservata il 30 ottobre 2026 è `openlogi 0.8.19`, che ha risposto con schema 1. Nessuna promessa
-per tutti i dispositivi visibili nella GUI: l’inventario API include luci senza
-batteria, ma non webcam. Osservati due dispositivi reali (MX Master e MX Keys);
-G515 e Keys-To-Go 2 non sono stati provati.
+Fedora, GNOME Shell 50, GJS, the OpenLogi RPM with its `openlogi api devices` CLI,
+an agent reachable under the same profile as the CLI, and the `openlogi.desktop`
+launcher are required. The contract was checked against OpenLogi tag v0.8.18,
+JSON schema 1. The real CLI observed on October 30, 2026 was `openlogi 0.8.19`,
+which returned schema 1. There is no compatibility promise for every device
+visible in the GUI: the API inventory includes lights without batteries, but
+not webcams. Two real devices have been observed (MX Master and MX Keys);
+G515 and Keys-To-Go 2 have not been tested.
 
-L’indicatore parte con la sola icona. In **Preferenze dell’estensione** si può
-mostrare nel pannello più dispositivi fissati: ciascuno con icona del tipo (mouse,
-tastiera, …​) e batteria propria. La preferenza **Mostra la batteria a tacca**
-alterna la percentuale numerica (predefinita) con una barra verticale proporzionale
-alla lettura: verde sopra il 20%, ambra fino al 20%, rossa fino al 10%.
-Lo 0% mostra la traccia vuota; senza percentuale non compare alcuna tacca e non
-si deduce un valore dal livello qualitativo. Il menu e il nome accessibile
-mantengono il dettaglio della batteria anche in modalità tacca.
-Il pulsante a puntina di ogni riga aggiunge o rimuove quel solo dispositivo,
-senza sostituire gli altri; l’ordine nel pannello segue quello delle puntine.
-Per fissare un dispositivo serve un ID attualmente univoco su
-un dispositivo online con supporto batteria; **non** serve una lettura valida,
-quindi un dispositivo in carica senza percentuale resta fissabile e nel pannello
-mostra almeno la sua icona. Con la preferenza **Nascondi l’icona dell’estensione
-quando ci sono dispositivi fissati** il marchio del companion lascia il posto
-ai dispositivi fissati, riconoscibili dalla propria icona di tipo.
-Non viene calcolata una media. ID null/duplicati non impediscono la visualizzazione
-delle righe, ma impediscono la scelta nel pannello. Le scelte restano in memoria:
-scomparsa, disconnessione, ID ambiguo o perdita del supporto batteria rimuovono
-solo la puntina interessata; errore, nuova scansione o disabilitazione le rimuovono tutte.
-Non è un’identità hardware persistente: non sopravvive a cambi della route.
+The indicator initially shows only the extension icon. In **Extension
+preferences**, you can show multiple pinned devices in the panel, each with its
+own kind icon (mouse, keyboard, etc.) and battery reading. **Show battery as a
+bar** switches between a numeric percentage (the default) and a proportional
+vertical bar: green above 20%, amber at 20% or below, red at 10% or below.
+`0%` shows an empty track. A missing percentage produces no bar; qualitative
+levels are never converted into a made-up value. The menu and accessible names
+retain the battery details in bar mode.
 
-Aggiornamento all’abilitazione, all’apertura del menu e con **Aggiorna**. Mentre
-il menu è aperto il polling è di 5 secondi, così batteria e connessione cambiano
-senza chiudere il pannello; dopo errori il ritardo sale a 10, 20, 40 e massimo 60
-secondi. A menu chiuso l’unico timer è quello della preferenza: con i dispositivi
-consentiti nel pannello, polling ogni 60 secondi anche prima della scelta, con ritardo crescente
-120, 240, 480 e massimo 900 secondi dopo errori. Richieste contemporanee vengono
-accorpate. Senza menu aperto e senza la preferenza non ci sono timer di polling.
+Each row's pin button adds or removes that device independently. Panel order
+follows pin selection order. Pinning requires a currently unique ID and an
+online device with battery support; it does **not** require a valid reading.
+A charging device without a percentage can therefore remain pinned and shows
+at least its kind icon. **Hide the extension icon when devices are pinned** lets
+the pinned devices replace the companion mark, while their kind icons identify
+them.
 
-La preferenza **Nascondi l’icona dell’estensione quando ci sono dispositivi
-fissati** toglie il marchio solo quando almeno un dispositivo fissato viene
-effettivamente mostrato: restano le icone dei tipi e le rispettive batterie.
-Se nessun dispositivo fissato è mostrato (puntine assenti, preferenza disattivata,
-righe ambigue, dispositivi offline o inventario non pronto) il marchio riappare,
-quindi il pannello non può mai diventare un pulsante vuoto.
+No average is calculated. Null or duplicate IDs do not hide inventory rows,
+but prevent panel selection. Selections stay in memory: disappearance,
+disconnection, an ambiguous ID or loss of battery support removes only the
+affected pin. An error, a new scan or disabling the extension clears all pins.
+These are not persistent hardware identities; selections do not survive route
+changes.
 
-Le stringhe sono in inglese nel sorgente e tradotte in italiano tramite
-`po/it.po`; il bundle include solo il catalogo compilato in
-`locale/it/LC_MESSAGES/openlogi-companion.mo`, nel percorso atteso da
-`gettext-domain`. Ogni altra lingua usa l’inglese. Il controllo in
-`scripts/verify.sh` verifica che il catalogo compilato si carichi davvero e che
-template e traduzione restino allineati.
+Data refreshes when the extension is enabled, when the menu opens and through
+**Refresh**. While the menu is open, polling runs every 5 seconds, so battery
+and connection changes appear without closing it. After errors, the delay rises
+to 10, 20, 40 and at most 60 seconds. With the menu closed, only the panel
+preference enables polling: every 60 seconds, even before a device is selected,
+with delays of 120, 240, 480 and at most 900 seconds after errors. Concurrent
+requests are coalesced. With the menu closed and the preference off, there are
+no polling timers.
 
-I dispositivi connessi precedono gli altri, poi segue il nome secondo la locale.
-Le righe restano distinte anche per nomi o ID uguali. Le righe immutate vengono
-riutilizzate per conservare il focus. La lista scorre, i nomi lunghi sono troncati,
-lo stile e il focus usano il tema Shell. Stringhe inglesi traducibili e catalogo
-italiano incluso; le percentuali seguono la locale.
+**Hide the extension icon when devices are pinned** hides the mark only while
+at least one pinned device is actually shown. Kind icons and individual battery
+readings remain. If no pinned device is shown (no pins, the panel preference is
+off, ambiguous rows, offline devices or inventory not ready), the mark returns,
+so the panel button is never empty.
 
-Gli stati di caricamento, scansione, inventario indisponibile, nessun dispositivo,
-CLI assente, agent irraggiungibile, incompatibilità e dati invalidi sono distinti.
-Solo `ready` vuoto significa nessun dispositivo. Durante scansione o errore le
-righe precedenti vengono rimosse. Una periferica offline non mostra la vecchia
-batteria come attuale. Valori mancanti non diventano zero; i livelli qualitativi
-non diventano percentuali. Nessuna notifica duplicata di batteria scarica.
+Source UI strings are English, translated into Italian through `po/it.po`. The
+bundle includes only the compiled catalogue at
+`locale/it/LC_MESSAGES/openlogi-companion.mo`, the path expected by
+`gettext-domain`. Other languages fall back to English. `scripts/verify.sh`
+checks that the catalogue loads and that the template and translation stay in
+sync.
 
-## Installazione locale
+Connected devices appear first, then names are sorted according to the locale.
+Rows stay separate even when names or IDs match. Unchanged rows are reused to
+preserve focus. The list scrolls, long names are truncated, and styling and
+focus indicators follow the Shell theme. Percentages follow the locale.
 
-Scaricare o clonare il repository e aprire un terminale nella sua directory radice
-(quella che contiene `metadata.json`). Tutti i comandi seguenti partono da lì.
-Per compilare traduzioni/schema servono `msgfmt` e `glib-compile-schemas`
-(su Fedora, forniti da `gettext` e `glib2`).
+Loading, scanning, unavailable inventory, no devices, missing CLI, unreachable
+agent, incompatibility and invalid data are distinct states. Only an empty
+`ready` inventory means no devices. Scanning and errors remove previous rows.
+An offline device never presents its old battery reading as current. Missing
+values do not become zero; qualitative levels do not become percentages. The
+extension does not duplicate low-battery notifications.
+
+## Local installation
+
+Download or clone the repository and open a terminal at its root, containing
+`metadata.json`. All commands below run from that directory. Compiling
+translations and schemas requires `msgfmt` and `glib-compile-schemas` (provided
+by `gettext` and `glib2` on Fedora).
 
 ```bash
 ./scripts/sync-extension.sh
 gnome-extensions enable openlogi-companion@giaffa86
 ```
 
-Lo script copia esclusivamente i file runtime e compila lo schema nel target
+The script copies only runtime files and compiles the schema in
 `~/.local/share/gnome-shell/extensions/openlogi-companion@giaffa86/`.
-Non esegue reload, installazioni di pacchetti o comandi sudo. La prima installazione
-può richiedere logout/login; su Wayland la cache dei moduli può richiederlo anche
-dopo modifiche. La sessione non viene interrotta automaticamente.
+It does not reload the extension, install packages or run sudo commands. The
+first installation may require logout/login; Wayland's module cache may also
+require it after changes. The script never interrupts the session automatically.
 
-In alternativa, generare e installare il pacchetto locale; per crearlo serve
-anche `zip` e, per verificarne il contenuto, Python 3:
+Alternatively, build and install the local package. Creating it also requires
+`zip`, and checking its contents requires Python 3:
 
 ```bash
 ./scripts/package.sh
 gnome-extensions install --force dist/openlogi-companion@giaffa86.shell-extension.zip
 ```
 
-Il bundle conserva `shell/`, schema XML, catalogo italiano e licenza; lo schema
-compilato è escluso (compilato dall’installer delle estensioni). Non contiene
-prompt, test, script, documentazione di lavoro o dati personali.
+The bundle preserves `shell/`, the schema XML, Italian catalogue and license.
+The compiled schema is excluded and is built by the extension installer. The
+bundle contains no prompts, tests, scripts, working documentation or personal
+data.
 
-Rimozione del solo companion:
+To remove only the companion:
 
 ```bash
 gnome-extensions disable openlogi-companion@giaffa86
 gnome-extensions uninstall openlogi-companion@giaffa86
 ```
 
-Queste operazioni non disinstallano OpenLogi, non fermano l’agent e non cancellano
-configurazioni hardware. Per una copia manuale non registrata nell’installer,
-rimuovere esclusivamente la directory utente dell’UUID sopra indicato dopo averla
-disabilitata.
+These operations do not uninstall OpenLogi, stop its agent or delete hardware
+configuration. For a manual copy not registered with the installer, disable it
+and remove only the user extension directory for the UUID shown above.
 
-## Verifica e sviluppo
+## Verification and development
 
-Eseguire dalla radice del repository. Il controllo completo richiede Node
-(solo parsing sintattico), GJS, Python 3, Bash, `zip`, gli strumenti GLib e gettext
-(`msgfmt`, `msgcmp`, `xgettext`) e Shexli. La combinazione già verificata per lo
-scanner è Shexli 0.2.1 con tree-sitter 0.25.2 e tree-sitter-javascript 0.25.0.
-Per predisporre lo scanner in un ambiente Python separato:
+Run from the repository root. Full verification requires Node (syntax parsing
+only), GJS, Python 3, Bash, `zip`, GLib and gettext tools (`msgfmt`, `msgcmp`,
+`xgettext`), and Shexli. The tested scanner combination is Shexli 0.2.1 with
+tree-sitter 0.25.2 and tree-sitter-javascript 0.25.0. To prepare the scanner in
+an isolated Python environment:
 
 ```bash
 python3 -m venv /tmp/shexli-venv
 /tmp/shexli-venv/bin/pip install shexli==0.2.1 tree-sitter==0.25.2 tree-sitter-javascript==0.25.0
 ```
 
-Quindi:
+Then run:
 
 ```bash
-# Node è solo un syntax checker, non una toolchain runtime.
+# Node is only a syntax checker, not a runtime toolchain.
 SHEXLI=/tmp/shexli-venv/bin/shexli ./scripts/verify.sh
-# Ambiente separato, inventario e applicazione GUI sintetici:
+# Separate environment with synthetic inventory and GUI application:
 ./tests/nested.sh
-# Rigenera il bundle:
+# Rebuild the bundle:
 ./scripts/package.sh
 ```
 
-Il test isolato richiede `dbus-run-session`, GNOME Shell con supporto headless,
-monitor virtuale, `gdbus`, Python 3 con PyGObject/GTK4 e un renderer disponibile.
-Crea bus, impostazioni, launcher finto e copie runtime in `/tmp`; non espone il
-bus host e non usa il vero OpenLogi per i test GUI. Le evidenze restano nella
-directory stampata all’avvio. Il controllo Eval non sicuro è abilitato da una
-piccola estensione presente **solo nella copia di test**, mai nel pacchetto.
+The isolated test requires `dbus-run-session`, GNOME Shell with headless and
+virtual-monitor support, `gdbus`, Python 3 with PyGObject/GTK4 and an available
+renderer. It creates a bus, settings, fake launcher and runtime copies under
+`/tmp`. It does not expose the host bus or use the real OpenLogi app for GUI
+tests. Evidence remains in the directory printed at startup. Unsafe Eval
+control is enabled by a small extension present **only in the test copy**,
+never in the package.
 
-Per una prova interattiva usare una sessione di sviluppo separata:
-`dbus-run-session -- gnome-shell --devkit` (richiede `mutter-devkit`).
-Un bus isolato non vede automaticamente l’agent host: non collegare i due bus
-per aggirare l’isolamento. Consultare [VERIFICATION.md](docs/VERIFICATION.md) per
-risultati, comandi, versioni, prove non eseguite e limiti del sandbox.
+For interactive testing, use a separate development session:
+`dbus-run-session -- gnome-shell --devkit` (requires `mutter-devkit`). An
+isolated bus does not automatically see the host agent; do not connect the two
+buses to bypass isolation. See [VERIFICATION.md](docs/VERIFICATION.md) for
+results, commands, versions, unperformed checks and sandbox limitations.
 
-Nella sessione reale, con l’estensione già installata:
+In the real session, with the extension already installed:
 
 ```bash
-# Sola lettura: confronta i file installati col repository, stato, CLI, log.
+# Read only: compare installed files with the repository, state, CLI and logs.
 ./scripts/session-check.sh
-# Aggiorna la copia installata (poi logout/login su Wayland).
+# Update the installed copy, then log out/in on Wayland.
 ./scripts/session-check.sh --install
-# Test interattivo: disabilita col menu aperto e cerca processi orfani.
+# Interactive test: disable with the menu open and check for orphan processes.
 DELAY=8 ./scripts/session-check.sh --teardown
 ```
 
-Questi comandi toccano la sessione dell’utente e non sono usati da `verify.sh`
-né da `tests/nested.sh`.
+These commands affect the user's session and are not run by `verify.sh` or
+`tests/nested.sh`.
 
-## Flusso dei dati
+## Data flow
 
 ```text
-Agent OpenLogi (profilo corrente)
-  → CLI ufficiale: openlogi api devices
-  → Provider: due pipe asincrone, timeout, limite condiviso
-  → validazione schema 1, ordinamento stabile
-  → menu Shell, con icona del tipo e batteria dei dispositivi fissati in memoria
+OpenLogi agent (current profile)
+  → Official CLI: openlogi api devices
+  → Provider: two asynchronous pipes, timeout and shared limit
+  → Schema 1 validation and stable sorting
+  → Shell menu, with kind icons and batteries for devices pinned in memory
 
-Show OpenLogi window → finestra del launcher openlogi.desktop
-  → Main.activateWindow se esiste, Shell.App.activate per avviarla
-Preferenze GTK/Adw → GSettings: solo show-percentage, battery-bar e hide-logo
+Show OpenLogi window → window from the openlogi.desktop launcher
+  → Main.activateWindow if one exists, Shell.App.activate to launch it
+GTK/Adw preferences → GSettings: only show-percentage, battery-bar and hide-logo
 ```
 
-Il provider avvia solo la CLI in lettura, con argv fisso; non avvia l’agent,
-non apre HID, non legge `config.toml` e non decodifica IPC interno. Timeout di 5 s,
-budget stdout+stderr di 1 MiB, letture di massimo 8192 byte (un chunk che supera
-il limite provoca l’arresto). Stderr viene drenato senza conservarlo. A timeout,
-limite o teardown vengono cancellate le letture, terminato e raccolto il solo
-figlio CLI. Nessuno snapshot o ID viene salvato in GSettings, file o log.
-La GUI aperta dall’utente è indipendente dal teardown.
+The provider starts only the read-only CLI with fixed arguments. It does not
+start the agent, open HID devices, read `config.toml` or decode internal IPC.
+The timeout is 5 seconds, with a shared stdout+stderr budget of 1 MiB and reads
+of at most 8192 bytes; a chunk that exceeds the limit stops the request. Stderr
+is drained without being retained. On timeout, limit breach or teardown, reads
+are cancelled and only the owned CLI child is terminated and reaped. No
+snapshot or ID is stored in GSettings, files or logs. A GUI opened by the user
+is independent of extension teardown.
 
-Il codice è stato sviluppato con assistenza AI; la provenienza è documentata qui,
-in [AI_REVIEW_GUIDELINES.md](AI_REVIEW_GUIDELINES.md) e in `docs/`. I file
-sorgente e di runtime non contengono avvisi AI né prompt: portano solo l’SPDX
-`GPL-3.0-or-later`, perché le review EGO trattano quei commenti come indicatori
-di codice generato. La manutenzione richiede la comprensione del JavaScript;
-Shexli non certifica l’accettazione EGO.
+The code was developed with AI assistance. Provenance is documented here, in
+[AI_REVIEW_GUIDELINES.md](AI_REVIEW_GUIDELINES.md) and in `docs/`. Source and
+runtime files contain no AI notices or prompts; they carry only the SPDX
+`GPL-3.0-or-later` identifier, because EGO reviews treat such comments as
+indicators of generated code. Maintenance requires understanding the JavaScript;
+Shexli does not certify EGO acceptance.
 
-Il repository contiene sorgenti, traduzioni, test, script e documentazione.
-Il bundle installabile include soltanto i file elencati in
-`scripts/runtime-files.txt`; esclude test, script, documentazione e schema compilato.
-ZIP, cataloghi compilati e altri artefatti locali non sono versionati: vengono
-rigenerati dagli script.
+The repository contains source, translations, tests, scripts and documentation.
+The installable bundle includes only files listed in `scripts/runtime-files.txt`;
+it excludes tests, scripts, documentation and the compiled schema. ZIPs, compiled
+catalogues and other local artifacts are not versioned; scripts regenerate them.
 
-Le verifiche residue e il punto di ripresa sono in [OPEN_ITEMS.md](docs/OPEN_ITEMS.md).
-Il [piano upstream](docs/UPSTREAM_PLAN.md) descrive la proposta di selezione diretta;
-nessuna issue o PR è stata inviata.
+Remaining checks and the resumption checklist are in
+[OPEN_ITEMS.md](docs/OPEN_ITEMS.md). The [upstream plan](docs/UPSTREAM_PLAN.md)
+describes the proposed direct device selection; no issue or PR has been sent
+by this project.

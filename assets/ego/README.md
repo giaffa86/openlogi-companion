@@ -1,16 +1,16 @@
-# Icona per la pagina extensions.gnome.org
+# Icon for the extensions.gnome.org listing
 
-Generata con assistenza AI per uso personale. GPL-3.0-or-later.
-Marchio originale (mouse in un cerchio aperto), nessuna affiliazione con
-OpenLogi, Logitech o GNOME.
+Generated with AI assistance for personal use. GPL-3.0-or-later.
+Original mark: a mouse inside an open circle, with no affiliation to OpenLogi,
+Logitech or GNOME.
 
-- `icon-256.png` (256×256) e `icon-128.png` (128×128): PNG RGBA, piastra scura
-  arrotondata con emblema chiaro, così da restare leggibile sia su schede chiare
-  sia scure. L'icona trasparente e monocroma non sarebbe visibile su fondo scuro.
-- Rigenerazione: `python3 scripts/make-ego-icon.py`, che parte da
-  `assets/branding/openlogi-companion-logo.png` e non modifica il logo.
+- `icon-256.png` (256×256) and `icon-128.png` (128×128): RGBA PNGs with a light
+  emblem on a rounded dark background, readable on both light and dark listings.
+  A transparent monochrome icon would not be visible on a dark background.
+- Regenerate with `python3 scripts/make-ego-icon.py`, which reads
+  `assets/branding/openlogi-companion-logo.png` without modifying the logo.
 
-Uso previsto: campo icona del modulo di pubblicazione su extensions.gnome.org.
-Questi file non sono nel bundle: `scripts/runtime-files.txt` non li elenca. La
-variante usata nella Shell resta `icons/openlogi-companion-symbolic.svg`, che
-viene ricolorata dal tema.
+Intended use: the icon field in the extensions.gnome.org publication form.
+These files are outside the bundle: `scripts/runtime-files.txt` does not list
+them. The Shell still uses `icons/openlogi-companion-symbolic.svg`, recolored by
+the theme.
