@@ -717,3 +717,12 @@ python3 -m venv /tmp/shexli-venv
 For meaningful interactive tests: `dbus-run-session -- gnome-shell --devkit`
 with `mutter-devkit` available, runtime copied into the isolated XDG tree and
 a synthetic backend as in the runner. Do not expose the host bus to the devkit.
+
+## Localization — 2026-11-11
+
+English, Italian, Spanish, German and French are available. The 40 UI messages
+have complete it/es/de/fr catalogues, compiled during packaging and sync.
+Catalogue coverage, placeholders, compiled bytes, isolated language loading,
+and the existing verification/nested checks passed. The cross-project native
+language matrix, evidence and remaining limits are in [LOCALIZATION.md](LOCALIZATION.md).
+Previously recorded hardware and host-session limitations remain open.

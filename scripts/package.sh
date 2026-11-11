@@ -3,8 +3,8 @@
 set -euo pipefail
 SOURCE=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
 cd "$SOURCE"
-mkdir -p locale/it/LC_MESSAGES
-msgfmt --check po/it.po -o locale/it/LC_MESSAGES/openlogi-companion.mo
+./scripts/i18n.sh compile
+./scripts/i18n.sh check
 glib-compile-schemas --strict --dry-run schemas
 mkdir -p dist
 ARCHIVE="$SOURCE/dist/openlogi-companion@giaffa86.shell-extension.zip"

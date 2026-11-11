@@ -1,15 +1,16 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenLogi Companion 1\n"
+"Project-Id-Version: OpenLogi Companion\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-10 12:23+0100\n"
-"PO-Revision-Date: 2026-10-28 10:00+0100\n"
-"Last-Translator: OpenLogi Companion contributors\n"
-"Language-Team: Italian\n"
-"Language: it\n"
+"POT-Creation-Date: 2026-11-11 00:00+0100\n"
+"PO-Revision-Date: 2026-11-11 00:00+0100\n"
+"Last-Translator: giaffa86 contributors\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language-Team: Italian\n"
+"Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: prefs.js:11
@@ -17,9 +18,12 @@ msgid "Panel"
 msgstr "Pannello"
 
 #: prefs.js:12
-msgid "Pin devices from the menu. The choices last only for this session."
+msgid ""
+"Use the pin buttons in the menu to choose which devices appear in the panel. "
+"Selections are temporary."
 msgstr ""
-"Fissa i dispositivi dal menu. Le scelte durano solo per questa sessione."
+"Usa le puntine nel menu per scegliere i dispositivi da mostrare nel "
+"pannello. Le selezioni sono temporanee."
 
 #: prefs.js:13
 msgid "Show pinned devices in the panel"
@@ -65,16 +69,20 @@ msgid "Critical"
 msgstr "Critica"
 
 #: shell/contract.js:80
-msgid "Low"
-msgstr "Bassa"
+msgid "Full"
+msgstr "Piena"
 
 #: shell/contract.js:80
 msgid "Good"
 msgstr "Buona"
 
 #: shell/contract.js:80
-msgid "Full"
-msgstr "Piena"
+msgid "Low"
+msgstr "Bassa"
+
+#: shell/contract.js:81
+msgid "Charged"
+msgstr "Carica"
 
 #: shell/contract.js:81
 msgid "Charging"
@@ -82,19 +90,15 @@ msgstr "In carica"
 
 #: shell/contract.js:81
 msgid "Charging slowly"
-msgstr "Ricarica lenta"
-
-#: shell/contract.js:81
-msgid "Charged"
-msgstr "Carica completa"
-
-#: shell/contract.js:82
-msgid "On battery"
-msgstr "A batteria"
+msgstr "In carica lenta"
 
 #: shell/contract.js:82
 msgid "Charging error"
 msgstr "Errore di ricarica"
+
+#: shell/contract.js:82
+msgid "On battery"
+msgstr "A batteria"
 
 #: shell/deviceRow.js:33 shell/deviceRow.js:49
 msgid "Show this device in the panel"
@@ -132,13 +136,13 @@ msgstr "Aggiorna"
 msgid "Extension preferences"
 msgstr "Preferenze dell’estensione"
 
-#: shell/indicator.js:130
-msgid "Scanning devices…"
-msgstr "Scansione dei dispositivi…"
-
 #: shell/indicator.js:130 shell/indicator.js:153 shell/indicator.js:155
 msgid "Inventory unavailable"
-msgstr "Inventario indisponibile"
+msgstr "Inventario non disponibile"
+
+#: shell/indicator.js:130
+msgid "Scanning devices…"
+msgstr "Ricerca dispositivi…"
 
 #: shell/indicator.js:134
 msgid "Pin devices in the panel for this session."
@@ -154,11 +158,11 @@ msgstr "La CLI di OpenLogi non è installata"
 
 #: shell/indicator.js:148
 msgid "Cannot reach the OpenLogi agent"
-msgstr "Agent di OpenLogi non raggiungibile"
+msgstr "Impossibile raggiungere l’agente di OpenLogi"
 
 #: shell/indicator.js:149
 msgid "Incompatible CLI, agent or API schema"
-msgstr "CLI, agent o schema API incompatibili"
+msgstr "CLI, agente o schema API incompatibili"
 
 #: shell/indicator.js:150
 msgid "Invalid inventory data"
@@ -166,7 +170,7 @@ msgstr "Dati dell’inventario non validi"
 
 #: shell/indicator.js:151
 msgid "OpenLogi request timed out"
-msgstr "Tempo scaduto per la richiesta a OpenLogi"
+msgstr "Richiesta OpenLogi scaduta"
 
 #: shell/indicator.js:152
 msgid "OpenLogi output exceeds the limit"
@@ -174,7 +178,7 @@ msgstr "L’output di OpenLogi supera il limite"
 
 #: shell/indicator.js:287
 msgid "OpenLogi desktop application is not installed"
-msgstr "L’applicazione OpenLogi non è installata"
+msgstr "L’applicazione desktop OpenLogi non è installata"
 
 #: shell/indicator.js:306
 msgid "Could not open OpenLogi"

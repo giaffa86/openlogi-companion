@@ -1,0 +1,185 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenLogi Companion\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-11 00:00+0100\n"
+"PO-Revision-Date: 2026-11-11 00:00+0100\n"
+"Last-Translator: giaffa86 contributors\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: German\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: prefs.js:11
+msgid "Panel"
+msgstr "Panel"
+
+#: prefs.js:12
+msgid ""
+"Use the pin buttons in the menu to choose which devices appear in the panel. "
+"Selections are temporary."
+msgstr ""
+"Wähle mit den Stecknadeln im Menü aus, welche Geräte im Panel erscheinen. "
+"Die Auswahl ist vorübergehend."
+
+#: prefs.js:13
+msgid "Show pinned devices in the panel"
+msgstr "Angeheftete Geräte im Panel anzeigen"
+
+#: prefs.js:14
+msgid ""
+"Each device keeps its own icon and battery; refresh every 60 seconds, with a "
+"longer delay after errors."
+msgstr ""
+"Jedes Gerät behält sein eigenes Symbol und seinen Akkustand. Aktualisierung "
+"alle 60 Sekunden, bei Fehlern mit längerer Wartezeit."
+
+#: prefs.js:17
+msgid "Show battery as a bar"
+msgstr "Akkustand als Balken anzeigen"
+
+#: prefs.js:18
+msgid ""
+"Use a vertical bar instead of a numeric percentage for each pinned device."
+msgstr ""
+"Für jedes angeheftete Gerät einen vertikalen Balken statt einer Prozentzahl "
+"verwenden."
+
+#: prefs.js:21
+msgid "Hide the extension icon when devices are pinned"
+msgstr "Erweiterungssymbol ausblenden, wenn Geräte angeheftet sind"
+
+#: prefs.js:22
+msgid "Requires at least one pinned device to be shown in the panel."
+msgstr "Mindestens ein angeheftetes Gerät muss im Panel angezeigt werden."
+
+#: shell/contract.js:76
+msgid "Offline; battery reading is not current"
+msgstr "Offline; Akkustand ist nicht aktuell"
+
+#: shell/contract.js:79 shell/contract.js:85
+msgid "Battery unavailable"
+msgstr "Akkustand nicht verfügbar"
+
+#: shell/contract.js:80
+msgid "Critical"
+msgstr "Kritisch"
+
+#: shell/contract.js:80
+msgid "Full"
+msgstr "Voll"
+
+#: shell/contract.js:80
+msgid "Good"
+msgstr "Gut"
+
+#: shell/contract.js:80
+msgid "Low"
+msgstr "Niedrig"
+
+#: shell/contract.js:81
+msgid "Charged"
+msgstr "Aufgeladen"
+
+#: shell/contract.js:81
+msgid "Charging"
+msgstr "Wird geladen"
+
+#: shell/contract.js:81
+msgid "Charging slowly"
+msgstr "Wird langsam geladen"
+
+#: shell/contract.js:82
+msgid "Charging error"
+msgstr "Ladefehler"
+
+#: shell/contract.js:82
+msgid "On battery"
+msgstr "Akkubetrieb"
+
+#: shell/deviceRow.js:33 shell/deviceRow.js:49
+msgid "Show this device in the panel"
+msgstr "Dieses Gerät im Panel anzeigen"
+
+#: shell/deviceRow.js:43 shell/indicator.js:254 shell/indicator.js:259
+msgid "Unnamed device"
+msgstr "Unbenanntes Gerät"
+
+#: shell/deviceRow.js:44
+msgid "Connected"
+msgstr "Verbunden"
+
+#: shell/deviceRow.js:44
+msgid "Disconnected"
+msgstr "Getrennt"
+
+#: shell/deviceRow.js:49
+msgid "Remove this device from the panel"
+msgstr "Dieses Gerät aus dem Panel entfernen"
+
+#: shell/indicator.js:49
+msgid "Loading…"
+msgstr "Wird geladen…"
+
+#: shell/indicator.js:60
+msgid "Show OpenLogi window"
+msgstr "OpenLogi-Fenster anzeigen"
+
+#: shell/indicator.js:61
+msgid "Refresh"
+msgstr "Aktualisieren"
+
+#: shell/indicator.js:62
+msgid "Extension preferences"
+msgstr "Erweiterungseinstellungen"
+
+#: shell/indicator.js:130 shell/indicator.js:153 shell/indicator.js:155
+msgid "Inventory unavailable"
+msgstr "Geräteliste nicht verfügbar"
+
+#: shell/indicator.js:130
+msgid "Scanning devices…"
+msgstr "Geräte werden gesucht…"
+
+#: shell/indicator.js:134
+msgid "Pin devices in the panel for this session."
+msgstr "Geräte für diese Sitzung im Panel anheften."
+
+#: shell/indicator.js:135
+msgid "No devices"
+msgstr "Keine Geräte"
+
+#: shell/indicator.js:147
+msgid "OpenLogi CLI is not installed"
+msgstr "Die OpenLogi-CLI ist nicht installiert"
+
+#: shell/indicator.js:148
+msgid "Cannot reach the OpenLogi agent"
+msgstr "Der OpenLogi-Agent ist nicht erreichbar"
+
+#: shell/indicator.js:149
+msgid "Incompatible CLI, agent or API schema"
+msgstr "CLI, Agent oder API-Schema nicht kompatibel"
+
+#: shell/indicator.js:150
+msgid "Invalid inventory data"
+msgstr "Ungültige Gerätedaten"
+
+#: shell/indicator.js:151
+msgid "OpenLogi request timed out"
+msgstr "Zeitüberschreitung bei der OpenLogi-Anfrage"
+
+#: shell/indicator.js:152
+msgid "OpenLogi output exceeds the limit"
+msgstr "Die OpenLogi-Ausgabe überschreitet das Limit"
+
+#: shell/indicator.js:287
+msgid "OpenLogi desktop application is not installed"
+msgstr "Die OpenLogi-Desktop-Anwendung ist nicht installiert"
+
+#: shell/indicator.js:306
+msgid "Could not open OpenLogi"
+msgstr "OpenLogi konnte nicht geöffnet werden"

@@ -9,7 +9,7 @@ export default class Preferences extends ExtensionPreferences {
         const settings = this.getSettings();
         const page = new Adw.PreferencesPage({title: 'OpenLogi Companion', icon_name: 'input-keyboard-symbolic'});
         const group = new Adw.PreferencesGroup({title: _('Panel'),
-            description: _('Pin devices from the menu. The choices last only for this session.')});
+            description: _('Use the pin buttons in the menu to choose which devices appear in the panel. Selections are temporary.')});
         const row = new Adw.SwitchRow({title: _('Show pinned devices in the panel'),
             subtitle: _('Each device keeps its own icon and battery; refresh every 60 seconds, with a longer delay after errors.')});
         settings.bind('show-percentage', row, 'active', Gio.SettingsBindFlags.DEFAULT);

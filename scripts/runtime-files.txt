@@ -8,5 +8,8 @@ shell/provider.js
 shell/indicator.js
 shell/deviceRow.js
 schemas/org.gnome.shell.extensions.openlogi-companion.gschema.xml
-locale/it/LC_MESSAGES/openlogi-companion.mo
 LICENSE
+locale/it/LC_MESSAGES/openlogi-companion.mo
+locale/es/LC_MESSAGES/openlogi-companion.mo
+locale/de/LC_MESSAGES/openlogi-companion.mo
+locale/fr/LC_MESSAGES/openlogi-companion.mo

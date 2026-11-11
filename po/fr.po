@@ -1,0 +1,185 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenLogi Companion\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-11 00:00+0100\n"
+"PO-Revision-Date: 2026-11-11 00:00+0100\n"
+"Last-Translator: giaffa86 contributors\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: French\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: prefs.js:11
+msgid "Panel"
+msgstr "Panneau"
+
+#: prefs.js:12
+msgid ""
+"Use the pin buttons in the menu to choose which devices appear in the panel. "
+"Selections are temporary."
+msgstr ""
+"Utilisez les épingles du menu pour choisir les périphériques à afficher dans "
+"le panneau. Les sélections sont temporaires."
+
+#: prefs.js:13
+msgid "Show pinned devices in the panel"
+msgstr "Afficher les périphériques épinglés dans le panneau"
+
+#: prefs.js:14
+msgid ""
+"Each device keeps its own icon and battery; refresh every 60 seconds, with a "
+"longer delay after errors."
+msgstr ""
+"Chaque périphérique conserve son icône et sa batterie ; actualisation toutes "
+"les 60 secondes, avec un délai plus long après une erreur."
+
+#: prefs.js:17
+msgid "Show battery as a bar"
+msgstr "Afficher la batterie sous forme de barre"
+
+#: prefs.js:18
+msgid ""
+"Use a vertical bar instead of a numeric percentage for each pinned device."
+msgstr ""
+"Utiliser une barre verticale au lieu d’un pourcentage numérique pour chaque "
+"périphérique épinglé."
+
+#: prefs.js:21
+msgid "Hide the extension icon when devices are pinned"
+msgstr "Masquer l’icône de l’extension lorsque des périphériques sont épinglés"
+
+#: prefs.js:22
+msgid "Requires at least one pinned device to be shown in the panel."
+msgstr "Au moins un périphérique épinglé doit être affiché dans le panneau."
+
+#: shell/contract.js:76
+msgid "Offline; battery reading is not current"
+msgstr "Hors ligne ; le niveau de batterie n’est pas à jour"
+
+#: shell/contract.js:79 shell/contract.js:85
+msgid "Battery unavailable"
+msgstr "Batterie indisponible"
+
+#: shell/contract.js:80
+msgid "Critical"
+msgstr "Critique"
+
+#: shell/contract.js:80
+msgid "Full"
+msgstr "Pleine"
+
+#: shell/contract.js:80
+msgid "Good"
+msgstr "Bonne"
+
+#: shell/contract.js:80
+msgid "Low"
+msgstr "Faible"
+
+#: shell/contract.js:81
+msgid "Charged"
+msgstr "Chargée"
+
+#: shell/contract.js:81
+msgid "Charging"
+msgstr "En charge"
+
+#: shell/contract.js:81
+msgid "Charging slowly"
+msgstr "Charge lente"
+
+#: shell/contract.js:82
+msgid "Charging error"
+msgstr "Erreur de charge"
+
+#: shell/contract.js:82
+msgid "On battery"
+msgstr "Sur batterie"
+
+#: shell/deviceRow.js:33 shell/deviceRow.js:49
+msgid "Show this device in the panel"
+msgstr "Afficher ce périphérique dans le panneau"
+
+#: shell/deviceRow.js:43 shell/indicator.js:254 shell/indicator.js:259
+msgid "Unnamed device"
+msgstr "Périphérique sans nom"
+
+#: shell/deviceRow.js:44
+msgid "Connected"
+msgstr "Connecté"
+
+#: shell/deviceRow.js:44
+msgid "Disconnected"
+msgstr "Déconnecté"
+
+#: shell/deviceRow.js:49
+msgid "Remove this device from the panel"
+msgstr "Retirer ce périphérique du panneau"
+
+#: shell/indicator.js:49
+msgid "Loading…"
+msgstr "Chargement…"
+
+#: shell/indicator.js:60
+msgid "Show OpenLogi window"
+msgstr "Afficher la fenêtre d’OpenLogi"
+
+#: shell/indicator.js:61
+msgid "Refresh"
+msgstr "Actualiser"
+
+#: shell/indicator.js:62
+msgid "Extension preferences"
+msgstr "Préférences de l’extension"
+
+#: shell/indicator.js:130 shell/indicator.js:153 shell/indicator.js:155
+msgid "Inventory unavailable"
+msgstr "Inventaire indisponible"
+
+#: shell/indicator.js:130
+msgid "Scanning devices…"
+msgstr "Recherche de périphériques…"
+
+#: shell/indicator.js:134
+msgid "Pin devices in the panel for this session."
+msgstr "Épinglez des périphériques dans le panneau pour cette session."
+
+#: shell/indicator.js:135
+msgid "No devices"
+msgstr "Aucun périphérique"
+
+#: shell/indicator.js:147
+msgid "OpenLogi CLI is not installed"
+msgstr "L’interface en ligne de commande d’OpenLogi n’est pas installée"
+
+#: shell/indicator.js:148
+msgid "Cannot reach the OpenLogi agent"
+msgstr "Impossible de joindre l’agent OpenLogi"
+
+#: shell/indicator.js:149
+msgid "Incompatible CLI, agent or API schema"
+msgstr "Interface en ligne de commande, agent ou schéma d’API incompatible"
+
+#: shell/indicator.js:150
+msgid "Invalid inventory data"
+msgstr "Données d’inventaire non valides"
+
+#: shell/indicator.js:151
+msgid "OpenLogi request timed out"
+msgstr "La requête OpenLogi a expiré"
+
+#: shell/indicator.js:152
+msgid "OpenLogi output exceeds the limit"
+msgstr "La sortie d’OpenLogi dépasse la limite"
+
+#: shell/indicator.js:287
+msgid "OpenLogi desktop application is not installed"
+msgstr "L’application de bureau OpenLogi n’est pas installée"
+
+#: shell/indicator.js:306
+msgid "Could not open OpenLogi"
+msgstr "Impossible d’ouvrir OpenLogi"

@@ -101,12 +101,14 @@ readings remain. If no pinned device is shown (no pins, the panel preference is
 off, ambiguous rows, offline devices or inventory not ready), the mark returns,
 so the panel button is never empty.
 
-Source UI strings are English, translated into Italian through `po/it.po`. The
-bundle includes only the compiled catalogue at
-`locale/it/LC_MESSAGES/openlogi-companion.mo`, the path expected by
-`gettext-domain`. Other languages fall back to English. `scripts/verify.sh`
-checks that the catalogue loads and that the template and translation stay in
-sync.
+The interface supports English, Italian, Spanish, German and French. English
+is the source language and fallback; translations follow the session language.
+Editable catalogues live in `po/`; only compiled `locale/*/LC_MESSAGES/*.mo`
+files enter the runtime bundle. Build tools require gettext and Python 3.
+`scripts/i18n.sh update` refreshes the template and catalogues after UI edits;
+`scripts/i18n.sh compile` compiles them; `scripts/i18n.sh check` checks source
+coverage, completeness, format placeholders and compiled catalogue equality.
+Packaging and `scripts/verify.sh` run these checks automatically.
 
 Connected devices appear first, then names are sorted according to the locale.
 Rows stay separate even when names or IDs match. Unchanged rows are reused to
@@ -253,3 +255,5 @@ Remaining checks and the resumption checklist are in
 [OPEN_ITEMS.md](docs/OPEN_ITEMS.md). The [upstream plan](docs/UPSTREAM_PLAN.md)
 describes the proposed direct device selection; no issue or PR has been sent
 by this project.
+
+Language verification: [docs/LOCALIZATION.md](docs/LOCALIZATION.md).

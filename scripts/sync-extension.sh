@@ -4,8 +4,7 @@ set -euo pipefail
 SOURCE=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
 TARGET="${HOME}/.local/share/gnome-shell/extensions/openlogi-companion@giaffa86"
 cd "$SOURCE"
-mkdir -p locale/it/LC_MESSAGES
-msgfmt --check po/it.po -o locale/it/LC_MESSAGES/openlogi-companion.mo
+./scripts/i18n.sh compile
 while IFS= read -r file; do
     mkdir -p -- "$TARGET/$(dirname -- "$file")"
     cp -- "$file" "$TARGET/$file"
