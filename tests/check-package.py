@@ -9,7 +9,7 @@ with zipfile.ZipFile(sys.argv[1]) as archive:
     assert sorted(archive.namelist()) == sorted(expected)
     metadata = json.loads(archive.read('metadata.json'))
     assert metadata['uuid'] == 'openlogi-companion@giaffa86'
-    assert metadata['shell-version'] == ['50']
+    assert metadata['shell-version'] == ['50', '51']
     # EGO sets the version itself and expects a repository URL.
     assert 'version' not in metadata, 'deprecated version key in the bundle'
     assert metadata['url'].startswith('https://'), metadata.get('url')
